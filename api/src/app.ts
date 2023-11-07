@@ -7,7 +7,7 @@ import errorHandler from "./middlewares/errors";
 import userRoute from './routes/users.route';
 import categoryRoute from './routes/prodCategories.route';
 import productRoute from './routes/products.route';
-// import orderRoute from './routes/orders.route';
+import orderRoute from './routes/orders.route';
 
 const app = express();
 dotenv.config();
@@ -22,6 +22,7 @@ app.use(morgan('dev'));
 app.use('/api/users', userRoute);
 app.use('/api/category', categoryRoute);
 app.use('/api/product', productRoute);
+app.use('/api/order', orderRoute);
 
 app.use(endpointHandler);
 app.use(errorHandler);

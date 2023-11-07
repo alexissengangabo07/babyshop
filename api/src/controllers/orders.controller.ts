@@ -1,125 +1,116 @@
-// import { RequestHandler } from "express";
-// import mongoose from "mongoose";
-// import ordersModel from "../models/orders.model";
+import { RequestHandler } from "express";
+import mongoose from "mongoose";
+import ordersModel from "../models/orders.model";
 
-// export const getProducts: RequestHandler = async (req, res, next) => {
-//     try {
-//         const products = await productsModel.find().populate('categoryId');
-//         res.status(200).json(products);
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+export const getOrders: RequestHandler = async (req, res, next) => {
+    try {
+        const orders = await ordersModel.find().populate('productsId').populate('userId');
+        res.status(200).json(orders);
+    } catch (error) {
+        next(error);
+    }
+}
 
 
-// export const getProduct: RequestHandler = async (req, res, next) => {
-//     const productId = req.params.id;
-//     try {
-//         if (!mongoose.isValidObjectId(productId)) {
-//             return res.status(400).json({ message: 'Invalid product id' });
-//         }
+export const getOrder: RequestHandler = async (req, res, next) => {
+    const orderId = req.params.id;
+    try {
+        if (!mongoose.isValidObjectId(orderId)) {
+            return res.status(400).json({ message: 'Invalid order id' });
+        }
 
-//         const product = await productsModel.findById(productId);
+        const order = await ordersModel.findById(orderId);
 
-//         if (!product) {
-//             return res.status(404).json({ message: 'Product not found' });
-//         }
-//         res.status(200).json(product);
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        res.status(200).json(order);
+    } catch (error) {
+        next(error);
+    }
+}
 
-// interface CreateProductBody {
-//     name: string,
-//     price: number,
-//     image: {
-//         public_id: string,
-//         url: string
-//     },
-//     description?: string,
-//     categoryId: string
-// }
+interface CreateOrderBody {
+    userId: string,
+    productsId: [string],
+    total: number
+}
 
-// export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, unknown> = async (req, res, next) => {
-//     const { name, price, image, description, categoryId } = req.body;
+export const createOrder: RequestHandler<unknown, unknown, CreateOrderBody, unknown> = async (req, res, next) => {
+    const { userId, productsId, total } = req.body;
 
-//     try {
-//         if (!name) {
-//             return res.status(400).json({ message: 'Product name is required' });
-//         }
-//         if (!categoryId) {
-//             return res.status(400).json({ message: 'categoryId is required' });
-//         }
+    try {
+        if (!productsId) {
+            return res.status(400).json({ message: 'Product id is required' });
+        }
+        if (!userId) {
+            return res.status(400).json({ message: 'User id is required' });
+        }
 
 
 
-//         const products = await productsModel.create({
-//             name,
-//             price,
-//             description,
-//             categoryId
-//         });
-//         res.status(201).json(products);
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+        const orders = await ordersModel.create({
+            userId, productsId, total
+        });
+        res.status(201).json(orders);
+    } catch (error) {
+        next(error);
+    }
+}
 
-// interface UpdateProductBody {
-//     name?: string,
-//     price?: number,
-//     description?: string,
-//     categoryId?: string
-// }
+interface UpdateOrderBody {
+    userId?: string,
+    productsId?: string,
+    total?: number
+}
 
-// interface UpdateProductParams {
-//     id: string
-// }
+interface UpdateOrderParams {
+    id: string
+}
 
-// export const updateProduct: RequestHandler<UpdateProductParams, unknown, UpdateProductBody, unknown> = async (req, res, next) => {
-//     const { name, price, description, categoryId } = req.body;
-//     const productId = req.params.id;
+export const updateOrder: RequestHandler<UpdateOrderParams, unknown, UpdateOrderBody, unknown> = async (req, res, next) => {
+    const { productsId } = req.body;
+    const orderId = req.params.id;
 
-//     try {
-//         if (!mongoose.isValidObjectId(productId)) {
-//             return res.status(400).json({ message: 'Invalid product id' });
-//         }
+    try {
+        if (!mongoose.isValidObjectId(orderId)) {
+            return res.status(400).json({ message: 'Invalid order id' });
+        }
 
-//         const product = await productsModel.findById(productId);
+        const order = await ordersModel.findById(orderId);
 
-//         if (!product) {
-//             return res.status(404).json({ message: 'Product not found' });
-//         }
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
 
-//         if (!name) {
-//             return res.status(400).json({ message: 'Product name is required' });
-//         }
+        if (!productsId) {
+            return res.status(400).json({ message: 'Product id is required' });
+        }
 
-//         let updatedProduct = await productsModel.findByIdAndUpdate(productId, req.body, { new: true });
-//         res.status(200).json(updatedProduct);
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+        let updatedOrder = await ordersModel.findByIdAndUpdate(orderId, req.body, { new: true });
+        res.status(200).json(updatedOrder);
+    } catch (error) {
+        next(error);
+    }
+}
 
-// export const deleteProduct: RequestHandler = async (req, res, next) => {
-//     const productId = req.params.id;
-//     try {
-//         if (!mongoose.isValidObjectId(productId)) {
-//             return res.status(400).json({ message: 'Invalid product id' });
-//         }
+export const deleteOrder: RequestHandler = async (req, res, next) => {
+    const orderId = req.params.id;
+    try {
+        if (!mongoose.isValidObjectId(orderId)) {
+            return res.status(400).json({ message: 'Invalid product id' });
+        }
 
-//         const product = await productsModel.findById(productId);
+        const order = await ordersModel.findById(orderId);
 
-//         if (!product) {
-//             return res.status(404).json({ message: 'product not found' });
-//         }
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
 
-//         await productsModel.findByIdAndDelete(productId);
+        await ordersModel.findByIdAndDelete(orderId);
 
-//         res.sendStatus(204);
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+        res.sendStatus(204);
+    } catch (error) {
+        next(error);
+    }
+}

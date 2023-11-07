@@ -6,7 +6,7 @@ const ordersSchema = new Schema({
         ref: 'users',
         required: true
     },
-    products_id: [{
+    productsId: [{
         type: Schema.Types.ObjectId,
         ref: 'products'
     }],

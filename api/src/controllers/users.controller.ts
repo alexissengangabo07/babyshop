@@ -5,8 +5,8 @@ import usersModel from "../models/users.model";
 
 export const getUsers: RequestHandler = async (req, res, next) => {
     try {
-        const notes = await usersModel.find();
-        res.status(200).json(notes);
+        const users = await usersModel.find();
+        res.status(200).json(users);
     } catch (error) {
         next(error);
     }
@@ -33,18 +33,31 @@ export const getUser: RequestHandler = async (req, res, next) => {
 
 interface CreateUserBody {
     username: string,
-    email: string,
+    first_name: string,
+    last_name: string,
+    telephone?: string,
+    adresse?: string,
+    email?: string,
     password: string,
-    role?: string
+    role: string
 }
 
 export const createUser: RequestHandler<unknown, unknown, CreateUserBody, unknown> = async (req, res, next) => {
-    const { username, email, password, role } = req.body;
+    const {
+        username,
+        first_name,
+        last_name,
+        telephone,
+        adresse,
+        email,
+        password,
+        role
+    } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
         const users = await usersModel.create({
-            username, email, password: hashedPassword, role
+            username, first_name, last_name, telephone, adresse, email, hashedPassword, role
         });
         res.status(201).json(users);
     } catch (error) {
@@ -54,6 +67,10 @@ export const createUser: RequestHandler<unknown, unknown, CreateUserBody, unknow
 
 interface UpdateUserBody {
     username?: string,
+    first_name?: string,
+    last_name?: string,
+    telephone?: string,
+    adresse?: string,
     email?: string,
     password?: string,
     role?: string
@@ -64,7 +81,7 @@ interface UpdateUserParams {
 }
 
 export const updateUser: RequestHandler<UpdateUserParams, unknown, UpdateUserBody, unknown> = async (req, res, next) => {
-    const { username, email, password, role } = req.body;
+    const { username, first_name, last_name, telephone, adresse, email, password, role } = req.body;
     const userId = req.params.id;
 
     try {

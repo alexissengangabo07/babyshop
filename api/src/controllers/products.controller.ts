@@ -1,7 +1,6 @@
 import { RequestHandler } from "express";
 import mongoose from "mongoose";
 import productsModel from "../models/products.model";
-import cloudinary from '../utils/cloudinary';
 
 export const getProducts: RequestHandler = async (req, res, next) => {
     try {
@@ -34,16 +33,12 @@ export const getProduct: RequestHandler = async (req, res, next) => {
 interface CreateProductBody {
     name: string,
     price: number,
-    image: {
-        public_id: string,
-        url: string
-    },
     description?: string,
     categoryId: string
 }
 
 export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, unknown> = async (req, res, next) => {
-    const { name, price, image, description, categoryId } = req.body;
+    const { name, price, description, categoryId } = req.body;
 
     try {
         if (!name) {
@@ -53,19 +48,9 @@ export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, 
             return res.status(400).json({ message: 'categoryId is required' });
         }
 
-        const imageResult = await cloudinary.uploader.upload(image, {
-            folder: "products",
-            // width: 300,
-            // crop: "scale"
-        });
-
         const products = await productsModel.create({
             name,
             price,
-            image: {
-                public_id: imageResult.public_id,
-                url: imageResult.secure_url
-            },
             description,
             categoryId
         });

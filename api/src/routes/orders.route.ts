@@ -1,13 +1,13 @@
-// import { Router } from "express";
-// import * as ProductsController from "../controllers/products.controller";
+import { Router } from "express";
+import * as ordersController from "../controllers/orders.controller";
 
-// const route = Router();
+const route = Router();
 
-// route.get('/', ProductsController.getProducts)
-//     .get('/:id', ProductsController.getProduct)
-//     .post('/', ProductsController.createProduct)
-//     .patch('/:id', ProductsController.updateProduct)
-//     .delete('/:id', ProductsController.deleteProduct);
+route.get('/', ordersController.getOrders)
+    .get('/:id', ordersController.getOrder)
+    .post('/', ordersController.createOrder)
+    .patch('/:id', ordersController.updateOrder)
+    .delete('/:id', ordersController.deleteOrder);
 
 
-// export default route;
+export default route;
