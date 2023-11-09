@@ -10,11 +10,21 @@ const productsSchema = new Schema({
         required: true
     },
     description: String,
+    image: {
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
+    },
     categoryId: {
         type: Schema.Types.ObjectId,
         ref: "categories",
         required: true
-    }
+    },
 }, {
     timestamps: true
 });

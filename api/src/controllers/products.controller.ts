@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import mongoose from "mongoose";
 import productsModel from "../models/products.model";
+import cloudinary from "../utils/cloudinary";
 
 export const getProducts: RequestHandler = async (req, res, next) => {
     try {
@@ -34,11 +35,12 @@ interface CreateProductBody {
     name: string,
     price: number,
     description?: string,
-    categoryId: string
+    categoryId: string,
+    image?: string
 }
 
 export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, unknown> = async (req, res, next) => {
-    const { name, price, description, categoryId } = req.body;
+    const { name, price, description, categoryId, image } = req.body;
 
     try {
         if (!name) {
@@ -48,11 +50,23 @@ export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, 
             return res.status(400).json({ message: 'categoryId is required' });
         }
 
+        if (!image) {
+            return res.status(400).json({ error: 'Aucun fichier fournit' });
+        }
+
+        const result = await cloudinary.uploader.upload(image, {
+            folder: 'bambino_products' // Optionnel : Définir un dossier spécifique pour les images d'utilisateurs
+        });
+
         const products = await productsModel.create({
             name,
             price,
             description,
-            categoryId
+            categoryId,
+            image: {
+                public_id: result.public_id,
+                url: result.secure_url
+            }
         });
         res.status(201).json(products);
     } catch (error) {
