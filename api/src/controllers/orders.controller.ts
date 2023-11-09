@@ -48,7 +48,6 @@ export const createOrder: RequestHandler<unknown, unknown, CreateOrderBody, unkn
         }
 
 
-
         const orders = await ordersModel.create({
             userId, productsId, total
         });

@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import usersModel from "../models/users.model";
 
 export const getUsers: RequestHandler = async (req, res, next) => {
@@ -23,7 +24,7 @@ export const getUser: RequestHandler = async (req, res, next) => {
         const user = await usersModel.findById(userId);
 
         if (!user) {
-            return res.status(404).json({ message: 'Note not found' });
+            return res.status(404).json({ message: 'User not found' });
         }
         res.status(200).json(user);
     } catch (error) {
@@ -56,8 +57,16 @@ export const createUser: RequestHandler<unknown, unknown, CreateUserBody, unknow
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
+        const existingUsername = await usersModel.findOne({ username });
+        const existingEmail = await usersModel.findOne({ email });
+        const existingTelephone = await usersModel.findOne({ telephone });
+
+        if (existingUsername) {
+            return res.status(400).json({ message: 'Le nom d\'utilisateur existe déjà.' });
+        }
+
         const users = await usersModel.create({
-            username, first_name, last_name, telephone, adresse, email, hashedPassword, role
+            username, first_name, last_name, telephone, adresse, email, password: hashedPassword, role
         });
         res.status(201).json(users);
     } catch (error) {
@@ -124,5 +133,30 @@ export const deleteUser: RequestHandler = async (req, res, next) => {
         res.sendStatus(204);
     } catch (error) {
         next(error);
+    }
+}
+
+export const generateToken = (id: string | object) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET as string, {
+        expiresIn: '30d'
+    });
+}
+
+export const userLogin: RequestHandler = async (req, res, next) => {
+    const { username, password } = req.body;
+    const user = await usersModel.findOne({ username });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+        res.status(200).json({
+            id: user._id,
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            username: user.username,
+            token: generateToken(user._id)
+        });
+    }
+    else {
+        res.status(400).json({ message: 'Invalid username or password !' });
     }
 }

@@ -6,6 +6,7 @@ const route = Router();
 route.get('/', UsersController.getUsers)
     .get('/:id', UsersController.getUser)
     .post('/', UsersController.createUser)
+    .post('/login', UsersController.userLogin)
     .patch('/:id', UsersController.updateUser)
     .delete('/:id', UsersController.deleteUser);
 

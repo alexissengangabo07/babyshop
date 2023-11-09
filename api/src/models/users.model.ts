@@ -14,13 +14,17 @@ const usersSchema = new Schema({
         required: true
     },
     telephone:{
-        type: String
+        type: String,
+        unique: true,
+        sparse: true
     },
     adresse: {
         type: String
     },
     email: {
-        type: String
+        type: String,
+        unique: true,
+        sparse: true
     },
     password: {
         type: String,

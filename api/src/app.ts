@@ -19,7 +19,7 @@ app.use(cors({
 }));
 app.use(morgan('dev'));
 //Routes
-app.use('/api/users', userRoute);
+app.use('/api/user', userRoute);
 app.use('/api/category', categoryRoute);
 app.use('/api/product', productRoute);
 app.use('/api/order', orderRoute);
