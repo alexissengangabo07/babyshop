@@ -1,9 +1,10 @@
 import { Router } from "express";
 import * as ProductsController from "../controllers/products.controller";
+// import checkAuth from "../middlewares/token";
 
 const route = Router();
 
-route.get('/', ProductsController.getProducts)
+route.get('/', /*checkAuth,*/ProductsController.getProducts)
     .get('/:id', ProductsController.getProduct)
     .post('/', ProductsController.createProduct)
     .patch('/:id', ProductsController.updateProduct)

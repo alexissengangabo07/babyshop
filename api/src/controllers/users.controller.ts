@@ -64,6 +64,12 @@ export const createUser: RequestHandler<unknown, unknown, CreateUserBody, unknow
         if (existingUsername) {
             return res.status(400).json({ message: 'Le nom d\'utilisateur existe déjà.' });
         }
+        if (existingEmail) {
+            return res.status(400).json({ message: 'L\'email existe déjà.' });
+        }
+        if (existingTelephone) {
+            return res.status(400).json({ message: 'Le nom de telephone existe déjà.' });
+        }
 
         const users = await usersModel.create({
             username, first_name, last_name, telephone, adresse, email, password: hashedPassword, role
