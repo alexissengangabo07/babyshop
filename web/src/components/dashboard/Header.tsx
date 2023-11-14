@@ -8,7 +8,7 @@ import { FaMoon } from 'react-icons/fa';
 const Header = () => {
     return (
         <>
-            <header className="sticky top-0 bg-[#182235] border-b border-slate-200 z-30">
+            <header className="sticky top-0 bg-[#182235] border-b border-slate-800 z-30">
                 <div className="px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16 -mb-px">
                         {/* Header: Left side */}
@@ -45,7 +45,7 @@ const Header = () => {
                             </a>
                             {/* <FaMoon size={20} color="#ABAFB6" /> */}
                             <hr className="w-px h-6 bg-slate-600 border-none" />
-                            <a href='#' className='bg-blue-300 py-1 px-2 rounded-full' >
+                            <a href='#' className='bg-blue-300 py-1 px-2.5 rounded-full' >
                                 <p className='text-gray-300'>A</p>
                             </a>
                             <p className='text-gray-400'>Alex</p>

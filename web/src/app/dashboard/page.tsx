@@ -1,6 +1,7 @@
 import Home from '@/components/dashboard/Home'
 import Header from '@/components/dashboard/Header'
 import Sidebar from '@/components/dashboard/Sidebar'
+import Footer from '@/components/dashboard/Footer'
 
 const DashboardHome = () => {
     return (
@@ -11,32 +12,54 @@ const DashboardHome = () => {
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
                 {/*  Site header */}
                 <Header />
-                <main>
-                    <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                <main className='bg-[#111827]'>
+                    <div className="px-4 sm:px-6 lg:px-5 py-4 w-full max-w-9xl mx-auto">
                         {/* Dashboard actions */}
                         <div className="sm:flex sm:justify-between sm:items-center mb-8">
 
-                            {/* Right: Actions */}
-                            <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-                                {/* Add view button */}
-                                {/* <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
-                                    <svg className="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
-                                        <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-                                    </svg>
-                                    <span className="hidden xs:block ml-2">Add view</span>
-                                </button> */}
-                            </div>
+                            {/* Breadcrumb */}
+
+
+                            <nav className="flex" aria-label="Breadcrumb">
+                                <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                                    <li className="inline-flex items-center">
+                                        <a href="#" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                                            <svg className="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                                            </svg>
+                                            Home
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div className="flex items-center">
+                                            <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                            </svg>
+                                            <a href="#" className="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Projects</a>
+                                        </div>
+                                    </li>
+                                    <li aria-current="page">
+                                        <div className="flex items-center">
+                                            <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                            </svg>
+                                            <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Flowbite</span>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </nav>
+
 
                         </div>
 
                         {/* Cards */}
-                        <div className="grid grid-cols-12 gap-6">
+                        <div>
                             <Home />
                         </div>
 
                     </div>
                 </main>
-
+                <Footer />
             </div>
         </div>
     )

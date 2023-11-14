@@ -29,7 +29,7 @@ function Sidebar() {
                     {/* Logo */}
                     <a href="/dashboard" className="block">
                         {/* <Image src={'/bambino.png'} alt="" width={120} height={120} /> */}
-                        <p className='text-lg lg:text-xl p-4 bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent'>BAMBINO ADMIN</p>
+                        <p className='text-lg font-extrabold lg:text-xl p-4 pl-3 bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent'>BAMBINO ADMIN</p>
                     </a>
                 </div>
 
