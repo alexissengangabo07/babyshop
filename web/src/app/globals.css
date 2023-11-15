@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+td {
+    border-bottom: none !important;
+    color: #b1b1b1 !important;
+}
+
+th {
+    background-color: rgb(127, 130, 139) !important;
+    border-bottom: none !important;
+}
+
+.ant-table-wrapper .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before, :where(.css-dev-only-do-not-override-2i2tap).ant-table-wrapper .ant-table-thead >tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+    background-color: transparent;
+}

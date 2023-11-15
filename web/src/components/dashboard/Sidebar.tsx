@@ -3,9 +3,13 @@ import { MdProductionQuantityLimits } from 'react-icons/md';
 import { BiCategory } from 'react-icons/bi';
 import { AiOutlineTransaction, AiOutlineUser } from 'react-icons/ai';
 import { HiOutlineHome } from 'react-icons/hi2';
-import Image from 'next/image';
+import Link from 'next/link';
 
-function Sidebar() {
+function Sidebar({
+    searchParams
+}: {
+    searchParams?: { [key: string]: string | string[] | undefined }
+}) {
 
     return (
         <div>
@@ -38,31 +42,32 @@ function Sidebar() {
                     {/* Pages group */}
                     <div>
                         <ul className="mt-3">
-                            <li
-                                className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
+                            <Link
+                                href="/dashboard"
+                                className={`block text-slate-300 rounded-sm truncate  w-full
+                            }`}
                             >
-                                <a
-                                    href="#0"
-                                    className={`block text-slate-300 rounded-sm truncate  w-full
-                                                    }`}
-                                >
+                                <li
+                                    className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
+                                    >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center">
                                             <HiOutlineHome size={18} />
                                             <span className="text-lg ml-3 lg:sidebar-expanded:opacity-100 duration-200">
                                                 Accueil
+                                    {JSON.stringify(searchParams)}
                                             </span>
                                         </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li
-                                className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
+                                </li>
+                            </Link>
+                            <Link
+                                href="/dashboard/categories"
+                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                            }`}
                             >
-                                <a
-                                    href="#0"
-                                    className={`block text-slate-300 rounded-sm truncate  w-full
-                                                    }`}
+                                <li
+                                    className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center">
@@ -72,15 +77,15 @@ function Sidebar() {
                                             </span>
                                         </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li
-                                className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
+                                </li>
+                            </Link>
+                            <Link
+                                href="/dashboard/products"
+                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                }`}
                             >
-                                <a
-                                    href="#0"
-                                    className={`block text-slate-300 rounded-sm truncate  w-full
-                                                    }`}
+                                <li
+                                    className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center">
@@ -90,15 +95,15 @@ function Sidebar() {
                                             </span>
                                         </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li
-                                className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
+                                </li>
+                            </Link>
+                            <Link
+                                href="/dashboard/commandes"
+                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                }`}
                             >
-                                <a
-                                    href="#0"
-                                    className={`block text-slate-300 rounded-sm truncate  w-full
-                                                    }`}
+                                <li
+                                    className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center">
@@ -108,31 +113,31 @@ function Sidebar() {
                                             </span>
                                         </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li
-                                className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
+                                </li>
+                            </Link>
+                            <Link
+                                href="/dashboard/clients"
+                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                }`}
                             >
-                                <a
-                                    href="#0"
-                                    className={`block text-slate-300 rounded-sm truncate  w-full
-                                                    }`}
+                                <li
+                                    className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer`}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center">
                                             <AiOutlineUser size={18} />
                                             <span className="text-lg ml-3 lg:sidebar-expanded:opacity-100 duration-200">
-                                                Utilisateurs
+                                                Clients
                                             </span>
                                         </div>
                                     </div>
-                                </a>
-                            </li>
+                                </li>
+                            </Link>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
