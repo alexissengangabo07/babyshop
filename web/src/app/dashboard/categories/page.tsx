@@ -1,5 +1,6 @@
 import React from 'react';
 import DataTable from '@/components/dashboard/DataTable';
+import Modal from '@/components/dashboard/modals/Modal';
 
 const columns = [
   {
@@ -37,13 +38,9 @@ function page() {
     <div className="App">
       <div className='flex justify-between'>
         <div>
-          <p className="text-gray-300">Categories</p>
+          <p className="text-gray-300">A</p>
         </div>
-        <div>
-          <a href="torrent:void(0)" className='bg-blue-500 hover:bg-blue-600 text-gray-200 text-sm p-2 rounded-md'>
-            Ajouter une catégorie
-          </a>
-        </div>
+        <Modal />
       </div>
       <DataTable columns={columns} data={data} />
     </div>
