@@ -38,7 +38,7 @@ function page() {
     <div className="App">
       <div className='flex justify-between'>
         <div>
-          <p className="text-gray-300">A</p>
+          {/* <p className="text-gray-300">A</p> */}
         </div>
         <Modal />
       </div>

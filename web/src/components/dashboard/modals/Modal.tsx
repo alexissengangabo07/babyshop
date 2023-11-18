@@ -105,7 +105,7 @@ const App: React.FC = () => {
     return (
         <>
             <Button type="primary" className='bg-blue-600' onClick={showModal}>
-                Open Modal with customized footer
+                Ajouter une catégorie
             </Button>
             <Modal
                 open={open}

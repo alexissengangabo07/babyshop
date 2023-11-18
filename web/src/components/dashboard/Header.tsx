@@ -1,11 +1,21 @@
 "use client";
 
-import { CiMenuFries } from 'react-icons/ci';
+import { useContext, useEffect } from 'react';
+import { MdMenu } from 'react-icons/md';
 import { BsBellFill, BsFillSunFill, BsArrowsFullscreen } from 'react-icons/bs';
 import { AiFillAppstore } from 'react-icons/ai';
 import { FaMoon } from 'react-icons/fa';
+import { MenuContext } from '@/contexts/MenuContext';
+
 
 const Header = () => {
+    const { showMenu, toggleShow } = useContext(MenuContext);
+    
+    useEffect(() => {
+      console.log(showMenu)
+    })
+    
+
     return (
         <>
             <header className="sticky top-0 bg-[#182235] border-b border-slate-800 z-30">
@@ -13,7 +23,12 @@ const Header = () => {
                     <div className="flex items-center justify-between h-16 -mb-px">
                         {/* Header: Left side */}
                         <div className='basis-1/3'>
-                            <form>
+                            <div className='block lg:hidden'>
+                                <button className='bg-gray-700 rounded-sm hover:bg-gray-500 p-1 mt-1' onClick={() => toggleShow()}>
+                                    <MdMenu className='text-gray-400' size={27} />
+                                </button>
+                            </div>
+                            <form className='hidden lg:block'>
                                 <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
