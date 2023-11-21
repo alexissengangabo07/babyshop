@@ -14,7 +14,7 @@ function Sidebar({
     searchParams
 }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
     const path = usePathname();
-    const { showMenu, toggleShow } = useContext(MenuContext);
+    const { showMenu, toggleShow, setShowMenu } = useContext(MenuContext);
 
     const isLinkActive = (href: string): boolean => {
         return path === href;

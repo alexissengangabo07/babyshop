@@ -72,7 +72,6 @@ const DataTable: React.FC<DataTableProps> = ({ columns, data }) => {
             pagination={{ pageSize: 6 }}
             className="mt-4 bg-gray-800"
             rowClassName={(record, index) => (index % 2 === 0 ? 'bg-gray-800' : 'bg-[#111827]')}
-            
         />
     );
 };

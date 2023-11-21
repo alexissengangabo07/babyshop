@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import MenuContextProvider from '@/contexts/MenuContext';
+import ProgressBar from '@/components/ProgressBar';
 
 const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ProgressBar />
         <MenuContextProvider>
           {children}
         </MenuContextProvider>
