@@ -21,15 +21,15 @@ const columns = [
 ];
 
 const data = [
-  { id: 1, name: 'John Doe', age: 25 },
-  { id: 1, name: 'John Doe', age: 25 },
-  { id: 2, name: 'Jane Doe', age: 30 }, { id: 1, name: 'John Doe', age: 25 },
-  { id: 2, name: 'Jane Doe', age: 30 }, { id: 1, name: 'John Doe', age: 25 },
-  { id: 2, name: 'Jane Doe', age: 30 }, { id: 1, name: 'John Doe', age: 25 },
-  { id: 2, name: 'Jane Doe', age: 30 }, { id: 1, name: 'John Doe', age: 25 },
-  { id: 2, name: 'Jane Doe', age: 30 }, { id: 1, name: 'John Doe', age: 25 },
-  { id: 2, name: 'Jane Doe', age: 30 },
-  { id: 2, name: 'Jane Doe', age: 30 },
+  { id: 91, name: 'John Doe', age: 25 },
+  { id: 11, name: 'John Doe', age: 25 },
+  { id: 222, name: 'Jane Doe', age: 30 }, { id: 291, name: 'John Doe', age: 25 },
+  { id: 2101, name: 'Jane Doe', age: 30 }, { id: 177, name: 'John Doe', age: 25 },
+  { id: 21111, name: 'Jane Doe', age: 30 }, { id: 1199, name: 'John Doe', age: 25 },
+  { id: 213111, name: 'Jane Doe', age: 30 }, { id: 106, name: 'John Doe', age: 25 },
+  { id: 2374, name: 'Jane Doe', age: 30 }, { id: 1, name: 'John Doe', age: 25 },
+  { id: 2343, name: 'Jane Doe', age: 30 },
+  { id: 221, name: 'Jane Doe', age: 30 },
   // Add more data as needed
 ];
 

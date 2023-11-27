@@ -1,0 +1,126 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import * as api from '@/features/api/users';
+
+interface User {
+    _id: string;
+    userId: {},
+    productsId: object[],
+    total: number
+}
+
+interface UserState {
+    data: User[];
+    isLoading: boolean;
+}
+
+const initialState: UserState = {
+    data: [],
+    isLoading: false
+};
+
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async (_, { rejectWithValue }) => {
+    try {
+        const response = await api.fetchUsers();
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+export const fetchUser = createAsyncThunk('users/fetchUser', async (userId: string, { rejectWithValue }) => {
+    try {
+        const response = await api.fetchUser(userId);
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+export const createUser = createAsyncThunk('users/createUser', async (newUser: object, { rejectWithValue }) => {
+    try {
+        const response = await api.createUser(newUser);
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+export const updateUser = createAsyncThunk('users/updateUser', async (userId: string, { rejectWithValue }) => {
+    try {
+        const response = await api.updateUser(userId);
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+export const deleteUser = createAsyncThunk('users/deleteUsers', async (userId: string, { rejectWithValue }) => {
+    try {
+        const response = await api.deleteUser(userId);
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+const userSlice = createSlice({
+    name: 'users',
+    initialState,
+    reducers: {},
+    extraReducers: builder => {
+        builder.addCase(fetchUsers.pending, state => {
+            state.isLoading = true;
+        });
+        builder.addCase(fetchUsers.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.data = action.payload;
+            // console.log(state.users);
+        });
+        builder.addCase(fetchUsers.rejected, (state, action) => {
+            state.isLoading = false;
+        });
+
+        builder.addCase(createUser.pending, state => {
+            state.isLoading = true;
+        });
+        builder.addCase(createUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.data.push(action.payload);
+        });
+        builder.addCase(createUser.rejected, (state, action) => {
+            state.isLoading = false;
+        });
+
+        builder.addCase(deleteUser.pending, state => {
+            state.isLoading = true;
+        });
+        builder.addCase(deleteUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.data = state.data.filter(
+                (item) => item._id != action.payload
+            );
+        });
+        builder.addCase(deleteUser.rejected, (state, action) => {
+            state.isLoading = false;
+        });
+
+        builder.addCase(updateUser.pending, state => {
+            state.isLoading = true;
+        });
+        builder.addCase(updateUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            const updateItem = action.payload;
+            const index = state.data.findIndex(
+                (item) => item._id === updateItem._id
+            );
+            if (index !== -1) {
+                state.data[index] = updateItem;
+            }
+        });
+        builder.addCase(updateUser.rejected, (state, action) => {
+            state.isLoading = false;
+        });
+    }
+});
+
+export default userSlice.reducer;

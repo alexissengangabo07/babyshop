@@ -1,0 +1,13 @@
+import axios from 'axios';
+
+const url = 'http://localhost:9001/user/';
+
+export const fetchUsers = () => axios.get(url);
+
+export const fetchUser = (userId: string) => axios.get(url + userId);
+
+export const createUser = (newUser: Object) => axios.post(url + 'register/', newUser);
+
+export const deleteUser = (userId: string) => axios.delete(url + userId);
+
+export const updateUser = (userId: string) => axios.patch(url + userId);

@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { MdProductionQuantityLimits } from 'react-icons/md';
 import { BiCategory } from 'react-icons/bi';
 import { AiOutlineTransaction, AiOutlineUser } from 'react-icons/ai';
@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IoMdClose } from "react-icons/io";
 import { MenuContext } from '@/contexts/MenuContext';
+
 
 function Sidebar({
     searchParams
@@ -19,6 +20,10 @@ function Sidebar({
     const isLinkActive = (href: string): boolean => {
         return path === href;
     };
+
+    useEffect(() => {
+        const MOBILE_VIEW = window.innerWidth < 468;
+    })
 
     return (
         <div>
@@ -51,6 +56,7 @@ function Sidebar({
                                 href="/dashboard"
                                 className={`block text-slate-300 rounded-sm truncate  w-full
                             }`}
+                                onClick={(e) => setShowMenu(false)}
                             >
                                 <li
                                     className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer ${isLinkActive('/dashboard') ? 'bg-[#3d475b]' : ''}`}
@@ -60,7 +66,6 @@ function Sidebar({
                                             <HiOutlineHome size={18} />
                                             <span className="text-lg ml-3 lg:sidebar-expanded:opacity-100 duration-200">
                                                 Accueil
-                                                {JSON.stringify(searchParams)}
                                             </span>
                                         </div>
                                     </div>
@@ -70,6 +75,7 @@ function Sidebar({
                                 href="/dashboard/categories"
                                 className={`block text-slate-300 rounded-sm truncate  w-full
                                             }`}
+                                onClick={() => setShowMenu(false)}
                             >
                                 <li
                                     className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer ${isLinkActive('/dashboard/categories') ? 'bg-[#3d475b]' : ''}`}
@@ -88,6 +94,7 @@ function Sidebar({
                                 href="/dashboard/products"
                                 className={`block text-slate-300 rounded-sm truncate  w-full
                                 }`}
+                                onClick={(e) => setShowMenu(false)}
                             >
                                 <li
                                     className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer ${isLinkActive('/dashboard/products') ? 'bg-[#3d475b]' : ''}`}
@@ -106,6 +113,7 @@ function Sidebar({
                                 href="/dashboard/commandes"
                                 className={`block text-slate-300 rounded-sm truncate  w-full
                                 }`}
+                                onClick={(e) => setShowMenu(false)}
                             >
                                 <li
                                     className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer ${isLinkActive('/dashboard/commandes') ? 'bg-[#3d475b]' : ''}`}
@@ -124,6 +132,7 @@ function Sidebar({
                                 href="/dashboard/clients"
                                 className={`block text-slate-300 rounded-sm truncate  w-full
                                 }`}
+                                onClick={() => setShowMenu(false)}
                             >
                                 <li
                                     className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer ${isLinkActive('/dashboard/clients') ? 'bg-[#3d475b]' : ''}`}

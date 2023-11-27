@@ -15,14 +15,12 @@ export default function RootLayout({
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
                 {/*  Site header */}
                 <Header />
-                <main className='bg-[#111827]'>
+                <main className='bg-[#111827] min-h-[88vh]'>
                     <div className="px-4 sm:px-6 lg:px-5 py-4 w-full max-w-9xl mx-auto">
                         {/* Dashboard actions */}
                         <div className="sm:flex sm:justify-between sm:items-center mb-8">
 
                             {/* Breadcrumb */}
-
-
                             <nav className="flex" aria-label="Breadcrumb">
                                 <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                                     <li className="inline-flex items-center">
@@ -46,7 +44,7 @@ export default function RootLayout({
                                             <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                             </svg>
-                                            <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Flowbite</span>
+                                            <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Bambino</span>
                                         </div>
                                     </li>
                                 </ol>

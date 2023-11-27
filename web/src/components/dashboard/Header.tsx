@@ -11,9 +11,9 @@ import { MenuContext } from '@/contexts/MenuContext';
 const Header = () => {
     const { showMenu, toggleShow } = useContext(MenuContext);
     
-    useEffect(() => {
-      console.log(showMenu)
-    })
+    // useEffect(() => {
+    //   console.log(showMenu)
+    // })
     
 
     return (
