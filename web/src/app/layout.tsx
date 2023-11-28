@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import MenuContextProvider from '@/contexts/MenuContext';
-import { Providers } from './provider'
-import store from '@/app/store';
+import { Providers } from './provider';
 
 const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],

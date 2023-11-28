@@ -36,9 +36,9 @@ const data = [
 function page() {
   return (
     <div className="App">
-      <div className='flex justify-between'>
+      <div className='flex justify-between items-center'>
         <div>
-          {/* <p className="text-gray-300">A</p> */}
+          <p className="text-gray-300 text-lg">Catégories des produits</p>
         </div>
         <Modal />
       </div>

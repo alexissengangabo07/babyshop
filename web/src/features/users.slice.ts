@@ -3,9 +3,14 @@ import * as api from '@/features/api/users';
 
 interface User {
     _id: string;
-    userId: {},
-    productsId: object[],
-    total: number
+    username: string,
+    first_name:string,
+    last_name: string,
+    telephone?:string,
+    adresse?: string,
+    email?: string,
+    password: string,
+    role: string
 }
 
 interface UserState {
