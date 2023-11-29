@@ -8,7 +8,7 @@ const TopStats = () => {
     return (
         <div className='flex flex-wrap relative gap-6 mb-5'>
             <div className='grow shrink bg-[#1f2937] shadow-md p-6 rounded-lg cursor-default transition-all duration-1000 ease-in-out py-5 px-3 hover:scale-105'>
-                <div className='absolute p-4 rounded-lg top-[-1rem]' style={{ background: '#3094ec', boxShadow: '0px 0px 5px 1px #3094ec' }}>
+                <div className='absolute p-4 rounded-lg top-[-1rem]' style={{ background: 'purple', boxShadow: '0px 0px 5px 1px purple' }}>
                     <HiBanknotes size={25} color="#fff" />
                 </div>
                 <div className='text-right pb-5'>
@@ -17,7 +17,7 @@ const TopStats = () => {
                 </div>
             </div>
             <div className='grow shrink bg-[#1f2937] shadow-md p-6 rounded-lg cursor-default transition-all duration-1000 ease-in-out py-5 px-3 hover:scale-105'>
-                <div className='absolute p-4 rounded-lg top-[-1rem]' style={{ background: '#3094ec', boxShadow: '0px 0px 5px 1px #3094ec' }}>
+                <div className='absolute p-4 rounded-lg top-[-1rem]' style={{ background: 'orange', boxShadow: '0px 0px 5px 1px orange' }}>
                     <HiUser color="#fff" size={25} />
                 </div>
                 <div className='text-right pb-5'>
@@ -26,7 +26,7 @@ const TopStats = () => {
                 </div>
             </div>
             <div className='grow shrink bg-[#1f2937] shadow-md p-6 rounded-lg cursor-default transition-all duration-1000 ease-in-out py-5 px-3 hover:scale-105'>
-                <div className='absolute p-4 rounded-lg top-[-1rem]' style={{ background: '#3094ec', boxShadow: '0px 0px 5px 1px #3094ec' }}>
+                <div className='absolute p-4 rounded-lg top-[-1rem]' style={{ background: 'green', boxShadow: '0px 0px 5px 1px green' }}>
                     <HiDatabase color="#fff" size={25} />
                 </div>
                 <div className='text-right pb-5'>

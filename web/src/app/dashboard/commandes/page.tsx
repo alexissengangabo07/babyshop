@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import DataTable from '@/components/dashboard/DataTable';
 import Modal from '@/components/dashboard/modals/Modal';
 
@@ -42,7 +42,9 @@ function page() {
         </div>
         <Modal />
       </div>
-      <DataTable columns={columns} data={data} />
+      <Suspense fallback={<span className="text-white">LOADIING</span>}>
+        <DataTable columns={columns} data={data} />
+      </Suspense>
     </div>
   );
 }
