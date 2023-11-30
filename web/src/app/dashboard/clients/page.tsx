@@ -1,49 +1,31 @@
-import React from 'react';
+"use client"
+
+import React, { useEffect } from 'react';
 import DataTable from '@/components/dashboard/DataTable';
 import Modal from '@/components/dashboard/modals/Modal';
-
-const columns = [
-  {
-    title: 'ID',
-    dataIndex: 'id',
-    key: 'id',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-];
-
-const data = [
-  { id: 91, name: 'John Doe', age: 25 },
-  { id: 11, name: 'John Doe', age: 25 },
-  { id: 222, name: 'Jane Doe', age: 30 }, { id: 291, name: 'John Doe', age: 25 },
-  { id: 2101, name: 'Jane Doe', age: 30 }, { id: 177, name: 'John Doe', age: 25 },
-  { id: 21111, name: 'Jane Doe', age: 30 }, { id: 1199, name: 'John Doe', age: 25 },
-  { id: 213111, name: 'Jane Doe', age: 30 }, { id: 106, name: 'John Doe', age: 25 },
-  { id: 2374, name: 'Jane Doe', age: 30 }, { id: 1, name: 'John Doe', age: 25 },
-  { id: 2343, name: 'Jane Doe', age: 30 },
-  { id: 221, name: 'Jane Doe', age: 30 },
-  // Add more data as needed
-];
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { RootState } from '@/redux/store';
+import { fetchUsers } from '@/features/users.slice';
 
 function page() {
+  const dispatch = useAppDispatch();
+  const users = useAppSelector((store: RootState) => store.usersReducer);
+  const columns = [
+    { name: '#', selector: (row: any, index: any) => index + 1 },
+    { name: 'Nom', selector: (row: any) => row.first_name + ' ' + row.last_name, sortable: true },
+    { name: 'Email', selector: (row: any) => row.email, sortable: true },
+    { name: 'Telephone', selector: (row: any) => row.telephone, sortable: true },
+    { name: 'Adresse', selector: (row: any) => row.adresse, sortable: true },
+    { name: 'Actions', selector: (row: any) => <><button className="bg-red-500 text-white p-2 rounded-md">Supprimer</button></> }
+  ];
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
   return (
-    <div className="App">
-      <div className='flex justify-between items-center'>
-        <div>
-          <p className="text-gray-300 text-lg">Clients</p>
-        </div>
-        <Modal />
-      </div>
-      <DataTable columns={columns} data={data} />
-    </div>
+    <>
+      <DataTable tabColumns={columns} data={users.data} />
+    </>
   );
 }
 

@@ -4,10 +4,11 @@ import productsReducer from "@/features/products.slice";
 import usersReducer from "@/features/users.slice";
 import ordersReducer from "@/features/orders.slice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     categoriesReducer, productsReducer, usersReducer, ordersReducer
   },
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const url = 'http://localhost:9001/order/';
+const url = 'http://localhost:9001/api/order/';
 
-export const fetchOrders = () => axios.get(url + 'all/');
+export const fetchOrders = () => axios.get(url);
 
 export const fetchOrder = (orderId: string) => axios.get(url + orderId);
 

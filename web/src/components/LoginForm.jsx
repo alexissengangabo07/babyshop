@@ -28,8 +28,8 @@ const LoginForm = () => {
                                         <Form>
                                             <Form.Item
                                                 name="username" rules={[{ required: true, message: 'Please input your password!' }]}>
-                                                <label htmlFor="" className="text-gray-400">Nom d'utilisateur ou Email</label>
-                                                <Input placeholder="Entrer votre nom d'utilisateur ou email" className="h-10 w-full font-bold" />
+                                                <label htmlFor="" className="text-gray-400" name="emal">Nom d'utilisateur ou Email</label>
+                                                <Input placeholder="Entrer votre nom d'utilisateur ou email" name="password" className="h-10 w-full font-bold" />
                                             </Form.Item>
                                             <Form.Item
                                                 name="password" rules={[{ required: true, message: 'Please input your password!' }]}>

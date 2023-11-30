@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const url = 'http://localhost:9001/product/';
+const url = 'http://localhost:9001/api/product/';
 
-export const fetchProducts = () => axios.get(url + 'all/');
+export const fetchProducts = () => axios.get(url);
 
 export const fetchProduct = (productId: string) => axios.get(url + productId);
 
