@@ -24,9 +24,9 @@ const App: React.FC = () => {
 
     return (
         <>
-            <Button type="primary" className='bg-blue-600 h-10' onClick={showModal}>
+            <button type="button" className='bg-[#199cd7] hover:bg-[#5f8dc2] h-11 text-white rounded-md p-3' onClick={showModal}>
                 Ajouter une catégorie
-            </Button>
+            </button>
             <Modal
                 open={open}
                 title="Create New Product"

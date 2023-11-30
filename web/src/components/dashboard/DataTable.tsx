@@ -1,80 +1,99 @@
-"use client"
+"use client";
 
-// DataTable.tsx
-import React, { useState } from 'react';
-import { Table, Input, Button } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { useState, useContext, useEffect } from 'react';
+import DataTable from 'react-data-table-component';
+import { MdEdit } from 'react-icons/md';
+import { VscTrash } from 'react-icons/vsc';
+import { fetchCategories } from '@/features/categories.slice';
+import { useSelector, useDispatch } from 'react-redux';
 
-interface DataTableProps {
-    columns: any[];
-    data: any[];
+interface colType {
+    name: string;
+    selector: (row: { title: string }, index?: number) => any;
+    sortable?: boolean
 }
 
-const DataTable: React.FC<DataTableProps> = ({ columns, data }) => {
-    const [searchText, setSearchText] = useState('');
-    const [searchedColumn, setSearchedColumn] = useState('');
+const DashboardCategories = () => {
+    const dispatch = useDispatch();
+    const categories = useSelector((store: any) => store.categoriesReducer);
 
-    const getColumnSearchProps = (dataIndex: string) => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
-            <div className="p-4">
-                <Input
-                    placeholder={`Rechercher par ${dataIndex}`}
-                    value={selectedKeys[0]}
-                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{ width: 188, marginBottom: 8, display: 'block' }}
-                    className='border-gray-300'
-                />
-                <Button
-                    type="primary"
-                    onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    // icon={<SearchOutlined />}
-                    size="small"
-                    style={{ width: 90, marginRight: 8 }}
-                    className='bg-blue-500'
-                >
-                    Rechercher
-                </Button>
-                <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-                    Effacer
-                </Button>
-            </div>
-        ),
-        filterIcon: (filtered: any) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-        onFilter: (value: any, record: any) => record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-        // onFilterDropdownVisibleChange: (visible: boolean) => {
-        //     if (visible) {
-        //         setTimeout(() => document.getElementById('search-input')?.select(), 100);
-        //     }
-        // },
-        render: (text: any) =>
-            searchedColumn === dataIndex ? <span className="font-bold">{text}</span> : text,
-    });
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, []);
 
-    const handleSearch = (selectedKeys: any[], confirm: any, dataIndex: string) => {
-        confirm();
-        setSearchText(selectedKeys[0]);
-        setSearchedColumn(dataIndex);
-    };
+    const columns: colType[] = [
+        {
+            name: 'Id',
+            selector: (row, index) => index
+        },
+        {
+            name: 'Categorie',
+            selector: row => row.title,
+            sortable: true
+        },
+        {
+            name: 'Action',
+            selector: row => <>
+                <button onClick={() => { }}><MdEdit size={20} /></button>
+                <button onClick={() => { }}><VscTrash size={20} /></button>
+            </>
+        }
+    ];
 
-    const handleReset = (clearFilters: any) => {
-        clearFilters();
-        setSearchText('');
-    };
+    // const handleFilter = (event: KeyboardEvent) => {
+    //     const newData = categories.filter(row => {
+    //         return row.designation.toLowerCase().includes(event.target.value.toLowerCase());
+    //     });
+
+    //     setRecords(newData);
+    // }
+
 
     return (
-        <Table
-            columns={columns.map((column) => ({
-                ...column,
-                ...getColumnSearchProps(column.dataIndex),
-            }))}
-            dataSource={data}
-            pagination={{ pageSize: 6 }}
-            className="mt-4 bg-gray-800"
-            rowClassName={(record, index) => (index % 2 === 0 ? 'bg-gray-800' : 'bg-[#111827]')}
-            rowKey={record => record.id}
-        />
+        <>
+            <div className='border-[#e0e0e0] rounded-sm w-full shadow-md shadow-gray-300'>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div style={{ padding: 5 }}>
+                        <button onClick={() => { }}>
+                            Ajouter une categorie
+                        </button>
+                    </div>
+                    <div style={{ padding: 5 }}>
+                        <input placeholder="Rechercher" onChange={() => { }} />
+                    </div>
+                </div>
+                <DataTable
+                    columns={columns}
+                    data={categories.data}
+                    pagination
+                    paginationPerPage={7}
+                    paginationRowsPerPageOptions={[7, 10, 25, 50, 100]}
+                    highlightOnHover
+                    customStyles={{
+                        headCells: {
+                            style: {
+                                backgroundColor: '#d3d3d33f',
+                                fontSize: 16,
+                                fontWeight: 500
+                            }
+                        },
+                        cells: {
+                            style: {
+                                border: '1px solid #d3d3d354',
+                            }
+                        },
+                        rows: {
+                            style: {
+                                '&:nth-of-type(even)': {
+                                    backgroundColor: '#d3d3d31a',
+                                }
+                            }
+                        }
+                    }}
+                />
+            </div >
+        </>
     );
-};
+}
 
-export default DataTable;
+export default DashboardCategories;

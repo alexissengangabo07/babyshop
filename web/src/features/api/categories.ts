@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const url = 'http://localhost:9001/category/';
+const url = 'http://localhost:9001/api/category/';
 
-export const fetchCategories = () => axios.get(url + 'all/');
+export const fetchCategories = () => axios.get(url);
 
 export const fetchCategory = (categoryId: string) => axios.get(url + categoryId);
 
