@@ -4,7 +4,7 @@ import categoriesModel from "../models/prodCategories.model";
 
 export const getCategories: RequestHandler = async (req, res, next) => {
     try {
-        const categories = await categoriesModel.find();
+        const categories = await categoriesModel.find().sort({ createdAt: 'desc' });
         res.status(200).json(categories);
     } catch (error) {
         next(error);

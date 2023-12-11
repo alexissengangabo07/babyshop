@@ -4,9 +4,9 @@ import * as api from '@/features/api/users';
 interface User {
     _id: string;
     username: string,
-    first_name:string,
+    first_name: string,
     last_name: string,
-    telephone?:string,
+    telephone?: string,
     adresse?: string,
     email?: string,
     password: string,
@@ -102,7 +102,7 @@ const userSlice = createSlice({
         builder.addCase(deleteUser.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = state.data.filter(
-                (item) => item._id != action.payload
+                (item) => item._id != action.meta.arg
             );
         });
         builder.addCase(deleteUser.rejected, (state, action) => {

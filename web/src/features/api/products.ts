@@ -6,7 +6,7 @@ export const fetchProducts = () => axios.get(url);
 
 export const fetchProduct = (productId: string) => axios.get(url + productId);
 
-export const createProduct = (newProduct: Object) => axios.post(url + 'register/', newProduct);
+export const createProduct = (newProduct: Object) => axios.post(url, newProduct);
 
 export const deleteProduct = (productId: string) => axios.delete(url + productId);
 

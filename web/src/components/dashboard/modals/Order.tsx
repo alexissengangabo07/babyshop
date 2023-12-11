@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 
-const App: React.FC = () => {
+const Order: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
@@ -94,4 +94,4 @@ const App: React.FC = () => {
     );
 };
 
-export default App;
+export default Order;

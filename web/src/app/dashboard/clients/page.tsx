@@ -1,8 +1,10 @@
-"use client"
+"use client";
+import { MdEdit } from "react-icons/md"
+import { VscTrash } from 'react-icons/vsc';
 
 import React, { useEffect } from 'react';
 import DataTable from '@/components/dashboard/DataTable';
-import Modal from '@/components/dashboard/modals/Modal';
+import Modal from '@/components/dashboard/modals/Category';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store';
 import { fetchUsers } from '@/features/users.slice';
@@ -16,8 +18,15 @@ function page() {
     { name: 'Email', selector: (row: any) => row.email, sortable: true },
     { name: 'Telephone', selector: (row: any) => row.telephone, sortable: true },
     { name: 'Adresse', selector: (row: any) => row.adresse, sortable: true },
-    { name: 'Actions', selector: (row: any) => <><button className="bg-red-500 text-white p-2 rounded-md">Supprimer</button></> }
+    {
+      name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
+        <button className="bg-red-500 text-gray-300 px-3 py-2 rounded-sm hover:bg-red-600" data-tooltip-id="my-tooltip" data-tooltip-content="Editer">
+          <VscTrash size={14} />
+        </button>
+      </div>
+    }
   ];
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);

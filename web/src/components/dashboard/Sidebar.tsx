@@ -9,6 +9,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IoMdClose } from "react-icons/io";
 import { MenuContext } from '@/contexts/MenuContext';
+import { IoStorefrontOutline } from "react-icons/io5";
+import { LuGalleryHorizontalEnd } from "react-icons/lu";
 
 
 function Sidebar({
@@ -110,6 +112,25 @@ function Sidebar({
                                 </li>
                             </Link>
                             <Link
+                                href="/dashboard/stock"
+                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                            }`}
+                                onClick={() => setShowMenu(false)}
+                            >
+                                <li
+                                    className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer ${isLinkActive('/dashboard/stock') ? 'bg-[#3d475b]' : ''}`}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <IoStorefrontOutline size={16} />
+                                            <span className="text-lg ml-3 lg:sidebar-expanded:opacity-100 duration-200">
+                                                Stock
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </Link>
+                            <Link
                                 href="/dashboard/commandes"
                                 className={`block text-slate-300 rounded-sm truncate  w-full
                                 }`}
@@ -142,6 +163,25 @@ function Sidebar({
                                             <AiOutlineUser size={18} />
                                             <span className="text-lg ml-3 lg:sidebar-expanded:opacity-100 duration-200">
                                                 Clients
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </Link>
+                            <Link
+                                href="/dashboard/rapports"
+                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                            }`}
+                                onClick={() => setShowMenu(false)}
+                            >
+                                <li
+                                    className={`rounded-sm mb-0.5 last:mb-0 transition duration-1000 focus:text-white hover:bg-[#374151] p-4 cursor-pointer ${isLinkActive('/dashboard/rapports') ? 'bg-[#3d475b]' : ''}`}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <div className="flex items-center">
+                                            <LuGalleryHorizontalEnd />
+                                            <span className="text-lg ml-3 lg:sidebar-expanded:opacity-100 duration-200">
+                                                Rapports
                                             </span>
                                         </div>
                                     </div>

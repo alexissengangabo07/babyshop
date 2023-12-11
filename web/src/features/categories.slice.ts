@@ -72,7 +72,6 @@ const categorySlice = createSlice({
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
-            // console.log(state.users);
         });
         builder.addCase(fetchCategories.rejected, (state, action) => {
             state.isLoading = false;
@@ -95,7 +94,7 @@ const categorySlice = createSlice({
         builder.addCase(deleteCategory.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = state.data.filter(
-                (item) => item._id != action.payload
+                (item) => item._id != action.meta.arg
             );
         });
         builder.addCase(deleteCategory.rejected, (state, action) => {

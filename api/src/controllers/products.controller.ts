@@ -5,7 +5,7 @@ import cloudinary from "../utils/cloudinary";
 
 export const getProducts: RequestHandler = async (req, res, next) => {
     try {
-        const products = await productsModel.find().populate('categoryId');
+        const products = await productsModel.find().sort({ createdAt: 'desc' }).populate('categoryId');
         res.status(200).json(products);
     } catch (error) {
         next(error);
@@ -36,12 +36,12 @@ interface CreateProductBody {
     price: number,
     description?: string,
     categoryId: string,
-    image?: string
+    image?: {}
 }
 
 export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, unknown> = async (req, res, next) => {
     const { name, price, description, categoryId, image } = req.body;
-
+// console.log(req.file)
     try {
         if (!name) {
             return res.status(400).json({ message: 'Product name is required' });

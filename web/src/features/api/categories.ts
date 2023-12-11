@@ -6,7 +6,7 @@ export const fetchCategories = () => axios.get(url);
 
 export const fetchCategory = (categoryId: string) => axios.get(url + categoryId);
 
-export const createCategory = (newCategory: Object) => axios.post(url + 'register/', newCategory);
+export const createCategory = (newCategory: Object) => axios.post(url, newCategory);
 
 export const deleteCategory = (categoryId: string) => axios.delete(url + categoryId);
 

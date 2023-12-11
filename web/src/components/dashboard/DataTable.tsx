@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import DataTable, { createTheme } from 'react-data-table-component';
+import { FaCirclePlus } from "react-icons/fa6";
+import { Tooltip } from 'react-tooltip';
+import ModalAdd from '@/components/dashboard/modals/Category';
 interface TableColumnType {
     name: string;
     selector: (row: {}, index?: number) => any;
@@ -15,24 +18,19 @@ interface Props {
 
 createTheme('solarized', {
     text: {
-        primary: '#268bd2',
+        primary: '#87AEF3',
         secondary: '#2aa198',
     },
     background: {
-        default: '#002b36',
+        default: '#172235',
     },
     context: {
         background: '#cb4b16',
         text: '#FFFFFF',
     },
     divider: {
-        default: '#073642',
-    },
-    action: {
-        button: 'rgba(0,0,0,.54)',
-        hover: 'rgba(0,0,0,.08)',
-        disabled: 'rgba(0,0,0,.12)',
-    },
+        default: '#d3d3d31a',
+    }
 }, 'dark');
 
 const Table: React.FC<Props> = ({ tabColumns, data }) => {
@@ -40,21 +38,26 @@ const Table: React.FC<Props> = ({ tabColumns, data }) => {
 
     const handleFilter = (event: React.FormEvent<HTMLInputElement>) => {
         const newData: any = data.filter(row => {
-            return row.title.toLowerCase().includes(event.currentTarget.value.toLowerCase());
+            if (row.title) {
+                return row.title.toLowerCase().includes(event.currentTarget.value.toLowerCase());
+            }
+            if (row.name) {
+                return row.name.toLowerCase().includes(event.currentTarget.value.toLowerCase());
+            }
+            if (row.title) {
+                return row.title.toLowerCase().includes(event.currentTarget.value.toLowerCase());
+            }
+            if (row.first_name) {
+                return row.first_name.toLowerCase().includes(event.currentTarget.value.toLowerCase());
+            }
         });
         setRecords(newData);
     }
-console.log(data)
 
     return (
         <>
             <div className='mt-8'>
-                <div className='flex justify-between mb-4 items-center'>
-                    <div style={{ padding: 5 }}>
-                        <button className='bg-[#199cd7] hover:bg-[#5f8dc2] h-11 text-white rounded-md p-3' >
-                            Ajouter une categorie
-                        </button>
-                    </div>
+                <div className='flex justify-end mb-4 items-center'>
                     <div style={{ padding: 5 }}>
                         <div className="relative">
                             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -64,8 +67,9 @@ console.log(data)
                             </div>
                             <input
                                 type="search" id="default-search"
-                                className="block w-80 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-[42px] outline-none"
+                                className="block w-full lg:w-80 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-[42px] outline-none"
                                 placeholder="Rechercher"
+                                autoComplete='off'
                                 onChange={handleFilter}
                             />
 
@@ -85,19 +89,21 @@ console.log(data)
                             style: {
                                 backgroundColor: '#d3d3d33f',
                                 fontSize: 16,
-                                fontWeight: 500
+                                fontWeight: 500,
                             }
                         },
                         rows: {
                             style: {
                                 '&:nth-of-type(even)': {
                                     backgroundColor: '#d3d3d31a',
-                                }
+                                },
+                                fontSize: 14,
                             }
                         }
                     }}
                 />
             </div >
+            <Tooltip id='my-tooltip-right' place='right' />
         </>
     );
 }

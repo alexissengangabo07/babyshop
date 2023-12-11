@@ -91,6 +91,7 @@ const productSlice = createSlice({
         });
         builder.addCase(createProduct.rejected, (state, action) => {
             state.isLoading = false;
+            console.log(action)
         });
 
         builder.addCase(deleteProduct.pending, state => {
@@ -99,8 +100,9 @@ const productSlice = createSlice({
         builder.addCase(deleteProduct.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = state.data.filter(
-                (item) => item._id != action.payload
+                (item) => item._id != action.meta.arg
             );
+            console.log(action.meta.arg)
         });
         builder.addCase(deleteProduct.rejected, (state, action) => {
             state.isLoading = false;

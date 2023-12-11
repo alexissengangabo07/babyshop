@@ -1,24 +1,56 @@
-"use client"
+"use client";
 
 import React, { useEffect } from 'react';
+import { Tooltip } from 'react-tooltip';
 import DataTable from '@/components/dashboard/DataTable';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store';
-import { fetchProducts } from '@/features/products.slice';
+import { fetchProducts, deleteProduct } from '@/features/products.slice';
+import { MdEdit } from "react-icons/md"
+import { VscTrash } from 'react-icons/vsc';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import Product from '@/components/dashboard/modals/Product.jsx';
 
 function page() {
   const dispatch = useAppDispatch();
   const products = useAppSelector((store: RootState) => store.productsReducer);
+  const MySwal = withReactContent(Swal);
   const columns = [
     { name: '#', selector: (row: any, index: any) => index + 1 },
-    { name: 'name', selector: (row: any) => row.name, sortable: true },
-    { name: 'price', selector: (row: any) => row.price, sortable: true },
-    { name: 'description', selector: (row: any) => row.description, sortable: true },
-    { name: 'image', selector: (row: any) => 'row.image', sortable: true },
-    { name: 'catégorie', selector: (row: any) => row.categoryId.title, sortable: true },
-    { name: 'Actions', selector: (row: any) => <><button className="bg-red-500 text-white p-2 rounded-md">Supprimer</button></> }
+    { name: 'Nom du produit', selector: (row: any) => row.name, sortable: true },
+    { name: 'Prix', selector: (row: any) => row.price, sortable: true },
+    { name: 'Description', selector: (row: any) => row.description, sortable: true },
+    { name: 'Image', selector: (row: any) => 'row.image', sortable: true },
+    { name: 'Catégorie', selector: (row: any) => row.categoryId?.title, sortable: true },
+    {
+      name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
+        <button className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
+          <MdEdit size={14} />
+        </button>
+        <button onClick={() => removeProd(row._id)} className="bg-red-500 text-gray-300 px-3 py-2 rounded-sm hover:bg-red-600" data-tooltip-id="my-tooltip-top" data-tooltip-content="Supprimer">
+          <VscTrash size={14} />
+        </button>
+      </div>
+    }
   ];
 
+  const removeProd = (id: string) => {
+    MySwal.fire({
+      title: <p>Êtes-vous sûr de vouloir supprimer ce produit ?</p>,
+      showCancelButton: true,
+      confirmButtonColor: 'red',
+      cancelButtonColor: 'darkgray',
+      confirmButtonText: `Supprimer`,
+      cancelButtonText: 'Annuler',
+      background: '#374151',
+      color: 'lightgray'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteProduct(id));
+      }
+    })
+  }
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -27,7 +59,11 @@ function page() {
 
   return (
     <>
+      <div className='float-left mt-1'>
+        <Product />
+      </div>
       <DataTable tabColumns={columns} data={products.data} />
+      <Tooltip id="my-tooltip-top" place='top' />
     </>
   );
 }
