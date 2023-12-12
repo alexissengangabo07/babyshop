@@ -36,12 +36,13 @@ interface CreateProductBody {
     price: number,
     description?: string,
     categoryId: string,
-    image?: {}
+    image?: {} | string
 }
 
 export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, unknown> = async (req, res, next) => {
     const { name, price, description, categoryId, image } = req.body;
-// console.log(req.file)
+    console.log(image)
+    
     try {
         if (!name) {
             return res.status(400).json({ message: 'Product name is required' });

@@ -6,11 +6,13 @@ import { RootState } from '@/redux/store';
 import { createProduct } from '@/features/products.slice';
 import { fetchCategories } from '@/features/categories.slice';
 import toast, { Toaster } from 'react-hot-toast';
+import Image from 'next/image';
 
 const Product = () => {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
-    const [product, setCatText] = useState('');
+    const [selectedFile, setSelectedFile] = useState();
+    const [preview, setPreview] = useState();
     const [formInputs, setFormInput] = useState({
         name: '',
         price: '',
@@ -23,7 +25,16 @@ const Product = () => {
 
     useEffect(() => {
         dispatch(fetchCategories());
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (!selectedFile) return;
+        setPreview(URL.createObjectURL(selectedFile));
+        return () => {
+            URL.revokeObjectURL(preview)
+        }
+    }, [selectedFile])
+
 
 
     const showModal = () => {
@@ -38,7 +49,12 @@ const Product = () => {
 
             if (areAllPropertiesNotEmpty) {
                 setOpen(false);
-                dispatch(createProduct(formInputs))
+                dispatch(createProduct(formInputs));
+                let formData = new FormData();
+                formData.append("title", this.state.title);
+                formData.append("image", this.state.image);
+
+                console.log(formData)
             }
             else {
                 toast.error('Tous les champs sont oligatoires.')
@@ -69,11 +85,9 @@ const Product = () => {
                 ...prevInputs,
                 image: file
             }));
-            console.log(formInputs)
         };
 
     };
-    console.log(formInputs)
 
     const handleInputChange = (e) => {
         e.preventDefault();
@@ -146,7 +160,10 @@ const Product = () => {
                         </div>
                         <div className="col-span-2">
                             <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image du produit</label>
-                            <input type="file" accept='.png, .jpg' onChange={handleFileChange} name="image" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
+                            <input type="file" accept='.png, .jpg' onChange={e => { handleFileChange(e); setSelectedFile(e.target.files[0]); }} name="image" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
+                            <div>
+                                {preview && <Image src={preview} width={100} height={100} alt="er" />}
+                            </div>
                         </div>
                         <div className="col-span-2">
                             <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description du produit</label>

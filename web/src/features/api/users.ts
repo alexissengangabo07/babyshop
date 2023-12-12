@@ -11,3 +11,5 @@ export const createUser = (newUser: Object) => axios.post(url + 'register/', new
 export const deleteUser = (userId: string) => axios.delete(url + userId);
 
 export const updateUser = (userId: string) => axios.patch(url + userId);
+
+export const loginUser = (user: Object) => axios.post(url + 'login/', user);

@@ -16,11 +16,15 @@ interface User {
 interface UserState {
     data: User[];
     isLoading: boolean;
+    isError: boolean;
+    message: string;
 }
 
 const initialState: UserState = {
     data: [],
-    isLoading: false
+    isLoading: false,
+    isError: false,
+    message: ''
 };
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async (_, { rejectWithValue }) => {
@@ -44,6 +48,15 @@ export const fetchUser = createAsyncThunk('users/fetchUser', async (userId: stri
 export const createUser = createAsyncThunk('users/createUser', async (newUser: object, { rejectWithValue }) => {
     try {
         const response = await api.createUser(newUser);
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
+export const loginUser = createAsyncThunk('users/loginUser', async (user: object, { rejectWithValue }) => {
+    try {
+        const response = await api.loginUser(user);
         return response.data;
     } catch (error) {
         return rejectWithValue(error);
@@ -94,6 +107,22 @@ const userSlice = createSlice({
         });
         builder.addCase(createUser.rejected, (state, action) => {
             state.isLoading = false;
+        });
+
+        builder.addCase(loginUser.pending, state => {
+            state.isLoading = true;
+        });
+        builder.addCase(loginUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            // state.data.push(action.payload);
+            console.log(action)
+            // localStorage.setItem('user', JSON.stringify(action.payload));
+        });
+        builder.addCase(loginUser.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true;
+            state.message = action.payload?.response?.data?.message;
         });
 
         builder.addCase(deleteUser.pending, state => {
