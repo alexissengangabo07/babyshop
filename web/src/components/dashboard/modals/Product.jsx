@@ -50,11 +50,8 @@ const Product = () => {
             if (areAllPropertiesNotEmpty) {
                 setOpen(false);
                 dispatch(createProduct(formInputs));
-                let formData = new FormData();
-                formData.append("title", this.state.title);
-                formData.append("image", this.state.image);
 
-                console.log(formData)
+                console.log(formInputs)
             }
             else {
                 toast.error('Tous les champs sont oligatoires.')
@@ -66,24 +63,14 @@ const Product = () => {
         setOpen(false);
     };
 
-    // const setTo64 = (file: any) => {
-    //     console.log(file)
-    //     console.log(formInputs)
-    //     // const reader = new FileReader();
-    //     // reader.readAsDataURL(file);
-    //     // reader.onloadend = () => {
-    //         
-    //     //     console.log(formInputs)
-    //     // };
-    // }
     const handleFileChange = (event) => {
-        const file = event.target.files?.[0] || null;
+        const file = event.target.files[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onloadend = () => {
+        reader.onload = () => {
             setFormInput((prevInputs) => ({
                 ...prevInputs,
-                image: file
+                image: reader.result
             }));
         };
 

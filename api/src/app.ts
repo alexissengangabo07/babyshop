@@ -25,6 +25,6 @@ app.use('/api/product', productRoute);
 app.use('/api/order', orderRoute);
 
 app.use(endpointHandler);
-app.use(errorHandler);
+// app.use(errorHandler);
 
 export default app;

@@ -36,12 +36,11 @@ interface CreateProductBody {
     price: number,
     description?: string,
     categoryId: string,
-    image?: {} | string
+    image?: string
 }
 
 export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, unknown> = async (req, res, next) => {
     const { name, price, description, categoryId, image } = req.body;
-    console.log(image)
     
     try {
         if (!name) {

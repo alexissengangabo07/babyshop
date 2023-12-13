@@ -11,17 +11,17 @@ import { VscTrash } from 'react-icons/vsc';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Product from '@/components/dashboard/modals/Product.jsx';
+import Image from 'next/image';
 
 function page() {
   const dispatch = useAppDispatch();
   const products = useAppSelector((store: RootState) => store.productsReducer);
   const MySwal = withReactContent(Swal);
   const columns = [
-    { name: '#', selector: (row: any, index: any) => index + 1 },
+    { name: '#', selector: (row: any) => <Image src={row.image?.url} width={80} height={80} alt='img' className='rounded-md' /> },
     { name: 'Nom du produit', selector: (row: any) => row.name, sortable: true },
     { name: 'Prix', selector: (row: any) => row.price, sortable: true },
     { name: 'Description', selector: (row: any) => row.description, sortable: true },
-    { name: 'Image', selector: (row: any) => 'row.image', sortable: true },
     { name: 'Catégorie', selector: (row: any) => row.categoryId?.title, sortable: true },
     {
       name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
