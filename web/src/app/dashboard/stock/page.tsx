@@ -5,7 +5,7 @@ import { Tooltip } from 'react-tooltip';
 import DataTable from '@/components/dashboard/DataTable';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store';
-import { fetchProducts, deleteProduct } from '@/features/products.slice';
+import { fetchProductsStock, deleteProduct } from '@/features/stock.slice';
 import { MdEdit } from "react-icons/md"
 import { VscTrash } from 'react-icons/vsc';
 import Swal from 'sweetalert2';
@@ -15,11 +15,11 @@ import Image from 'next/image';
 
 function page() {
   const dispatch = useAppDispatch();
-  const products = useAppSelector((store: RootState) => store.productsReducer);
+  const stock = useAppSelector((store: RootState) => store.stockReducer);
   const MySwal = withReactContent(Swal);
   const columns = [
-    { name: 'Produit', selector: (row: any) => row.name, sortable: true },
-    { name: 'Quantité disponile', selector: (row: any) => row.price, sortable: true },
+    { name: 'Produit', selector: (row: any) => row.productId.name, sortable: true },
+    { name: 'Quantité disponile', selector: (row: any) => row.quantity, sortable: true },
     {
       name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
         <button className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
@@ -50,7 +50,7 @@ function page() {
   }
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProductsStock());
   }, [])
 
 
@@ -59,7 +59,7 @@ function page() {
       <div className='float-left mt-1'>
         <Product />
       </div>
-      <DataTable tabColumns={columns} data={products.data} />
+      <DataTable tabColumns={columns} data={stock.data} />
       <Tooltip id="my-tooltip-top" place='top' />
     </>
   );

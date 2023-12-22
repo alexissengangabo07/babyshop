@@ -3,10 +3,11 @@ import categoriesReducer from "@/features/categories.slice";
 import productsReducer from "@/features/products.slice";
 import usersReducer from "@/features/users.slice";
 import ordersReducer from "@/features/orders.slice";
+import stockReducer from "@/features/stock.slice";
 
 export const store = configureStore({
   reducer: {
-    categoriesReducer, productsReducer, usersReducer, ordersReducer
+    categoriesReducer, productsReducer, usersReducer, ordersReducer, stockReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

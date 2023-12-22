@@ -7,6 +7,7 @@ import errorHandler from "./middlewares/errors";
 import userRoute from './routes/users.route';
 import categoryRoute from './routes/prodCategories.route';
 import productRoute from './routes/products.route';
+import productStockRoute from './routes/stock.route';
 import orderRoute from './routes/orders.route';
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(morgan('dev'));
 app.use('/api/user', userRoute);
 app.use('/api/category', categoryRoute);
 app.use('/api/product', productRoute);
+app.use('/api/stock', productStockRoute);
 app.use('/api/order', orderRoute);
 
 app.use(endpointHandler);

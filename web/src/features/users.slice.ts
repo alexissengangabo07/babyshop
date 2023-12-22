@@ -1,16 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from '@/features/api/users';
+import { toast } from 'react-hot-toast';
+import { setCookie } from "@/utils/cookie";
 
 interface User {
-    _id: string;
-    username: string,
-    first_name: string,
-    last_name: string,
+    _id?: string;
+    username?: string,
+    first_name?: string,
+    last_name?: string,
     telephone?: string,
     adresse?: string,
     email?: string,
-    password: string,
-    role: string
+    password?: string,
+    role?: string
 }
 
 interface UserState {
@@ -103,7 +105,7 @@ const userSlice = createSlice({
         });
         builder.addCase(createUser.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.data.push(action.payload);
+            state.data = action.payload;
         });
         builder.addCase(createUser.rejected, (state, action) => {
             state.isLoading = false;
@@ -115,14 +117,16 @@ const userSlice = createSlice({
         builder.addCase(loginUser.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isError = false;
-            // state.data.push(action.payload);
-            console.log(action)
-            // localStorage.setItem('user', JSON.stringify(action.payload));
+            console.log("fullfill")
+            state.data = action.payload;
+
+            setCookie('token', action.payload?.token, 7)
         });
-        builder.addCase(loginUser.rejected, (state, action) => {
+        builder.addCase(loginUser.rejected, (state, action: any) => {
             state.isLoading = false
             state.isError = true;
             state.message = action.payload?.response?.data?.message;
+            toast.error(state.message)
         });
 
         builder.addCase(deleteUser.pending, state => {
@@ -130,9 +134,9 @@ const userSlice = createSlice({
         });
         builder.addCase(deleteUser.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.data = state.data.filter(
-                (item) => item._id != action.meta.arg
-            );
+            // state.data = state.data.filter(
+            //     (item) => item._id != action.meta.arg
+            // );
         });
         builder.addCase(deleteUser.rejected, (state, action) => {
             state.isLoading = false;
@@ -144,12 +148,12 @@ const userSlice = createSlice({
         builder.addCase(updateUser.fulfilled, (state, action) => {
             state.isLoading = false;
             const updateItem = action.payload;
-            const index = state.data.findIndex(
-                (item) => item._id === updateItem._id
-            );
-            if (index !== -1) {
-                state.data[index] = updateItem;
-            }
+            // const index = state.data.findIndex(
+            //     (item) => item._id === updateItem._id
+            // );
+            // if (index !== -1) {
+            //     state.data[index] = updateItem;
+            // }
         });
         builder.addCase(updateUser.rejected, (state, action) => {
             state.isLoading = false;

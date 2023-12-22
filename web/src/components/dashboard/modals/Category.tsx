@@ -25,7 +25,7 @@ const Category: React.FC = () => {
         }, 2000);
         setTimeout(() => {
             setCatText('')
-        }, 4000);
+        }, 3000);
     };
 
     const handleCancel = () => {

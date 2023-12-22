@@ -1,3 +1,4 @@
+"use client"
 import Home from '@/components/dashboard/Home';
 
 const DashboardHome = () => {

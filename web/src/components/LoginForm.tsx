@@ -23,12 +23,18 @@ const loginSchema = Yup.object().shape({
 const LoginForm = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const dispatch = useAppDispatch();
-    const user = useAppSelector((store: RootState) => store.usersReducer);
-    const router = useRouter()
+    const { data, isError, message } = useAppSelector((store: RootState) => store.usersReducer);
+    const router = useRouter();
 
     function togglePasswordVisibility() {
         setIsPasswordVisible((prevState) => !prevState);
     }
+
+    useEffect(() => {
+        if (data?.username !== undefined) {
+            router.push('/dashboard')
+        }
+    }, [isError, message, data]);
 
     return (
         <section className="bg-[#1F2D57] h-[100vh] py-3 flex items-center">
@@ -44,7 +50,7 @@ const LoginForm = () => {
                                     className="mx-auto w-44 h-36"
                                     src="/login.png"
                                     alt="logo" />
-                                <h4 style={{ fontFamily: "revert-layer" }} className="mb-12 mt-1 pb-1 text-xl font-extrabold lg:text-xl p-4 pl-3 bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent">
+                                <h4 style={{ fontFamily: "revert-layer" }} className="mb-12 mt-1 pb-1 text-2xl font-extrabold lg:text-xl p-4 pl-3 bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent">
                                     Bambino Shop
                                 </h4>
                             </div>
@@ -56,12 +62,6 @@ const LoginForm = () => {
                                 validationSchema={loginSchema}
                                 onSubmit={values => {
                                     dispatch(loginUser(values));
-                                    if (user.isError) {
-                                        toast.error(user.message)
-                                    }
-                                    else {
-                                        router.push('/dashboard')
-                                    }
                                 }}
                             >
                                 {({ errors, touched }) => (
@@ -78,7 +78,7 @@ const LoginForm = () => {
         bg-[#1f2d57]
         border-gray-700
         text-sm
-        outline-none focus:ring-1" />
+        outline-none focus:ring-1" autoComplete="off" />
                                             {errors.username && touched.username ? (
                                                 <div className="text-red-500">{errors.username}</div>
                                             ) : null}

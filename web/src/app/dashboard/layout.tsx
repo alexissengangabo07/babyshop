@@ -1,18 +1,12 @@
 import Header from '@/components/dashboard/Header'
 import Sidebar from '@/components/dashboard/Sidebar'
 import Footer from '@/components/dashboard/Footer'
-import Breadcrumb from '@/components/dashboard/Breadcrumb'
+import Breadcrumb from '@/components/dashboard/Breadcrumb';
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
     return (
         <div className="flex min-h-screen relative">
-            {/* Sidebar */}
             <Sidebar />
-            {/* Content area */}
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
                 {/*  Site header */}
                 <Header />

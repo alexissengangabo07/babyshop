@@ -56,7 +56,7 @@ function Sidebar({
                         <ul className="mt-3">
                             <Link
                                 href="/dashboard"
-                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                className={`block text-slate-300 rounded-sm truncate  w-full font-thin
                             }`}
                                 onClick={(e) => setShowMenu(false)}
                             >
@@ -75,7 +75,7 @@ function Sidebar({
                             </Link>
                             <Link
                                 href="/dashboard/categories"
-                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                className={`block text-slate-300 rounded-sm truncate  w-full font-thin
                                             }`}
                                 onClick={() => setShowMenu(false)}
                             >
@@ -94,7 +94,7 @@ function Sidebar({
                             </Link>
                             <Link
                                 href="/dashboard/products"
-                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                className={`block text-slate-300 rounded-sm truncate  w-full font-thin
                                 }`}
                                 onClick={(e) => setShowMenu(false)}
                             >
@@ -113,7 +113,7 @@ function Sidebar({
                             </Link>
                             <Link
                                 href="/dashboard/stock"
-                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                className={`block text-slate-300 rounded-sm truncate  w-full font-thin
                                             }`}
                                 onClick={() => setShowMenu(false)}
                             >
@@ -132,7 +132,7 @@ function Sidebar({
                             </Link>
                             <Link
                                 href="/dashboard/commandes"
-                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                className={`block text-slate-300 rounded-sm truncate  w-full font-thin
                                 }`}
                                 onClick={(e) => setShowMenu(false)}
                             >
@@ -151,7 +151,7 @@ function Sidebar({
                             </Link>
                             <Link
                                 href="/dashboard/clients"
-                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                className={`block text-slate-300 rounded-sm truncate  w-full font-thin
                                 }`}
                                 onClick={() => setShowMenu(false)}
                             >
@@ -170,7 +170,7 @@ function Sidebar({
                             </Link>
                             <Link
                                 href="/dashboard/rapports"
-                                className={`block text-slate-300 rounded-sm truncate  w-full
+                                className={`block text-slate-300 rounded-sm truncate  w-full font-thin
                                             }`}
                                 onClick={() => setShowMenu(false)}
                             >

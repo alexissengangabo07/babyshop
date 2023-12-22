@@ -144,7 +144,7 @@ export const deleteUser: RequestHandler = async (req, res, next) => {
 
 export const generateToken = (id: string | object) => {
     return jwt.sign({ id }, process.env.JWT_SECRET as string, {
-        expiresIn: '30d'
+        expiresIn: '7d'
     });
 }
 
@@ -160,7 +160,7 @@ export const userLogin: RequestHandler = async (req, res, next) => {
             first_name: user.first_name,
             last_name: user.last_name,
             username: user.username,
-            token: generateToken(user._id)
+            token: generateToken(user)
         });
     }
     else {
