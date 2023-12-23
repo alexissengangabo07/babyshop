@@ -12,13 +12,14 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Product from '@/components/dashboard/modals/Product.jsx';
 import Image from 'next/image';
+import { Toaster } from 'react-hot-toast';
 
 function page() {
   const dispatch = useAppDispatch();
   const products = useAppSelector((store: RootState) => store.productsReducer);
   const MySwal = withReactContent(Swal);
   const columns = [
-    { name: '#', selector: (row: any) => <Image src={row.image?.url} width={80} height={80} alt='img' className='rounded-md' /> },
+    { name: '#', selector: (row: any) => <Image src={row.image?.url} priority={false} quality={50} width={80} height={80} alt='img' className='rounded-md h-auto w-auto' /> },
     { name: 'Nom du produit', selector: (row: any) => row.name, sortable: true },
     { name: 'Prix', selector: (row: any) => row.price, sortable: true },
     { name: 'Description', selector: (row: any) => row.description, sortable: true },
@@ -64,6 +65,7 @@ function page() {
       </div>
       <DataTable tabColumns={columns} data={products.data} />
       <Tooltip id="my-tooltip-top" place='top' />
+      {/* <Toaster /> */}
     </>
   );
 }

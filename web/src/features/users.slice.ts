@@ -16,7 +16,7 @@ interface User {
 }
 
 interface UserState {
-    data: User[];
+    data: any;
     isLoading: boolean;
     isError: boolean;
     message: string;
@@ -120,7 +120,7 @@ const userSlice = createSlice({
             console.log("fullfill")
             state.data = action.payload;
 
-            setCookie('token', action.payload?.token, 7)
+            setCookie('token', action.payload?.token, 7);
         });
         builder.addCase(loginUser.rejected, (state, action: any) => {
             state.isLoading = false

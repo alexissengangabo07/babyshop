@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from '@/features/api/products';
 
@@ -81,16 +82,18 @@ const productSlice = createSlice({
         builder.addCase(fetchProducts.rejected, (state, action) => {
             state.isLoading = false;
         });
-
+        
         builder.addCase(createProduct.pending, state => {
             state.isLoading = true;
         });
         builder.addCase(createProduct.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data.push(action.payload);
+            toast.success("Succès");
         });
         builder.addCase(createProduct.rejected, (state, action) => {
             state.isLoading = false;
+            toast.error("Une erreur vient de survenir, produit non enregistré");
             console.log(action)
         });
 

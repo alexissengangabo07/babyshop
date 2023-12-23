@@ -7,7 +7,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store';
 import { loginUser } from '@/features/users.slice';
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 const loginSchema = Yup.object().shape({
     username: Yup.string()
@@ -24,7 +24,6 @@ const LoginForm = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const dispatch = useAppDispatch();
     const { data, isError, message } = useAppSelector((store: RootState) => store.usersReducer);
-    const router = useRouter();
 
     function togglePasswordVisibility() {
         setIsPasswordVisible((prevState) => !prevState);
@@ -32,7 +31,7 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (data?.username !== undefined) {
-            router.push('/dashboard')
+            redirect('/dashboard')
         }
     }, [isError, message, data]);
 

@@ -39,7 +39,7 @@ const Category: React.FC = () => {
     return (
         <>
             <button type="button" className='bg-[#199cd7] hover:bg-[#5f8dc2] h-11 text-white rounded-full lg:rounded-md p-3' onClick={showModal}>
-                <span className='lg:block hidden'>Ajouter une catégorie</span>
+                <span className='lg:block hidden text-sm'>Ajouter une catégorie</span>
                 <span className='block lg:hidden'>+</span>
             </button>
             <Modal

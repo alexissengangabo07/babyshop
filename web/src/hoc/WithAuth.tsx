@@ -1,24 +1,24 @@
-'use client';
+// 'use client';
 
-import { getToken } from '@/utils/cookie';
-import { redirect } from 'next/navigation';
-import { useEffect } from 'react';
+// import { getToken } from '@/utils/cookie';
+// import { redirect } from 'next/navigation';
+// import { useEffect } from 'react';
 
-const WithAuth = (Component: any) => {
-    const token = getToken('token');
+// const WithAuth = (Component: any) => {
+//     const token = getToken('token');
 
-    return function WithAuth(props: any) {
-        useEffect(() => {
-            if (token === null) {
-                redirect('/dashboard');
-            }
-        }, []);
+//     return function WithAuth(props: any) {
+//         useEffect(() => {
+//             if (token === null) {
+//                 redirect('/dashboard');
+//             }
+//         }, []);
 
-        if (token === null) {
-            return null;
-        }
-        return <Component {...props} />
-    }
-}
+//         if (token === null) {
+//             return null;
+//         }
+//         return <Component {...props} />
+//     }
+// }
 
-export default WithAuth
+// export default WithAuth

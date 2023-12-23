@@ -13,10 +13,10 @@ import orderRoute from './routes/orders.route';
 const app = express();
 dotenv.config();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:3000',
 }));
 app.use(morgan('dev'));
 //Routes

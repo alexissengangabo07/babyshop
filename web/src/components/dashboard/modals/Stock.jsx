@@ -55,7 +55,7 @@ const Product = () => {
 
     return (
         <>
-            <button type="button" className='bg-[#199cd7] hover:bg-[#5f8dc2] h-11 text-white rounded-md p-3' onClick={showModal}>
+            <button type="button" className='bg-[#199cd7] text-sm hover:bg-[#5f8dc2] h-11 text-white rounded-md p-3' onClick={showModal}>
                 Ajouter dans le stock
             </button>
             <Modal

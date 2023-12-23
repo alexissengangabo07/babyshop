@@ -5,7 +5,6 @@ import DataTable from '@/components/dashboard/DataTable';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store';
 import { fetchOrders } from '@/features/orders.slice';
-import WithAuth from '@/hoc/WithAuth';
 
 function page() {
   const dispatch = useAppDispatch();
@@ -28,4 +27,4 @@ function page() {
   );
 }
 
-export default WithAuth(page);
+export default page;

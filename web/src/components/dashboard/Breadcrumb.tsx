@@ -18,7 +18,7 @@ const Breadcrumb = ({ homeElement, separator, containerClasses, listClasses, act
     return (
         <div>
             <ul className={containerClasses}>
-                <li className={listClasses}><Link href={'/'}>{homeElement}</Link></li>
+                <li className={listClasses + ' font-light'}><Link href={'/'}>{homeElement}</Link></li>
                 {pathNames.length > 0 && separator}
                 {
                     pathNames.map((link, index) => {
@@ -28,7 +28,7 @@ const Breadcrumb = ({ homeElement, separator, containerClasses, listClasses, act
                         return (
                             <React.Fragment key={index}>
                                 <li className={itemClasses} >
-                                    <Link href={href}>{itemLink}</Link>
+                                    <Link href={href} className='font-light'>{itemLink}</Link>
                                 </li>
                                 {pathNames.length !== index + 1 && separator}
                             </React.Fragment>

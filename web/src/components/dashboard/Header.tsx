@@ -1,20 +1,82 @@
 "use client";
 
-import { useContext, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { MdMenu } from 'react-icons/md';
 import { BsBellFill, BsFillSunFill, BsArrowsFullscreen } from 'react-icons/bs';
 import { AiFillAppstore } from 'react-icons/ai';
 import { FaMoon } from 'react-icons/fa';
 import { MenuContext } from '@/contexts/MenuContext';
+import { Tooltip } from 'react-tooltip';
+import { getTokenCookie, clearCookie } from '@/utils/cookie';
+import { jwtDecode } from 'jwt-decode';
+import { redirect } from 'next/navigation';
+import Link from 'next/link';
+
+type connectedUserType = {
+    createdAt?: string;
+    first_name?: string;
+    last_name?: string;
+    password?: string;
+    role?: string;
+    telephone?: string;
+    updatedAt?: string;
+    username?: string;
+    __v?: number;
+    _id?: string
+}
 
 
 const Header = () => {
     const { showMenu, toggleShow } = useContext(MenuContext);
-    
-    // useEffect(() => {
-    //   console.log(showMenu)
-    // })
-    
+    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [connectedUser, setConnectedUser] = useState<connectedUserType>({
+        createdAt: '',
+        first_name: '',
+        last_name: '',
+        password: '',
+        role: '',
+        telephone: '',
+        updatedAt: '',
+        username: '',
+        __v: 0,
+        _id: ''
+    });
+
+    useEffect(() => {
+        const token = getTokenCookie();
+        if (token) {
+            const decodedToken: any = jwtDecode(token);
+            setConnectedUser(decodedToken.id);
+        } else {
+            console.log('Token cookie not found');
+        }
+    }, [])
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const disconnect = () => {
+        clearCookie('token');
+        location.reload();
+    }
+
+    const closeDropdown = () => {
+        setIsOpen(false);
+    };
+    const toggleScreen = () => {
+        const element = document.documentElement;
+
+        if (!isFullscreen) {
+            element.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+
+        setIsFullscreen(!isFullscreen);
+    };
+
 
     return (
         <>
@@ -50,9 +112,9 @@ const Header = () => {
 
                         {/* Header: Right side */}
                         <div className="flex items-center space-x-4">
-                            <a href="#" className='cursor-pointer hover hover:bg-[#374151] p-2 rounded-md' onClick={() => document.documentElement.requestFullscreen()}>
+                            <span className='cursor-pointer hover hover:bg-[#374151] p-2 rounded-md' data-tooltip-id="my-tooltip-right" data-tooltip-content={isFullscreen ? 'Quitter le plein ecran' : 'Entrer en plein ecran'} onClick={toggleScreen}>
                                 <BsArrowsFullscreen size={17} color="#ABAFB6" />
-                            </a>
+                            </span>
                             <a href="#" className='cursor-pointer hover hover:bg-[#374151] p-2 rounded-md'>
                                 <BsBellFill size={20} color="#ABAFB6" />
                             </a>
@@ -61,13 +123,42 @@ const Header = () => {
                             </a>
                             {/* <FaMoon size={20} color="#ABAFB6" /> */}
                             <hr className="w-px h-6 bg-slate-600 border-none" />
-                            <a href='#' className='bg-blue-300 py-1 px-2.5 rounded-full' >
-                                <p className='text-gray-300'>A</p>
-                            </a>
-                            <p className='text-gray-400'>Alex</p>
+                            <div onClick={toggleDropdown} className='flex items-center gap-2 relative cursor-pointer hover:bg-[#3741519a] active:bg-[#475b7a9a] p-2 rounded-lg'>
+                                <a href='#' className='bg-blue-300 py-1 px-2.5 rounded-full' >
+                                    <p className='text-gray-300 select-none capitalize'>{connectedUser?.first_name?.charAt(0)}</p>
+                                </a>
+                                <p className='text-gray-400 select-none capitalize'>{connectedUser?.first_name + ' ' + connectedUser?.last_name}</p>
+                            </div>
+
+
+
+                            {/* <!-- Dropdown menu --> */}
+                            {isOpen && (
+                                <div className="z-10 absolute top-full right-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                    <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                        <div className='capitalize'>{connectedUser?.first_name + ' ' + connectedUser?.last_name}</div>
+                                        <div className="font-medium truncate">@{connectedUser?.username}</div>
+                                    </div>
+                                    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
+                                        <li>
+                                            <a href="#" onClick={closeDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profil</a>
+                                        </li>
+                                        <li>
+                                            <Link href="/dashboard/parametre/" onClick={closeDropdown} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Paramètres</Link>
+                                        </li>
+                                    </ul>
+                                    <div className="py-2">
+                                        <a href="#" onClick={disconnect} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Déconnexion</a>
+                                    </div>
+                                </div>
+                            )}
+
+
+
                         </div>
                     </div>
                 </div>
+                <Tooltip id='my-tooltip-right' place='bottom' />
             </header>
         </>
     )
