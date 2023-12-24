@@ -1,13 +1,21 @@
-import Link from 'next/link'
+import Categories from '@/components/shop/Categories'
+import Footer from '@/components/shop/Footer'
+import Header from '@/components/shop/Header'
+import Navbar from '@/components/shop/Navbar'
+import Products from '@/components/shop/Products'
 import React from 'react'
 
 const Home = () => {
   return (
-    <div>
-      <Link href="/dashboard" className=' text-center mt-8 text-lg font-extrabold lg:text-2xl p-4 pl-3 bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent'>
-        BAMBINO APP
-      </Link>
-    </div>
+    <>
+      <Header />
+      <Navbar />
+      <div className="container grid md:grid-cols-4 grid-cols-2 gap-6 pt-4 pb-16 items-start">
+        <Categories />
+        <Products />
+      </div>
+      <Footer />
+    </>
   )
 }
 
