@@ -4,13 +4,12 @@ const Navbar = () => {
     return (
         <nav className="bg-gray-800">
             <div className="container flex">
-                <div className="px-8 py-4 bg-primary md:flex items-center cursor-pointer relative group hidden">
+                <div className="px-8 py-4 bg-primary ml-5 md:flex items-center cursor-pointer relative group hidden">
                     <span className="text-white">
                         <i className="fa-solid fa-bars"></i>
                     </span>
 
-
-                    <span className="capitalize ml-2 text-white hidden">All Categories</span>
+                    <span className="capitalize ml-2 text-white hidden">Toutes les Categories</span>
 
                     {/* <!-- dropdown --> */}
                     <div
@@ -44,16 +43,16 @@ const Navbar = () => {
 
                 <div className="flex items-center justify-between flex-grow md:pl-12 py-5">
                     <div className="flex items-center space-x-6 capitalize">
-                        <a href="../index.html" className="text-gray-200 hover:text-white transition">Home</a>
-                        <a href="pages/shop.html" className="text-gray-200 hover:text-white transition">Shop</a>
-                        <a href="#" className="text-gray-200 hover:text-white transition">About us</a>
-                        <a href="#" className="text-gray-200 hover:text-white transition">Contact us</a>
+                        <a href="../index.html" className="text-gray-200 hover:text-primary transition">Accueil</a>
+                        <a href="pages/shop.html" className="text-gray-200 hover:text-primary transition">Boutique</a>
+                        <a href="#" className="text-gray-200 hover:text-primary transition">A Propos </a>
+                        <a href="#" className="text-gray-200 hover:text-primary transition">Contact</a>
                     </div>
-                    <a href="login.html" className="text-gray-200 hover:text-white transition">Login</a>
+                    <a href="login.html" className="text-gray-200 hover:text-primary transition">Login</a>
                 </div>
             </div>
         </nav>
     )
 }
 
-export default Navbar
+export default Navbar;

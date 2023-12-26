@@ -3,10 +3,11 @@ import React from 'react'
 const Footer = () => {
     return (
         <>
-            <footer className="bg-white pt-16 pb-12 border-t border-gray-100">
+            <footer className="bg-gray-300 pt-16 pb-12 px-4 border-t border-gray-100">
                 <div className="container grid grid-cols-1 ">
                     <div className="col-span-1 space-y-4">
-                        <img src="assets/images/logo.svg" alt="logo" className="w-30" />
+                    <span className='text-2xl font-bold'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
+              
                         <div className="mr-2">
                             <p className="text-gray-500">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, hic?
@@ -30,7 +31,7 @@ const Footer = () => {
                             <div>
                                 <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Solutions</h3>
                                 <div className="mt-4 space-y-4">
-                                    <a href="#" className="text-base text-gray-500 hover:text-gray-900 block">Marketing</a>
+                                    <a href="/dashboard" className="text-base text-gray-500 hover:text-gray-900 block">Marketing</a>
                                     <a href="#" className="text-base text-gray-500 hover:text-gray-900 block">Analitycs</a>
                                     <a href="#" className="text-base text-gray-500 hover:text-gray-900 block">Commerce</a>
                                     <a href="#" className="text-base text-gray-500 hover:text-gray-900 block">Insights</a>
@@ -72,9 +73,9 @@ const Footer = () => {
             {/* <!-- ./footer --> */}
 
             {/* <!-- copyright --> */}
-            <div className="bg-gray-800 py-4">
+            <div className="bg-gray-800 py-4 px-2">
                 <div className="container flex items-center justify-between">
-                    <p className="text-white">&copy; TailCommerce - All Right Reserved</p>
+                    <p className="text-gray-400">&copy; BAMBINO - All Right Reserved</p>
                     <div>
                         <img src="/assets/images/methods.png" alt="methods" className="h-5" />
                     </div>

@@ -1,11 +1,12 @@
 import React from 'react'
 
 const Header = () => {
+
     return (
         <header className="py-4 shadow-sm bg-white">
             <div className="container flex items-center justify-between">
                 <a href="index.html">
-                    <img src="/assets/images/logo.svg" alt="Logo" className="w-32" />
+                    <span className='text-2xl font-bold px-2'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
                 </a>
 
                 <div className="w-full max-w-xl relative flex">
@@ -13,10 +14,13 @@ const Header = () => {
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </span>
                     <input type="text" name="search" id="search"
-                        className="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md hidden md:flex focus:outline-none"
-                        placeholder="search" />
+                        className="w-full border border-primary border-r-0 pl-4 py-3 pr-3 rounded-l-md hidden md:flex focus:outline-none"
+                        placeholder="Rechercher un produit.." />
                     <button
-                        className="bg-primary border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition md:flex hidden">Search</button>
+                        className="bg-primary border border-primary text-white px-8 
+                        rounded-r-md hover:bg-transparent hover:text-primary transition md:flex md:items-center hidden">
+                        Rechercher
+                    </button>
                 </div>
 
                 <div className="flex items-center space-x-4">
@@ -24,7 +28,10 @@ const Header = () => {
                         <div className="text-2xl">
                             <i className="fa-regular fa-heart"></i>
                         </div>
-                        <div className="text-xs leading-3">Wishlist</div>
+                        <div className="text-xs leading-3">
+                            {/* Wishlist */}
+                            Favoris
+                        </div>
                         <div
                             className="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                             8</div>
@@ -33,7 +40,7 @@ const Header = () => {
                         <div className="text-2xl">
                             <i className="fa-solid fa-bag-shopping"></i>
                         </div>
-                        <div className="text-xs leading-3">Cart</div>
+                        <div className="text-xs leading-3">Panier</div>
                         <div
                             className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                             2</div>
@@ -42,7 +49,7 @@ const Header = () => {
                         <div className="text-2xl">
                             <i className="fa-regular fa-user"></i>
                         </div>
-                        <div className="text-xs leading-3">Account</div>
+                        <div className="text-xs leading-3">Compte</div>
                     </a>
                 </div>
             </div>
@@ -50,4 +57,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

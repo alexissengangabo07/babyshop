@@ -5,7 +5,7 @@ const Categories = () => {
         <div className="col-span-1 bg-white px-4 pb-6 shadow rounded overflow-hiddenb hidden md:block">
             <div className="divide-y divide-gray-200 space-y-5">
                 <div>
-                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Categories</h3>
+                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Catégories</h3>
                     <div className="space-y-2">
                         <div className="flex items-center">
                             <input type="checkbox" name="cat-1" id="cat-1"
@@ -35,7 +35,7 @@ const Categories = () => {
                 </div>
 
                 <div className="pt-4">
-                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Brands</h3>
+                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Marques</h3>
                     <div className="space-y-2">
                         <div className="flex items-center">
                             <input type="checkbox" name="brand-1" id="brand-1"
@@ -71,7 +71,7 @@ const Categories = () => {
                 </div>
 
                 <div className="pt-4">
-                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
+                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Prix</h3>
                     <div className="mt-4 flex items-center">
                         <input type="text" name="min" id="min"
                             className="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
@@ -84,7 +84,7 @@ const Categories = () => {
                 </div>
 
                 <div className="pt-4">
-                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">size</h3>
+                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Taille</h3>
                     <div className="flex items-center gap-2">
                         <div className="size-selector">
                             <input type="radio" name="size" id="size-xs" className="hidden" />
@@ -113,32 +113,6 @@ const Categories = () => {
                         </div>
                     </div>
                 </div>
-
-                <div className="pt-4">
-                    <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Color</h3>
-                    <div className="flex items-center gap-2">
-                        <div className="color-selector">
-                            <input type="radio" name="color" id="red" className="hidden" />
-                            <label htmlFor="red"
-                                className="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
-                                style={{ backgroundColor: '#fc3d57' }}></label>
-                        </div>
-                        <div className="color-selector">
-                            <input type="radio" name="color" id="black" className="hidden" />
-                            <label htmlFor="black"
-                                className="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
-                                style={{ backgroundColor: '#000' }}></label>
-                        </div>
-                        <div className="color-selector">
-                            <input type="radio" name="color" id="white" className="hidden" />
-                            <label htmlFor="white"
-                                className="border border-gray-200 rounded-sm h-6 w-6  cursor-pointer shadow-sm block"
-                                style={{ backgroundColor: '#fff' }}></label>
-                        </div>
-
-                    </div>
-                </div>
-
             </div>
         </div>
     )

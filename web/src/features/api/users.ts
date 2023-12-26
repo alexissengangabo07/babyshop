@@ -6,7 +6,7 @@ export const fetchUsers = () => axios.get(url);
 
 export const fetchUser = (userId: string) => axios.get(url + userId);
 
-export const createUser = (newUser: Object) => axios.post(url + 'register/', newUser);
+export const createUser = (newUser: Object) => axios.post(url, newUser);
 
 export const deleteUser = (userId: string) => axios.delete(url + userId);
 
