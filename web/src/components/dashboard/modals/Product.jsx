@@ -16,6 +16,7 @@ const Product = () => {
     const [formInputs, setFormInput] = useState({
         name: '',
         price: '',
+        devise: '',
         description: '',
         image: '',
         categoryId: ''
@@ -135,6 +136,14 @@ const Product = () => {
                             <input type="number" value={formInputs.price} onChange={handleInputChange} name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le prix du produit" required={true} />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
+                            <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Devise</label>
+                            <select id="devise" name="devise" value={formInputs.devise} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
+                                <option value=''>Sélectionner une devise</option>
+                               <option value="USD" className='capitalize py-4'>USD</option>
+                               <option value="CDF" className='capitalize py-4'>CDF</option>
+                            </select>
+                        </div>
+                        <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie</label>
                             <select id="category" name="categoryId" value={formInputs.categoryId} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
                                 <option value=''>Sélectionner une catégorie</option>
@@ -143,7 +152,7 @@ const Product = () => {
                                 }
                             </select>
                         </div>
-                        <div className="col-span-2">
+                        <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image du produit</label>
                             <input type="file" accept='.png, .jpg' onChange={e => { handleFileChange(e); setSelectedFile(e.target.files[0]); }} name="image" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
                             <div>

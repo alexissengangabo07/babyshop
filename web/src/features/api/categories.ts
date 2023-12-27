@@ -10,4 +10,4 @@ export const createCategory = (newCategory: Object) => axios.post(url, newCatego
 
 export const deleteCategory = (categoryId: string) => axios.delete(url + categoryId);
 
-export const updateCategory = (categoryId: string) => axios.patch(url + categoryId);
+export const updateCategory = (categoryId: string, category: any) => axios.patch(url + categoryId, category);

@@ -12,6 +12,7 @@ const Product = () => {
     const [formInputs, setFormInput] = useState({
         productId: '',
         quantity: '',
+        dateStock: '',
         size: ''
     });
     const dispatch = useAppDispatch();
@@ -109,6 +110,11 @@ const Product = () => {
                         <div className="col-span-2">
                             <label htmlFor="quantity" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantité</label>
                             <input type="number" onChange={handleInputChange} name="quantity" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Comnien produit ?" required={true} />
+                        </div>
+
+                        <div className="col-span-2">
+                            <label htmlFor="quantity" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date stock</label>
+                            <input type="date" onChange={handleInputChange} name="dateStock" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Date du stock" required={true} />
                         </div>
 
                         {/* <div className="col-span-2">

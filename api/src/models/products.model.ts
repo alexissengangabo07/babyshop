@@ -9,6 +9,10 @@ const productsSchema = new Schema({
         type: Number,
         required: true
     },
+    devise: {
+        type: String,
+        required: true
+    },
     description: String,
     image: {
         public_id: {

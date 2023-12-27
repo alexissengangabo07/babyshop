@@ -34,13 +34,14 @@ export const getProduct: RequestHandler = async (req, res, next) => {
 interface CreateProductBody {
     name: string,
     price: number,
+    devise: string,
     description?: string,
     categoryId: string,
     image?: string
 }
 
 export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, unknown> = async (req, res, next) => {
-    const { name, price, description, categoryId, image } = req.body;
+    const { name, price, devise, description, categoryId, image } = req.body;
     
     try {
         if (!name) {

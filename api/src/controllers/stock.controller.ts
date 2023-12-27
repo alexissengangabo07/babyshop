@@ -33,11 +33,12 @@ export const getProductInStock: RequestHandler = async (req, res, next) => {
 interface CreateProductStockBody {
     productId: string,
     quantity: number,
+    dateStock: string,
     size?: string
 }
 
 export const createProductStock: RequestHandler<unknown, unknown, CreateProductStockBody, unknown> = async (req, res, next) => {
-    const { productId, quantity, size } = req.body;
+    const { productId, dateStock, quantity, size } = req.body;
 
     try {
         if (!productId) {
@@ -48,7 +49,7 @@ export const createProductStock: RequestHandler<unknown, unknown, CreateProductS
         }
 
         const productStock = await stockModel.create({
-            productId, quantity, size
+            productId, quantity, dateStock, size
         });
         res.status(201).json(productStock);
     } catch (error) {
@@ -59,6 +60,7 @@ export const createProductStock: RequestHandler<unknown, unknown, CreateProductS
 interface UpdateProductBody {
     productId?: string,
     quantity?: number,
+    dateStock?: string,
     size?: string
 }
 
@@ -67,7 +69,7 @@ interface UpdateProductParams {
 }
 
 export const updateProductStock: RequestHandler<UpdateProductParams, unknown, UpdateProductBody, unknown> = async (req, res, next) => {
-    const { productId, quantity, size } = req.body;
+    const { productId } = req.body;
     const productIdParam = req.params.id;
 
     try {

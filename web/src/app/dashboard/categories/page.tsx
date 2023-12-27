@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import DataTable from '@/components/dashboard/DataTable';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -13,6 +13,8 @@ import withReactContent from 'sweetalert2-react-content';
 import Category from '@/components/dashboard/modals/Category';
 
 function page() {
+  const [editOpen, setEditOpen] = useState(false);
+  const [editData, setEditData] = useState({ _id: '', title: '' });
   const dispatch = useAppDispatch();
   const categories = useAppSelector((store: RootState) => store.categoriesReducer);
   const MySwal = withReactContent(Swal);
@@ -21,7 +23,12 @@ function page() {
     { name: 'Catégories', selector: (row: any) => row.title, sortable: true },
     {
       name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
-        <button className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
+        <button onClick={() => {
+          setEditOpen(true); setEditData({
+            _id: row._id,
+            title: row.title
+          })
+        }} className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
           <MdEdit size={14} />
         </button>
         <button onClick={() => removeCat(row._id)} className="bg-red-500 text-gray-300 px-3 py-2 rounded-sm hover:bg-red-600" data-tooltip-id="my-tooltip-top" data-tooltip-content="Supprimer">
@@ -58,7 +65,7 @@ function page() {
   return (
     <>
       <div className='float-left mt-1'>
-        <Category />
+        <Category editOpen={editOpen} setEditOpen={setEditOpen} editData={editData} setEditData={setEditData}/>
       </div>
       <DataTable tabColumns={columns} data={categories.data} />
       <Tooltip id="my-tooltip-top" place='top' />

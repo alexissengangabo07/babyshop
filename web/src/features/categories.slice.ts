@@ -43,9 +43,9 @@ export const createCategory = createAsyncThunk('categories/createCategory', asyn
     }
 });
 
-export const updateCategory = createAsyncThunk('categories/updateCategory', async (categoryId: string, { rejectWithValue }) => {
+export const updateCategory = createAsyncThunk('categories/updateCategory', async (category: { _id: string, title: string }, { rejectWithValue }) => {
     try {
-        const response = await api.updateCategory(categoryId);
+        const response = await api.updateCategory(category._id, { title: category.title });
         return response.data;
     } catch (error) {
         return rejectWithValue(error);

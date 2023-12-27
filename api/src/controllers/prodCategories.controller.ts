@@ -71,11 +71,12 @@ export const updateCategory: RequestHandler<UpdateCategoryParams, unknown, Updat
         }
 
         if (!title) {
+            console.log('t title')
             return res.status(400).json({ message: 'Title is required' });
         }
 
         let updatedCategory = await categoriesModel.findByIdAndUpdate(categoryId, req.body, { new: true });
-        res.status(200).json(updatedCategory);
+        res.status(201).json(updatedCategory);
     } catch (error) {
         next(error);
     }
