@@ -7,12 +7,14 @@ const protectedRoutes = [
     '/dashboard/categories',
     '/dashboard/stock',
     '/dashboard/commandes',
-    '/dashboard/rapports'
+    '/dashboard/rapports',
+    '/dashboard/parametre'
 ];
 
 export default function auth(req: NextRequest) {
     if (req.cookies.get('token') === undefined && protectedRoutes.includes(req.nextUrl.pathname)) {
         const apsoluteURL = new URL('/auth/login', req.nextUrl.origin);
+        console.log(req)
         return NextResponse.redirect(apsoluteURL.toString());
     }
 

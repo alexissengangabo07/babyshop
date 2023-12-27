@@ -59,19 +59,19 @@ const Parametre = () => {
                             </div>
                             <div className="mb-5">
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prenom</label>
-                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, first_name: e.target.value })} value={formValues.first_name} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le nom d'utilisateur" />
+                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, first_name: e.target.value })} value={formValues.first_name} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le prenom " />
                             </div>
                             <div className="mb-5">
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
-                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, last_name: e.target.value })} value={formValues.last_name} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le nom d'utilisateur" />
+                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, last_name: e.target.value })} value={formValues.last_name} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le nom" />
                             </div>
                             <div className="mb-5">
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, email: e.target.value })} value={formValues.email} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le nom d'utilisateur" />
+                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, email: e.target.value })} value={formValues.email} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer l'email" />
                             </div>
                             <div className="mb-5">
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telephone</label>
-                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, telephone: e.target.value })} value={formValues.telephone} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le nom d'utilisateur" />
+                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, telephone: e.target.value })} value={formValues.telephone} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le numero de telephone" />
                             </div>
 
                             <div className="mb-5">
@@ -84,11 +84,11 @@ const Parametre = () => {
                             </div>
                             <div className="mb-5">
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
-                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, password: e.target.value })} value={formValues.password} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le nom d'utilisateur" />
+                                <input type="text" onChange={(e: any) => setFormValues({ ...formValues, password: e.target.value })} value={formValues.password} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le mot de passe" />
                             </div>
                             <div className="mb-5">
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmer le mot de passe</label>
-                                <input type="text" onChange={(e: any) => setConfirmPass(e.target.value)} value={confirmPass} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Entrer le nom d'utilisateur" />
+                                <input type="text" onChange={(e: any) => setConfirmPass(e.target.value)} value={confirmPass} className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Confirmer le mot de passe" />
                             </div>
 
 
