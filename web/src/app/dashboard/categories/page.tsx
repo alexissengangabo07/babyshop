@@ -65,7 +65,7 @@ function page() {
   return (
     <>
       <div className='float-left mt-1'>
-        <Category editOpen={editOpen} setEditOpen={setEditOpen} editData={editData} setEditData={setEditData}/>
+        <Category editOpen={editOpen} setEditOpen={setEditOpen} editData={editData} setEditData={setEditData} />
       </div>
       <DataTable tabColumns={columns} data={categories.data} />
       <Tooltip id="my-tooltip-top" place='top' />

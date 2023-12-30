@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import DataTable from '@/components/dashboard/DataTable';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -15,18 +15,39 @@ import Image from 'next/image';
 import { Toaster } from 'react-hot-toast';
 
 function page() {
+  const [editOpen, setEditOpen] = useState(false);
+  const [editData, setEditData] = useState({
+    _id: '',
+    name: '',
+    price: '',
+    devise: '',
+    description: '',
+    categoryId: '',
+    image: ''
+  });
   const dispatch = useAppDispatch();
   const products = useAppSelector((store: RootState) => store.productsReducer);
   const MySwal = withReactContent(Swal);
   const columns = [
     { name: '#', selector: (row: any) => <Image src={row.image?.url} priority={false} quality={50} width={80} height={80} alt='img' className='rounded-md h-auto w-auto' /> },
     { name: 'Nom du produit', selector: (row: any) => row.name, sortable: true },
-    { name: 'Prix', selector: (row: any) => row.price, sortable: true },
+    { name: 'Prix', selector: (row: any) => row.price + ' ' + row?.devise, sortable: true },
     { name: 'Description', selector: (row: any) => row.description, sortable: true },
     { name: 'Catégorie', selector: (row: any) => row.categoryId?.title, sortable: true },
     {
       name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
-        <button className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
+        <button onClick={() => {
+          setEditOpen(true); setEditData({
+            _id: row._id,
+            name: row.name,
+            price: row.price,
+            devise: row.devise,
+            description: row.description,
+            categoryId: row.categoryId,
+            image: row.image
+          })
+        }}
+          className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
           <MdEdit size={14} />
         </button>
         <button onClick={() => removeProd(row._id)} className="bg-red-500 text-gray-300 px-3 py-2 rounded-sm hover:bg-red-600" data-tooltip-id="my-tooltip-top" data-tooltip-content="Supprimer">
@@ -61,7 +82,7 @@ function page() {
   return (
     <>
       <div className='float-left mt-1'>
-        <Product />
+        <Product editOpen={editOpen} setEditOpen={setEditOpen} editData={editData} setEditData={setEditData} />
       </div>
       <DataTable tabColumns={columns} data={products.data} />
       <Tooltip id="my-tooltip-top" place='top' />

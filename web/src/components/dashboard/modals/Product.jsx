@@ -8,7 +8,7 @@ import { fetchCategories } from '@/features/categories.slice';
 import toast, { Toaster } from 'react-hot-toast';
 import Image from 'next/image';
 
-const Product = () => {
+const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [selectedFile, setSelectedFile] = useState();
@@ -27,6 +27,7 @@ const Product = () => {
     useEffect(() => {
         dispatch(fetchCategories());
     }, []);
+    console.log(editData)
 
     useEffect(() => {
         if (!selectedFile) return;
@@ -60,6 +61,7 @@ const Product = () => {
 
     const handleCancel = () => {
         setOpen(false);
+        setEditOpen(false);
     };
 
     const handleFileChange = (event) => {
@@ -82,6 +84,10 @@ const Product = () => {
             ...prevInputs,
             [name]: value
         }));
+        setEditData((prevInputs) => ({
+            ...prevInputs,
+            [name]: value
+        }));
     };
 
     return (
@@ -90,7 +96,7 @@ const Product = () => {
                 Ajouter un produit
             </button>
             <Modal
-                open={open}
+                open={open || editOpen}
                 title="Créer un Nouveau Produit"
                 onOk={handleOk}
                 onCancel={handleCancel}
@@ -129,23 +135,23 @@ const Product = () => {
                     <div className="grid gap-4 mb-4 grid-cols-2">
                         <div className="col-span-2">
                             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
-                            <input type="text" value={formInputs.name} onChange={handleInputChange} name="name" autoComplete="off" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
+                            <input type="text" value={editOpen ? editData.name : formInputs.name} onChange={handleInputChange} name="name" autoComplete="off" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prix</label>
-                            <input type="number" value={formInputs.price} onChange={handleInputChange} name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le prix du produit" required={true} />
+                            <input type="number" value={editOpen ? editData.price : formInputs.price} onChange={handleInputChange} name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le prix du produit" required={true} />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Devise</label>
-                            <select id="devise" name="devise" value={formInputs.devise} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
+                            <select id="devise" name="devise" value={editOpen ? editData.devise : formInputs.devise} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
                                 <option value=''>Sélectionner une devise</option>
-                               <option value="USD" className='capitalize py-4'>USD</option>
-                               <option value="CDF" className='capitalize py-4'>CDF</option>
+                                <option value="USD" className='capitalize py-4'>USD</option>
+                                <option value="CDF" className='capitalize py-4'>CDF</option>
                             </select>
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie</label>
-                            <select id="category" name="categoryId" value={formInputs.categoryId} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
+                            <select id="category" name="categoryId" value={editOpen ? editData?.categoryId?._id : formInputs.categoryId} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
                                 <option value=''>Sélectionner une catégorie</option>
                                 {
                                     categories.data.map(cat => <option key={cat._id} value={cat._id} className='capitalize py-4'>{cat.title}</option>)
@@ -161,7 +167,7 @@ const Product = () => {
                         </div>
                         <div className="col-span-2">
                             <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description du produit</label>
-                            <textarea id="description" name="description" value={formInputs.description} onChange={handleInputChange} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Ecrire la description du produit ici"></textarea>
+                            <textarea id="description" name="description" value={editOpen ? editData.description : formInputs.description} onChange={handleInputChange} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Ecrire la description du produit ici"></textarea>
                         </div>
                     </div>
                 </form>

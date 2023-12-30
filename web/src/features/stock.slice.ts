@@ -45,9 +45,15 @@ export const createProduct = createAsyncThunk('stock/createProduct', async (newP
     }
 });
 
-export const updateProduct = createAsyncThunk('stock/updateProduct', async (productId: string, { rejectWithValue }) => {
+export const updateProductStock = createAsyncThunk('stock/updateProduct', async (stock: {
+    _id: string,
+    productId: string,
+    quantity: number,
+    dateStock: string,
+    size: string
+}, { rejectWithValue }) => {
     try {
-        const response = await api.updateProductStock(productId);
+        const response = await api.updateProductStock(stock._id, stock);
         return response.data;
     } catch (error) {
         return rejectWithValue(error);
@@ -74,7 +80,7 @@ const productStockSlice = createSlice({
         builder.addCase(fetchProductsStock.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
-            // console.log(state.users);
+            console.log(state);
         });
         builder.addCase(fetchProductsStock.rejected, (state, action) => {
             state.isLoading = false;
@@ -106,10 +112,10 @@ const productStockSlice = createSlice({
             state.isLoading = false;
         });
 
-        builder.addCase(updateProduct.pending, state => {
+        builder.addCase(updateProductStock.pending, state => {
             state.isLoading = true;
         });
-        builder.addCase(updateProduct.fulfilled, (state, action) => {
+        builder.addCase(updateProductStock.fulfilled, (state, action) => {
             state.isLoading = false;
             const updateItem = action.payload;
             const index = state.data.findIndex(
@@ -119,7 +125,7 @@ const productStockSlice = createSlice({
                 state.data[index] = updateItem;
             }
         });
-        builder.addCase(updateProduct.rejected, (state, action) => {
+        builder.addCase(updateProductStock.rejected, (state, action) => {
             state.isLoading = false;
         });
     }

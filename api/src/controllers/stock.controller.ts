@@ -87,8 +87,8 @@ export const updateProductStock: RequestHandler<UpdateProductParams, unknown, Up
             return res.status(400).json({ message: 'Product name is required' });
         }
 
-        let updatedProductStock = await stockModel.findByIdAndUpdate(productIdParam, req.body, { new: true });
-        res.status(200).json(updatedProductStock);
+        let updatedProductStock = await stockModel.findByIdAndUpdate(productIdParam, req.body, { new: true }).populate('productId');
+        res.status(201).json(updatedProductStock);
     } catch (error) {
         next(error);
     }

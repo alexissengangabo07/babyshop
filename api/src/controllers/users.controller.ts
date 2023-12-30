@@ -150,7 +150,6 @@ export const generateToken = (id: string | object) => {
 
 export const userLogin: RequestHandler = async (req, res, next) => {
     const { username, password } = req.body;
-    console.log(req.body);
     const user = await usersModel.findOne({ username });
 
     if (user && (await bcrypt.compare(password, user.password))) {

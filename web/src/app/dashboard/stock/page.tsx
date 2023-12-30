@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import DataTable from '@/components/dashboard/DataTable';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -11,9 +11,16 @@ import { VscTrash } from 'react-icons/vsc';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Product from '@/components/dashboard/modals/Stock.jsx';
-import Image from 'next/image';
 
 function page() {
+  const [editOpen, setEditOpen] = useState(false);
+  const [editData, setEditData] = useState({
+    _id: '',
+    productId: '',
+    quantity: '',
+    dateStock: '',
+    size: ''
+  });
   const dispatch = useAppDispatch();
   const stock = useAppSelector((store: RootState) => store.stockReducer);
   const MySwal = withReactContent(Swal);
@@ -22,13 +29,23 @@ function page() {
     { name: 'Quantité disponile', selector: (row: any) => row.quantity, sortable: true },
     {
       name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
-        <button className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
+        <button onClick={() => {
+          setEditOpen(true);
+          setEditData({
+            _id: row._id,
+            productId: row.productId,
+            quantity: row.quantity,
+            dateStock: row.dateStock,
+            size: row.size
+          })
+        }}
+          className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
           <MdEdit size={14} />
         </button>
         <button onClick={() => removeProd(row._id)} className="bg-red-500 text-gray-300 px-3 py-2 rounded-sm hover:bg-red-600" data-tooltip-id="my-tooltip-top" data-tooltip-content="Supprimer">
           <VscTrash size={14} />
         </button>
-      </div>
+      </div >
     }
   ];
 
@@ -57,7 +74,7 @@ function page() {
   return (
     <>
       <div className='float-left mt-1'>
-        <Product />
+        <Product editOpen={editOpen} setEditOpen={setEditOpen} editData={editData} setEditData={setEditData} />
       </div>
       <DataTable tabColumns={columns} data={stock.data} />
       <Tooltip id="my-tooltip-top" place='top' />

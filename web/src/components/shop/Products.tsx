@@ -2,7 +2,8 @@ import React from 'react'
 
 const Products = () => {
     return (
-        <div className="col-span-3">
+        // <div className="col-span-3">
+        <div className='basis-3/4'>
             <div className="flex items-center mb-4">
                 <select name="sort" id="sort"
                     className="w-44 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">

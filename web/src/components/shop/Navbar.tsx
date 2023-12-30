@@ -3,7 +3,7 @@ import React from 'react'
 const Navbar = () => {
     return (
         <nav className="bg-gray-800">
-            <div className="container flex">
+            <div className="pr-5 flex">
                 <div className="px-8 py-4 bg-primary ml-5 md:flex items-center cursor-pointer relative group hidden">
                     <span className="text-white">
                         <i className="fa-solid fa-bars"></i>

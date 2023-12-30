@@ -4,7 +4,7 @@ const Header = () => {
 
     return (
         <header className="py-4 shadow-sm bg-white">
-            <div className="container flex items-center justify-between">
+            <div className="pr-4 flex items-center justify-between">
                 <a href="index.html">
                     <span className='text-2xl font-bold px-2'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
                 </a>
@@ -23,7 +23,7 @@ const Header = () => {
                     </button>
                 </div>
 
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center">
                     <a href="#" className="text-center text-gray-700 hover:text-primary transition relative">
                         <div className="text-2xl">
                             <i className="fa-regular fa-heart"></i>
