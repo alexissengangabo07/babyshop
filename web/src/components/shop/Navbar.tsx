@@ -1,4 +1,5 @@
-import React from 'react'
+import Link from 'next/link';
+import React from 'react';
 
 const Navbar = () => {
     return (
@@ -43,10 +44,10 @@ const Navbar = () => {
 
                 <div className="flex items-center justify-between flex-grow md:pl-12 py-5">
                     <div className="flex items-center space-x-6 capitalize">
-                        <a href="../index.html" className="text-gray-200 hover:text-primary transition">Accueil</a>
-                        <a href="pages/shop.html" className="text-gray-200 hover:text-primary transition">Boutique</a>
-                        <a href="#" className="text-gray-200 hover:text-primary transition">A Propos </a>
-                        <a href="#" className="text-gray-200 hover:text-primary transition">Contact</a>
+                        <Link href="/" className="text-gray-200 hover:text-primary transition">Accueil</Link>
+                        <Link href="/boutique" className="text-gray-200 hover:text-primary transition">Boutique</Link>
+                        <Link href="/apropos" className="text-gray-200 hover:text-primary transition">A Propos </Link>
+                        <Link href="/contact" className="text-gray-200 hover:text-primary transition">Contact</Link>
                     </div>
                     <a href="login.html" className="text-gray-200 hover:text-primary transition">Login</a>
                 </div>

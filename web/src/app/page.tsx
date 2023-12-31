@@ -1,20 +1,25 @@
+import Ads from '@/components/shop/Ads'
+import Banner from '@/components/shop/Banner'
 import Categories from '@/components/shop/Categories'
+import CategoriesWithImage from '@/components/shop/CategoriesWithImage'
+import Features from '@/components/shop/Features'
 import Footer from '@/components/shop/Footer'
 import Header from '@/components/shop/Header'
 import Navbar from '@/components/shop/Navbar'
 import Products from '@/components/shop/Products'
-import React from 'react'
+import ProductsArrival from '@/components/shop/ProductsArrival'
 
 const Home = () => {
   return (
     <>
       <Header />
       <Navbar />
-      {/* <div className="container grid md:grid-cols-4 grid-cols-2 gap-6 pt-4 pb-16 items-start"> */}
-      <div className="flex gap-4 p-4">
-        <Categories />
-        <Products />
-      </div>
+      <Banner />
+      <Features />
+      <CategoriesWithImage />
+      <ProductsArrival />
+      <Ads />
+      <ProductsArrival />
       <Footer />
     </>
   )
