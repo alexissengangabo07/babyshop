@@ -1,56 +1,46 @@
-import React from 'react'
+import Link from "next/link";
+import { FaSearch, FaHeart, FaShoppingBag, FaUserAlt } from 'react-icons/fa';
+import { IoHeartOutline } from "react-icons/io5";
 
 const Header = () => {
 
     return (
-        <header className="py-4 shadow-sm bg-white">
+        <header className="py-4 shadow-sm bg-white text-sm">
             <div className="pr-4 flex items-center justify-between">
-                <a href="index.html">
+                <Link href="/">
                     <span className='text-2xl font-bold px-2'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
-                </a>
+                </Link>
 
-                <div className="w-full max-w-xl relative flex">
-                    <span className="absolute left-4 top-3 text-lg text-gray-400">
-                        <i className="fa-solid fa-magnifying-glass"></i>
+                <div className="w-full max-w-xl relative flex ">
+                    <span className="absolute left-4 top-4 text-sm text-gray-400">
+                        <FaSearch />
                     </span>
                     <input type="text" name="search" id="search"
-                        className="w-full border border-primary border-r-0 pl-4 py-3 pr-3 rounded-l-md hidden md:flex focus:outline-none"
+                        className="w-full border border-primary border-r-0 pl-10 py-3 pr-3 rounded-l-md hidden md:flex focus:outline-none"
                         placeholder="Rechercher un produit.." />
-                    <button
+                    <button type="button"
                         className="bg-primary border border-primary text-white px-8 
                         rounded-r-md hover:bg-transparent hover:text-primary transition md:flex md:items-center hidden">
                         Rechercher
                     </button>
                 </div>
 
-                <div className="flex items-center">
-                    <a href="#" className="text-center text-gray-700 hover:text-primary transition relative">
+                <div className="flex items-center gap-4">
+                    <Link href="/panier" className="flex flex-col items-center gap-2 text-center text-gray-700 hover:text-primary transition relative">
                         <div className="text-2xl">
-                            <i className="fa-regular fa-heart"></i>
-                        </div>
-                        <div className="text-xs leading-3">
-                            {/* Wishlist */}
-                            Favoris
-                        </div>
-                        <div
-                            className="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                            8</div>
-                    </a>
-                    <a href="#" className="text-center text-gray-700 hover:text-primary transition relative">
-                        <div className="text-2xl">
-                            <i className="fa-solid fa-bag-shopping"></i>
+                            <FaShoppingBag />
                         </div>
                         <div className="text-xs leading-3">Panier</div>
                         <div
-                            className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                            className="absolute -right-1 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                             2</div>
-                    </a>
-                    <a href="#" className="text-center text-gray-700 hover:text-primary transition relative">
+                    </Link>
+                    <Link href="/compte" className="flex flex-col items-center gap-2 text-center text-gray-700 hover:text-primary transition relative">
                         <div className="text-2xl">
-                            <i className="fa-regular fa-user"></i>
+                            <FaUserAlt />
                         </div>
                         <div className="text-xs leading-3">Compte</div>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </header>

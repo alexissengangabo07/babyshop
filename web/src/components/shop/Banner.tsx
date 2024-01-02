@@ -1,4 +1,4 @@
-import React from 'react'
+import Link from "next/link"
 
 const Banner = () => {
     return (
@@ -11,8 +11,8 @@ const Banner = () => {
                     accusantium perspiciatis, sapiente
                     magni eos dolorum ex quos dolores odio</p>
                 <div className="mt-12">
-                    <a href="#" className="bg-primary border border-primary text-white px-8 py-3 font-medium 
-                    rounded-md hover:bg-transparent hover:text-primary">Shop Now</a>
+                    <Link href="/boutique" className="bg-primary border border-primary text-white px-8 py-3 font-medium 
+                    rounded-md hover:bg-transparent hover:text-primary">Shop Now</Link>
                 </div>
             </div>
         </div>

@@ -31,3 +31,22 @@ th {
 .ant-modal-close-x {
     color: beige !important;
 }
+
+.input-box {
+    display: block;
+    width: 100%;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-color: rgba(165, 165, 165, 0.442);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    outline: none;
+  }
+  
+  .input-box:focus {
+    border-color: rgba(255, 81, 0, 0.198);
+  }

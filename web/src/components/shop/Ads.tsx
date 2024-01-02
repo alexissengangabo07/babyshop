@@ -1,11 +1,11 @@
-import React from 'react'
+import Link from "next/link"
 
 const Ads = () => {
     return (
         <div className="px-6 pb-16">
-            <a href="#">
+            <Link href="/boutique">
                 <img src="assets/images/offer.jpg" alt="ads" className="w-full" />
-            </a>
+            </Link>
         </div>
     )
 }
