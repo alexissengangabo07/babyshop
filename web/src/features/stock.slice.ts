@@ -80,7 +80,7 @@ const productStockSlice = createSlice({
         builder.addCase(fetchProductsStock.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
-            console.log(state);
+            // console.log(state);
         });
         builder.addCase(fetchProductsStock.rejected, (state, action) => {
             state.isLoading = false;
@@ -95,7 +95,7 @@ const productStockSlice = createSlice({
         });
         builder.addCase(createProduct.rejected, (state, action) => {
             state.isLoading = false;
-            console.log(action)
+            // console.log(action)
         });
 
         builder.addCase(deleteProduct.pending, state => {
@@ -106,7 +106,7 @@ const productStockSlice = createSlice({
             state.data = state.data.filter(
                 (item) => item._id != action.meta.arg
             );
-            console.log(action.meta.arg)
+            // console.log(action.meta.arg)
         });
         builder.addCase(deleteProduct.rejected, (state, action) => {
             state.isLoading = false;

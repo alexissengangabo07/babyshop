@@ -19,8 +19,8 @@ const ProductsArrival = () => {
             <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">top new arrival</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {
-                    products.data.map((product: any) => (
-                        <div className="bg-white shadow rounded overflow-hidden group">
+                    products.data.map((product: any, i: number) => (
+                        <div className="bg-white shadow rounded overflow-hidden group"key={i}>
                             <div className="relative">
                                 <img src={product.image?.url} alt="product 1" className="w-full" />
                                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 

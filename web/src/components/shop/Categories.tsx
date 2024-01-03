@@ -21,8 +21,8 @@ const Categories = () => {
                     <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Catégories</h3>
                     <div className="space-y-2">
                         {
-                            categories.data.map(category => (
-                                <div className="flex items-center">
+                            categories.data.map((category, i) => (
+                                <div className="flex items-center" key={i}>
                                     <input type="checkbox" name="cat-1" id="cat-1"
                                         className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
                                     <label htmlFor="cat-1" className="text-gray-600 ml-3 cusror-pointer">{category.title}</label>

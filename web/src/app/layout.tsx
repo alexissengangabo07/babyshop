@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import MenuContextProvider from '@/contexts/MenuContext';
+import PanierContextProvider from '@/contexts/PanierContext';
 import { Providers } from './provider';
 
 const inter = Inter({
@@ -25,7 +26,9 @@ export default function RootLayout({
 
         <Providers >
           <MenuContextProvider>
-            {children}
+            <PanierContextProvider>
+              {children}
+            </PanierContextProvider>
           </MenuContextProvider>
         </Providers>
       </body>
