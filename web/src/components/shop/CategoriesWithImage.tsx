@@ -1,42 +1,38 @@
-import React from 'react'
+"use client"
+import { useState, useEffect } from 'react'
+import { RootState } from '@/redux/store';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { fetchCategories } from '@/features/categories.slice';
 
 const CategoriesWithImage = () => {
+    const dispatch = useAppDispatch();
+    const categories = useAppSelector((store: RootState) => store.categoriesReducer);
+    const [imagesCat, setImagesCat] = useState([
+        'category-1.jpg',
+        'category-2.jpg',
+        'category-3.jpg',
+        'category-4.jpg',
+        'category-5.jpg',
+        'category-6.jpg'
+    ]);
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, []);
+
     return (
-        <div className="px-6 py-16">
+        <div className="px-6 pt-8 pb-16">
             <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">shop by category</h2>
             <div className="grid grid-cols-3 gap-3">
-                <div className="relative rounded-sm overflow-hidden group">
-                    <img src="assets/images/category/category-1.jpg" alt="category 1" className="w-full" />
-                    <a href="#"
-                        className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Bedroom</a>
-                </div>
-                <div className="relative rounded-sm overflow-hidden group">
-                    <img src="assets/images/category/category-2.jpg" alt="category 1" className="w-full" />
-                    <a href="#"
-                        className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Mattrass</a>
-                </div>
-                <div className="relative rounded-sm overflow-hidden group">
-                    <img src="assets/images/category/category-3.jpg" alt="category 1" className="w-full" />
-                    <a href="#"
-                        className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Outdoor
-                    </a>
-                </div>
-                <div className="relative rounded-sm overflow-hidden group">
-                    <img src="assets/images/category/category-4.jpg" alt="category 1" className="w-full" />
-                    <a href="#"
-                        className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Sofa</a>
-                </div>
-                <div className="relative rounded-sm overflow-hidden group">
-                    <img src="assets/images/category/category-5.jpg" alt="category 1" className="w-full" />
-                    <a href="#"
-                        className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Living
-                        Room</a>
-                </div>
-                <div className="relative rounded-sm overflow-hidden group">
-                    <img src="assets/images/category/category-6.jpg" alt="category 1" className="w-full" />
-                    <a href="#"
-                        className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Kitchen</a>
-                </div>
+                {
+                    categories.data.map((category, i) => (
+                        <div className="relative rounded-sm overflow-hidden group">
+                            <img src={"assets/images/category/" + imagesCat[i]} alt="category 1" className="w-full" />
+                            <a href="#"
+                                className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">{category.title}</a>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )
