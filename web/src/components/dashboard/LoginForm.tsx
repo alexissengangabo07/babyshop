@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster, } from 'react-hot-toast';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store';
 import { loginUser } from '@/features/users.slice';
-import { redirect } from 'next/navigation'
+import { redirect } from 'next/navigation';
+import Link from "next/link";
 
 const loginSchema = Yup.object().shape({
     username: Yup.string()
@@ -45,13 +46,15 @@ const LoginForm = () => {
                         <div className="md:px-12 md:py-6">
                             {/* Logo */}
                             <div className="text-center">
-                                <img
-                                    className="mx-auto w-44 h-36"
-                                    src="/login.png"
-                                    alt="logo" />
-                                <h4 style={{ fontFamily: "revert-layer" }} className="mb-12 mt-1 pb-1 text-2xl font-extrabold lg:text-xl p-4 pl-3 bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent">
-                                    Bambino Shop
-                                </h4>
+                                <Link href="/">
+                                    <img
+                                        className="mx-auto w-44 h-36"
+                                        src="/login.png"
+                                        alt="logo" />
+                                    <h4 style={{ fontFamily: "revert-layer" }} className="mb-12 mt-1 pb-1 text-2xl font-extrabold lg:text-xl p-4 pl-3 bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent">
+                                        Bambino Shop
+                                    </h4>
+                                </Link>
                             </div>
                             <Formik
                                 initialValues={{

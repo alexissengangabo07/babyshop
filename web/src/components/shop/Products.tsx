@@ -1,17 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { RootState } from '@/redux/store';
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchProducts } from "@/features/products.slice";
+import { fetchProductsStock } from "@/features/stock.slice";
 import { FaCartPlus, FaEye, FaList, FaGripVertical } from 'react-icons/fa';
+import Link from "next/link";
+import { PanierContext } from '@/contexts/PanierContext';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Products = () => {
     const dispatch = useAppDispatch();
-    const products = useAppSelector((store: RootState) => store.productsReducer);
+    const products = useAppSelector((store: RootState) => store.stockReducer);
+    const { addToCard } = useContext(PanierContext);
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        dispatch(fetchProductsStock());
     }, []);
 
     return (
@@ -39,17 +43,17 @@ const Products = () => {
 
             <div className="grid md:grid-cols-3 grid-cols-2 gap-6">
                 {
-                    products.data.map((product: any) => (
-                        <div className="bg-white shadow rounded overflow-hidden group">
+                    products.data.map((product: any, i) => (
+                        <div className="bg-white shadow rounded overflow-hidden group" key={i}>
                             <div className="relative">
-                                <img src={product.image?.url} alt="product 1" className="w-full" />
+                                <img src={product.productId.image?.url} alt="product 1" className="w-full" />
                                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
                   justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                                    <a href="#"
+                                    <Link href="/produit"
                                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                                         title="view product">
                                         <FaEye />
-                                    </a>
+                                    </Link>
                                     <a href="#"
                                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                                         title="add to wishlist">
@@ -60,24 +64,37 @@ const Products = () => {
                             <div className="pt-4 pb-3 px-4">
                                 <a href="#">
                                     <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                                        {product.name}
+                                        {product.productId.name}
                                     </h4>
                                 </a>
                                 <div className="flex items-baseline mb-1 space-x-2">
-                                    <p className="text-xl text-primary font-semibold">${product.price}</p>
-                                    <p className="text-sm text-gray-400 line-through">${product.price + 10}</p>
+                                    <p className="text-xl text-primary font-semibold">{product.productId.devise === 'USD' ? '$' : 'FC '}{product.productId.price}</p>
+                                    <p className="text-sm text-gray-400 line-through">{product.productId.devise === 'USD' ? '$' : 'FC '}{product.productId.price + 10}</p>
                                 </div>
 
                             </div>
-                            <a href="#"
-                                className="block w-full py-1 text-center text-sm md:text-base text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">
+                            <button type="button"
+                                onClick={() => {
+                                    addToCard
+                                    ({
+                                        produit: product.productId.name,
+                                        id: product._id,
+                                        image: product.productId.image.url,
+                                        qteDispo: product.quantity,
+                                        devise: product.productId.devise,
+                                        description: product.productId.description,
+                                        prix: product.productId.price
+                                    })
+                                }}
+                                className="block w-full py-1 text-center text-sm md:text-base text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition" >
                                 Ajouter au panier
-                            </a>
+                            </button>
                         </div>
                     ))
                 }
             </div>
-        </div>
+            <Toaster />
+        </div >
     )
 }
 

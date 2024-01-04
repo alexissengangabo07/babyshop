@@ -6,14 +6,10 @@ export const saveToLocalStorage = (data: any, name: string) => {
 };
 
 export const getLocalStorageItem = (name: string) => {
-    if (!localStorage.getItem(name)) {
-        return null;
-    }
-    const tokenString: any = localStorage.getItem(name);
-    const data = JSON.parse(tokenString);
+    const prodCard: any = localStorage.getItem(name);
+    const data = JSON.parse(prodCard);
     return data
 };
-
 
 export const removeLocalStorageItem = (name: string) => {
     return localStorage.removeItem(name)

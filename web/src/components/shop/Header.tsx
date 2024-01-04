@@ -1,8 +1,12 @@
+'use client'
+
+import { useContext } from "react";
 import Link from "next/link";
-import { FaSearch, FaHeart, FaShoppingBag, FaUserAlt } from 'react-icons/fa';
-import { IoHeartOutline } from "react-icons/io5";
+import { FaSearch, FaShoppingBag, FaUserAlt } from 'react-icons/fa';
+import { PanierContext } from "@/contexts/PanierContext";
 
 const Header = () => {
+    const { productsOnCard } = useContext(PanierContext);
 
     return (
         <header className="py-4 shadow-sm bg-white text-sm">
@@ -33,7 +37,8 @@ const Header = () => {
                         <div className="text-xs leading-3">Panier</div>
                         <div
                             className="absolute -right-1 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                            2</div>
+                            {productsOnCard.length}
+                        </div>
                     </Link>
                     <Link href="/compte" className="flex flex-col items-center gap-2 text-center text-gray-700 hover:text-primary transition relative">
                         <div className="text-2xl">

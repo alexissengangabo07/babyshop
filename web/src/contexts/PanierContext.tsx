@@ -4,32 +4,33 @@ import { getLocalStorageItem, saveToLocalStorage } from '@/utils/localStorage';
 import { toast } from 'react-hot-toast';
 
 interface PanierType {
+    productsOnCard: object[];
+    setProductsOnCard: React.Dispatch<React.SetStateAction<boolean>>,
     montant: number;
-    cartItems: object;
     getCardItems: () => void;
-    setCartItems: React.Dispatch<React.SetStateAction<boolean>>,
-    addItemToCart: (product: any) => void;
+    addToCard: (product: any) => void;
     decreaseItemQte: (id: string) => void;
     increaseItemQte: (id: string) => void;
     setItemQte: (id: string, product: any) => void;
     removeItemToCart: (id: string) => void;
 }
 export const PanierContext = createContext<PanierType>({
+    productsOnCard: [],
+    setProductsOnCard: () => null,
     montant: 0,
-    cartItems: {},
     getCardItems: () => null,
-    addItemToCart: () => null,
+    addToCard: () => null,
     decreaseItemQte: () => null,
     increaseItemQte: () => null,
     setItemQte: () => null,
     removeItemToCart: () => null,
-    setCartItems: () => null
 });
 
 const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [montant, setMontant] = useState(0);
 
     const getCardItems = () => {
+        console.log("first")
         const cartLocalItems = getLocalStorageItem("greenCart");
         if (cartLocalItems !== null)
             return cartLocalItems
@@ -37,7 +38,7 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             return []
     }
 
-    const [cartItems, setCartItems] = useState(getCardItems);
+    const [productsOnCard, setProductsOnCard] = useState(getCardItems);
 
     const testQte = (items: { qte: number, qteDispo: number }[], index: number) => {
         if (items[index].qte + 1 <= items[index].qteDispo)
@@ -57,37 +58,39 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         }
     }
 
-    const addItemToCart = (product: any) => {
-        const existingItemIndex = cartItems.findIndex((item: any) => item.id_production === product.id_production);
-        if (existingItemIndex != -1) {
-            const newState = [...cartItems];
+    // Ajouter au panier
+    const addToCard = (product: any) => {
+        const existingItemIndex = productsOnCard.findIndex((prodCard: any) => prodCard.id === product.id);
+     
+        if (existingItemIndex !== -1) {
+            const newState = [...productsOnCard];
             if (testQte(newState, existingItemIndex)) {
-                setCartItems(newState)
-                saveToLocalStorage(cartItems, "greenCart");
+                setProductsOnCard(newState)
+                saveToLocalStorage(productsOnCard, "greenCart");
                 newState[existingItemIndex].qte += 1;
             }
         } else {
-            setCartItems([...cartItems, { ...product, qte: 1 }]);
-            saveToLocalStorage(cartItems, "greenCart");
+            setProductsOnCard([...productsOnCard, { ...product, qte: 1 }]);
+            saveToLocalStorage(productsOnCard, "greenCart");
         }
     };
 
     const removeItemToCart = (id: string) => {
-        const newState = cartItems.filter((item: any) => item.id_production !== id);
-        setCartItems(newState);
+        const newState = productsOnCard.filter((item: any) => item.id_production !== id);
+        setProductsOnCard(newState);
     }
 
     const increaseItemQte = (id: string) => {
-        const items = [...cartItems];
+        const items = [...productsOnCard];
         const itemsIndex = items.findIndex((cartItem) => cartItem.id_production == id)
         if (testQte(items, itemsIndex)) {
             items[itemsIndex].qte += 1;
-            setCartItems(items);
+            setProductsOnCard(items);
         }
     }
 
     const setItemQte = (id: string, newQte: any) => {
-        const items = [...cartItems];
+        const items = [...productsOnCard];
         const itemsIndex = items.findIndex((cartItem) => cartItem.id_production == id)
 
         if (testQte2(items, itemsIndex, Number(newQte)))
@@ -101,36 +104,31 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         }
 
 
-        setCartItems(items);
+        setProductsOnCard(items);
     }
 
     const decreaseItemQte = (id: string) => {
-        const items = [...cartItems];
+        const items = [...productsOnCard];
         const itemsIndex = items.findIndex((cartItem) => cartItem.id_production == id)
         if (items[itemsIndex].qte === 1) {
             removeItemToCart(id)
         } else {
             items[itemsIndex].qte -= 1;
         }
-        setCartItems(items);
+        setProductsOnCard(items);
     }
 
-
     useEffect(() => {
-        saveToLocalStorage(cartItems, "greenCart");
-    }, [cartItems])
-
-    useEffect(() => {
-        // saveToLocalStorage(cartItems, "greenCart");
-        setMontant(cartItems.reduce((a: any, b: any) => a + b.qte * b.prix, 0))
-    }, [cartItems])
+        saveToLocalStorage(productsOnCard, "greenCart");
+        setMontant(productsOnCard.reduce((a: any, b: any) => a + b.qte * b.prix, 0))
+    }, [productsOnCard]);
 
     useEffect(() => {
         getCardItems();
-    }, [])
+    }, []);
 
     return (
-        <PanierContext.Provider value={{ montant, cartItems, getCardItems, setCartItems, addItemToCart, decreaseItemQte, increaseItemQte, setItemQte, removeItemToCart }}>
+        <PanierContext.Provider value={{ montant, productsOnCard, setProductsOnCard, getCardItems, addToCard, decreaseItemQte, increaseItemQte, setItemQte, removeItemToCart }}>
             {children}
         </PanierContext.Provider>
     );

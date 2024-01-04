@@ -26,7 +26,8 @@ const ProductStock = ({ editOpen, setEditOpen, editData, setEditData }) => {
         setOpen(true);
     };
 
-    const handleOk = () => {
+    const handleOk = (e) => {
+        e.preventDefault();
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
@@ -109,7 +110,7 @@ const ProductStock = ({ editOpen, setEditOpen, editData, setEditData }) => {
                     </Button>,
                 ]}
             >
-                <form className="p-4 md:p-5">
+                <div className="p-4 md:p-5">
                     <div className="grid gap-4 mb-4 grid-cols-2">
                         <div className="col-span-2">
                             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Produit</label>
@@ -136,7 +137,7 @@ const ProductStock = ({ editOpen, setEditOpen, editData, setEditData }) => {
                             <input type="number" onChange={handleInputChange} name="size" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Taille du produit" required={true} />
                         </div> */}
                     </div>
-                </form>
+                </div>
             </Modal >
             <Toaster />
         </>

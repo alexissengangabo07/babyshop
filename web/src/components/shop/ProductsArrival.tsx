@@ -2,16 +2,16 @@
 import { useEffect } from "react";
 import { RootState } from '@/redux/store';
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchProducts } from "@/features/products.slice";
+import { fetchProductsStock } from "@/features/stock.slice";
 import Link from "next/link";
 import { FaEye, FaCartPlus } from 'react-icons/fa';
 
 const ProductsArrival = () => {
     const dispatch = useAppDispatch();
-    const products = useAppSelector((store: RootState) => store.productsReducer);
+    const products = useAppSelector((store: RootState) => store.stockReducer);
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        dispatch(fetchProductsStock());
     }, []);
 
     return (
@@ -20,16 +20,16 @@ const ProductsArrival = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {
                     products.data.map((product: any, i: number) => (
-                        <div className="bg-white shadow rounded overflow-hidden group"key={i}>
+                        <div className="bg-white shadow rounded overflow-hidden group" key={i}>
                             <div className="relative">
-                                <img src={product.image?.url} alt="product 1" className="w-full" />
+                                <img src={product.productId.image?.url} alt="product 1" className="w-full" />
                                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
                     justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                                    <a href="#"
+                                    <Link href="/produit"
                                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                                         title="view product">
                                         <FaEye />
-                                    </a>
+                                    </Link>
                                     <a href="#"
                                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
                                         title="add to wishlist">
@@ -38,14 +38,14 @@ const ProductsArrival = () => {
                                 </div>
                             </div>
                             <div className="pt-4 pb-3 px-4">
-                                <a href="#">
+                                <Link href="/produit">
                                     <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                                        {product.name}
+                                        {product.productId.name}
                                     </h4>
-                                </a>
+                                </Link>
                                 <div className="flex items-baseline mb-1 space-x-2">
-                                    <p className="text-xl text-primary font-semibold">${product.price}</p>
-                                    <p className="text-sm text-gray-400 line-through">${product.price + 10}</p>
+                                    <p className="text-xl text-primary font-semibold">{product.productId.devise === 'USD' ? '$' : 'FC '}{product.productId.price}</p>
+                                    <p className="text-sm text-gray-400 line-through">{product.productId.devise === 'USD' ? '$' : 'FC '}{product.productId.price + 10}</p>
                                 </div>
                             </div>
                             <a href="#"
