@@ -3,34 +3,46 @@ import React from 'react'
 
 const Register = () => {
     return (
-        <div className="contain py-16">
-            <div className="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
-                <h2 className="text-2xl uppercase font-medium mb-1">Create an account</h2>
+        <div className="contain py-8">
+            <div className="max-w-lg mx-auto shadow-xl px-6 py-7 rounded overflow-hidden">
+                <h2 className="text-2xl uppercase font-medium mb-1">créer un compte</h2>
                 <p className="text-gray-600 mb-6 text-sm">
-                    Register htmlFor new cosutumer
+                    Enregistrement pour nouveau client
                 </p>
                 <form action="#" method="post" autoComplete="off">
                     <div className="space-y-2">
                         <div>
-                            <label htmlFor="name" className="text-gray-600 mb-2 block">Full Name</label>
+                            <label htmlFor="name" className="text-gray-600 mb-2 block">Prenom</label>
                             <input type="text" name="name" id="name"
                                 className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                                placeholder="fulan fulana" />
+                                placeholder="Taper votre prenom" />
                         </div>
                         <div>
-                            <label htmlFor="email" className="text-gray-600 mb-2 block">Email address</label>
+                            <label htmlFor="name" className="text-gray-600 mb-2 block">Nom</label>
+                            <input type="text" name="name" id="name"
+                                className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                                placeholder="Taper votre nom" />
+                        </div>
+                        <div>
+                            <label htmlFor="email" className="text-gray-600 mb-2 block">Addresse mail</label>
                             <input type="email" name="email" id="email"
                                 className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                                placeholder="youremail.@domain.com" />
+                                placeholder="Taper votre adresse mail" />
                         </div>
                         <div>
-                            <label htmlFor="password" className="text-gray-600 mb-2 block">Password</label>
+                            <label htmlFor="email" className="text-gray-600 mb-2 block">Numero de téléphone</label>
+                            <input type="email" name="email" id="email"
+                                className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                                placeholder="Taper votre adresse mail" />
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="text-gray-600 mb-2 block">Mot de passe</label>
                             <input type="password" name="password" id="password"
                                 className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
                                 placeholder="*******" />
                         </div>
                         <div>
-                            <label htmlFor="confirm" className="text-gray-600 mb-2 block">Confirm password</label>
+                            <label htmlFor="confirm" className="text-gray-600 mb-2 block">Confirmer le mot de passe</label>
                             <input type="password" name="confirm" id="confirm"
                                 className="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
                                 placeholder="*******" />
@@ -40,8 +52,8 @@ const Register = () => {
                         <div className="flex items-center">
                             <input type="checkbox" name="aggrement" id="aggrement"
                                 className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-                            <label htmlFor="aggrement" className="text-gray-600 ml-3 cursor-pointer">I have read and agree to the <a
-                                href="#" className="text-primary">terms & conditions</a></label>
+                            <label htmlFor="aggrement" className="text-gray-600 ml-3 cursor-pointer">J'accepte les  <a
+                                href="#" className="text-primary">termes & conditions</a></label>
                         </div>
                     </div>
                     <div className="mt-4">
@@ -52,7 +64,7 @@ const Register = () => {
                 </form>
 
                 <div className="mt-6 flex justify-center relative">
-                    <div className="text-gray-600 uppercase px-3 bg-white z-10 relative">Or signup with</div>
+                    <div className="text-gray-600 uppercase px-3 bg-white z-10 relative">Or s'enregistrer avec</div>
                     <div className="absolute left-0 top-3 w-full border-b-2 border-gray-200"></div>
                 </div>
                 <div className="mt-4 flex gap-4">
@@ -62,8 +74,8 @@ const Register = () => {
                         className="w-1/2 py-2 text-center text-white bg-red-600 rounded uppercase font-roboto font-medium text-sm hover:bg-red-500">google</a>
                 </div>
 
-                <p className="mt-4 text-center text-gray-600">Already have account? <Link href="/login"
-                    className="text-primary">Login now</Link></p>
+                <p className="mt-4 text-center text-gray-600">Avez vous déjà un compte? <Link href="/login"
+                    className="text-primary">Connectez vous</Link></p>
             </div>
         </div>
     )

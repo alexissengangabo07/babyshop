@@ -29,6 +29,7 @@ export const PanierContext = createContext<PanierType>({
 const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [montant, setMontant] = useState(0);
 
+    // Charger les produits du panier
     const getCardItems = () => {
         const cartLocalItems = getLocalStorageItem("greenCart");
         if (cartLocalItems !== null)
@@ -39,7 +40,7 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     const [productsOnCard, setProductsOnCard] = useState(getCardItems);
 
-    const testQte = (items: { qte: number, qteDispo: number }[], index: number) => {
+    const testQteOnClick = (items: { qte: number, qteDispo: number }[], index: number) => {
         if (items[index].qte + 1 <= items[index].qteDispo)
             return true
         else {
@@ -48,7 +49,7 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         }
     }
 
-    const testQte2 = (items: { qte: number, qteDispo: number }[], index: number, newQte: number) => {
+    const testQteOnChange = (items: { qte: number, qteDispo: number }[], index: number, newQte: number) => {
         if (newQte <= items[index].qteDispo && newQte >= 1)
             return true
         else {
@@ -63,7 +64,7 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
         if (existingItemIndex !== -1) {
             const newState = [...productsOnCard];
-            if (testQte(newState, existingItemIndex)) {
+            if (testQteOnClick(newState, existingItemIndex)) {
                 setProductsOnCard(newState)
                 saveToLocalStorage(productsOnCard, "greenCart");
                 newState[existingItemIndex].qte += 1;
@@ -74,16 +75,17 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         }
     };
 
+    // Supprimer la quantite d'un produit x dans le localStorage
     const removeItemToCart = (id: string) => {
-        console.log(id)
         const newState = productsOnCard.filter((item: any) => item.id !== id);
         setProductsOnCard(newState);
     }
 
+    // Augmenter la quantite du produit x du storage
     const increaseItemQte = (id: string) => {
         const items = [...productsOnCard];
         const itemsIndex = items.findIndex((cartItem) => cartItem.id == id)
-        if (testQte(items, itemsIndex)) {
+        if (testQteOnClick(items, itemsIndex)) {
             items[itemsIndex].qte += 1;
             setProductsOnCard(items);
         }
@@ -93,7 +95,7 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         const items = [...productsOnCard];
         const itemsIndex = items.findIndex((cartItem) => cartItem.id == id)
 
-        if (testQte2(items, itemsIndex, Number(newQte)))
+        if (testQteOnChange(items, itemsIndex, Number(newQte)))
             items[itemsIndex].qte = Number(newQte);
         else {
             if (newQte != "")

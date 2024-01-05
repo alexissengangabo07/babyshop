@@ -44,7 +44,7 @@ const Charts = () => {
                 </BarChart>
             </ResponsiveContainer>
             <div className='mt-5'>
-                <div className='text-gray-400 font-medium text-lg'>Les productions par produit</div>
+                <div className='text-gray-400 font-medium text-lg'>Situation du stock</div>
                 <div className='text-blue-300 text-sm'>Total General</div>
             </div>
         </div>

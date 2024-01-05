@@ -6,6 +6,8 @@ import { fetchProductsStock } from "@/features/stock.slice";
 import { PanierContext } from '@/contexts/PanierContext';
 import Link from "next/link";
 import { FaEye, FaCartPlus } from 'react-icons/fa';
+import { Tooltip } from 'react-tooltip';
+import { Toaster } from "react-hot-toast";
 
 const ProductsArrival = () => {
     const dispatch = useAppDispatch();
@@ -29,14 +31,28 @@ const ProductsArrival = () => {
                     justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                                     <Link href="/produit"
                                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                                        title="view product">
+                                        data-tooltip-id="my-tooltip-top" data-tooltip-content="Voir le produit"
+                                    >
                                         <FaEye />
                                     </Link>
-                                    <a href="#"
+                                    <button
                                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                                        title="add to wishlist">
+                                        data-tooltip-id="my-tooltip-top" data-tooltip-content="Ajouter au panier"
+                                        onClick={() => {
+                                            addToCard
+                                                ({
+                                                    produit: product.productId.name,
+                                                    id: product._id,
+                                                    image: product.productId.image.url,
+                                                    qteDispo: product.quantity,
+                                                    devise: product.productId.devise,
+                                                    description: product.productId.description,
+                                                    prix: product.productId.price
+                                                })
+                                        }}
+                                    >
                                         <FaCartPlus />
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                             <div className="pt-4 pb-3 px-4">
@@ -70,6 +86,8 @@ const ProductsArrival = () => {
                     ))
                 }
             </div>
+            <Tooltip id="my-tooltip-top" place='top' />
+            <Toaster />
         </div>
     )
 }

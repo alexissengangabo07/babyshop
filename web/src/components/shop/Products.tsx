@@ -8,6 +8,7 @@ import { FaCartPlus, FaEye, FaList, FaGripVertical } from 'react-icons/fa';
 import Link from "next/link";
 import { PanierContext } from '@/contexts/PanierContext';
 import { Toaster, toast } from 'react-hot-toast';
+import { Tooltip } from "react-tooltip";
 
 const Products = () => {
     const dispatch = useAppDispatch();
@@ -51,14 +52,29 @@ const Products = () => {
                   justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                                     <Link href="/produit"
                                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                                        title="view product">
+                                        data-tooltip-id="my-tooltip-top" data-tooltip-content="Voir le produit"
+                                    >
                                         <FaEye />
                                     </Link>
-                                    <a href="#"
+                                    <button
                                         className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                                        title="add to wishlist">
+                                        title="add to wishlist"
+                                        data-tooltip-id="my-tooltip-top" data-tooltip-content="Ajouter au panier"
+                                        onClick={() => {
+                                            addToCard
+                                                ({
+                                                    produit: product.productId.name,
+                                                    id: product._id,
+                                                    image: product.productId.image.url,
+                                                    qteDispo: product.quantity,
+                                                    devise: product.productId.devise,
+                                                    description: product.productId.description,
+                                                    prix: product.productId.price
+                                                })
+                                        }}
+                                    >
                                         <FaCartPlus />
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                             <div className="pt-4 pb-3 px-4">
@@ -76,15 +92,15 @@ const Products = () => {
                             <button type="button"
                                 onClick={() => {
                                     addToCard
-                                    ({
-                                        produit: product.productId.name,
-                                        id: product._id,
-                                        image: product.productId.image.url,
-                                        qteDispo: product.quantity,
-                                        devise: product.productId.devise,
-                                        description: product.productId.description,
-                                        prix: product.productId.price
-                                    })
+                                        ({
+                                            produit: product.productId.name,
+                                            id: product._id,
+                                            image: product.productId.image.url,
+                                            qteDispo: product.quantity,
+                                            devise: product.productId.devise,
+                                            description: product.productId.description,
+                                            prix: product.productId.price
+                                        })
                                 }}
                                 className="block w-full py-1 text-center text-sm md:text-base text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition" >
                                 Ajouter au panier
@@ -94,6 +110,7 @@ const Products = () => {
                 }
             </div>
             <Toaster />
+            <Tooltip id="my-tooltip-top" place='top' />
         </div >
     )
 }

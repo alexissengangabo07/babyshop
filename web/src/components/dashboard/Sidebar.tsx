@@ -40,10 +40,10 @@ function Sidebar({
                 {/* Sidebar header */}
                 <div className="flex justify-between pr-3 sm:px-2">
                     {/* Logo */}
-                    <a href="/dashboard" className="block">
+                    <Link href="/dashboard" className="block">
                         {/* <Image src={'/bambino.png'} alt="" width={120} height={120} /> */}
                         <p className='text-lg font-extrabold lg:text-xl p-4 pl-3 bg-gradient-to-r from-blue-600 to-red-500 bg-clip-text text-transparent'>BAMBINO ADMIN</p>
-                    </a>
+                    </Link>
                     <a href="#" className='lg:hidden text-gray-400 absolute top-2 right-0 active:text-white' onClick={() => toggleShow()}>
                         <IoMdClose size={40} />
                     </a>

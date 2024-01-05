@@ -40,7 +40,7 @@ const Header = () => {
                             {productsOnCard.length}
                         </div>
                     </Link>
-                    <Link href="/compte" className="flex flex-col items-center gap-2 text-center text-gray-700 hover:text-primary transition relative">
+                    <Link href="/profil" className="flex flex-col items-center gap-2 text-center text-gray-700 hover:text-primary transition relative">
                         <div className="text-2xl">
                             <FaUserAlt />
                         </div>
