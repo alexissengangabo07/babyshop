@@ -3,7 +3,7 @@ import React from 'react'
 
 const Login = () => {
     return (
-        <div className="contain py-16">
+        <div className="contain py-8">
             <div className="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
                 <h2 className="text-2xl uppercase font-medium mb-1">Login</h2>
                 <p className="text-gray-600 mb-6 text-sm">
@@ -12,13 +12,13 @@ const Login = () => {
                 <form action="#" method="post" autoComplete={'off'}>
                     <div className="space-y-2">
                         <div>
-                            <label htmlFor="email" className="text-gray-600 mb-2 block">Email address</label>
+                            <label htmlFor="email" className="text-gray-600 mb-2 block">Adresse mail</label>
                             <input type="email" name="email" id="email"
                                 className="block outline-none w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-red-200 placeholder-gray-400"
-                                placeholder="youremail.@domain.com"/>
+                                placeholder="Entrer votre adresse mail"/>
                         </div>
                         <div>
-                            <label htmlFor="password" className="text-gray-600 mb-2 block">Password</label>
+                            <label htmlFor="password" className="text-gray-600 mb-2 block">Mot de passe</label>
                             <input type="password" name="password" id="password"
                                 className="block outline-none w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-red-200 placeholder-gray-400"
                                 placeholder="*******" />
@@ -28,9 +28,9 @@ const Login = () => {
                         <div className="flex items-center">
                             <input type="checkbox" name="remember" id="remember"
                                 className="text-primary focus:ring-0 rounded-sm cursor-pointer" />
-                                <label htmlFor="remember" className="text-gray-600 ml-3 cursor-pointer">Remember me</label>
+                                <label htmlFor="remember" className="text-gray-600 ml-3 cursor-pointer">Garder ma session active</label>
                         </div>
-                        <a href="#" className="text-primary">Forgot password</a>
+                        <a href="#" className="text-primary">Mot de passe ouvlié ?</a>
                     </div>
                     <div className="mt-4">
                         <button type="submit"

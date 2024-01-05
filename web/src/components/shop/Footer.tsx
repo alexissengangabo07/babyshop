@@ -7,7 +7,7 @@ const Footer = () => {
             <footer className="bg-gray-300 pt-16 pb-12 px-4 border-t border-gray-100">
                 <div className="container grid grid-cols-1 ">
                     <div className="col-span-1 space-y-4">
-                    <span className='text-2xl font-bold'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
+                    <span className='text-2xl font-bold select-none'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
               
                         <div className="mr-2">
                             <p className="text-gray-500">

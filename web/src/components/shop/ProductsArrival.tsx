@@ -1,14 +1,16 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { RootState } from '@/redux/store';
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchProductsStock } from "@/features/stock.slice";
+import { PanierContext } from '@/contexts/PanierContext';
 import Link from "next/link";
 import { FaEye, FaCartPlus } from 'react-icons/fa';
 
 const ProductsArrival = () => {
     const dispatch = useAppDispatch();
     const products = useAppSelector((store: RootState) => store.stockReducer);
+    const { addToCard } = useContext(PanierContext);
 
     useEffect(() => {
         dispatch(fetchProductsStock());
@@ -48,9 +50,22 @@ const ProductsArrival = () => {
                                     <p className="text-sm text-gray-400 line-through">{product.productId.devise === 'USD' ? '$' : 'FC '}{product.productId.price + 10}</p>
                                 </div>
                             </div>
-                            <a href="#"
-                                className="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
-                                to cart</a>
+                            <button
+                                onClick={() => {
+                                    addToCard
+                                        ({
+                                            produit: product.productId.name,
+                                            id: product._id,
+                                            image: product.productId.image.url,
+                                            qteDispo: product.quantity,
+                                            devise: product.productId.devise,
+                                            description: product.productId.description,
+                                            prix: product.productId.price
+                                        })
+                                }}
+                                className="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">
+                                Ajouter au panier
+                            </button>
                         </div>
                     ))
                 }

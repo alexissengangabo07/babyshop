@@ -30,7 +30,6 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     const [montant, setMontant] = useState(0);
 
     const getCardItems = () => {
-        console.log("first")
         const cartLocalItems = getLocalStorageItem("greenCart");
         if (cartLocalItems !== null)
             return cartLocalItems
@@ -61,7 +60,7 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     // Ajouter au panier
     const addToCard = (product: any) => {
         const existingItemIndex = productsOnCard.findIndex((prodCard: any) => prodCard.id === product.id);
-     
+
         if (existingItemIndex !== -1) {
             const newState = [...productsOnCard];
             if (testQte(newState, existingItemIndex)) {
@@ -76,13 +75,14 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     };
 
     const removeItemToCart = (id: string) => {
-        const newState = productsOnCard.filter((item: any) => item.id_production !== id);
+        console.log(id)
+        const newState = productsOnCard.filter((item: any) => item.id !== id);
         setProductsOnCard(newState);
     }
 
     const increaseItemQte = (id: string) => {
         const items = [...productsOnCard];
-        const itemsIndex = items.findIndex((cartItem) => cartItem.id_production == id)
+        const itemsIndex = items.findIndex((cartItem) => cartItem.id == id)
         if (testQte(items, itemsIndex)) {
             items[itemsIndex].qte += 1;
             setProductsOnCard(items);
@@ -91,7 +91,7 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     const setItemQte = (id: string, newQte: any) => {
         const items = [...productsOnCard];
-        const itemsIndex = items.findIndex((cartItem) => cartItem.id_production == id)
+        const itemsIndex = items.findIndex((cartItem) => cartItem.id == id)
 
         if (testQte2(items, itemsIndex, Number(newQte)))
             items[itemsIndex].qte = Number(newQte);
@@ -109,7 +109,7 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     const decreaseItemQte = (id: string) => {
         const items = [...productsOnCard];
-        const itemsIndex = items.findIndex((cartItem) => cartItem.id_production == id)
+        const itemsIndex = items.findIndex((cartItem) => cartItem.id == id)
         if (items[itemsIndex].qte === 1) {
             removeItemToCart(id)
         } else {
