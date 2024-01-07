@@ -106,9 +106,11 @@ const userSlice = createSlice({
         builder.addCase(createUser.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
+            toast.success('Votre  compte a ete creer avec succes')
         });
-        builder.addCase(createUser.rejected, (state, action) => {
+        builder.addCase(createUser.rejected, (state, action: any) => {
             state.isLoading = false;
+            toast.error(action.payload?.response.data.message);
         });
 
         builder.addCase(loginUser.pending, state => {

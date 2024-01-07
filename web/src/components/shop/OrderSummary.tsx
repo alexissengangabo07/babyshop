@@ -44,12 +44,14 @@ const OrderSummary = () => {
                             <p>$1280</p>
                         </div>
 
-
-
+                        <div className='mt-6'>
+                            <img src="/assets/images/methods.png" alt="methods" className="h-8" />
+                        </div>
+                        {/* 
                         <Link href="/commande"
                             className="block w-full py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">
                             Valider l'Achat
-                        </Link>
+                        </Link> */}
                     </>
                 )
             }

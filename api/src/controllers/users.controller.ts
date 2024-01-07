@@ -62,7 +62,7 @@ export const createUser: RequestHandler<unknown, unknown, CreateUserBody, unknow
         const existingTelephone = await usersModel.findOne({ telephone });
 
         if (existingUsername) {
-            return res.status(400).json({ message: 'Le nom d\'utilisateur existe déjà.' });
+            return res.status(400).json({ message: 'L\'utilisateur existe déjà.' });
         }
         if (existingEmail) {
             return res.status(400).json({ message: 'L\'email existe déjà.' });

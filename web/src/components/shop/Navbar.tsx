@@ -3,11 +3,17 @@ import { RootState } from '@/redux/store';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Link from "next/link"
 import { FaBars } from 'react-icons/fa'
+import { useEffect } from 'react';
+import { fetchCategories } from '@/features/categories.slice';
 
 const Navbar = () => {
     const dispatch = useAppDispatch();
     const categories = useAppSelector((store: RootState) => store.categoriesReducer);
 
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, []);
+    
     return (
         <nav className="bg-gray-800">
             <div className="px-6 flex">
