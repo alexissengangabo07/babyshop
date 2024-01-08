@@ -4,6 +4,7 @@ import './globals.css';
 import MenuContextProvider from '@/contexts/MenuContext';
 import PanierContextProvider from '@/contexts/PanierContext';
 import { Providers } from './provider';
+import SessionContextProvider from '@/contexts/SessionContext';
 
 const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -25,11 +26,13 @@ export default function RootLayout({
       <body className={inter.className}>
 
         <Providers >
-          <MenuContextProvider>
-            <PanierContextProvider>
-              {children}
-            </PanierContextProvider>
-          </MenuContextProvider>
+          <SessionContextProvider>
+            <MenuContextProvider>
+              <PanierContextProvider>
+                {children}
+              </PanierContextProvider>
+            </MenuContextProvider>
+          </SessionContextProvider>
         </Providers>
       </body>
     </html>

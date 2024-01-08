@@ -25,7 +25,7 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
     }
 });
 
-export const fetchCategory = createAsyncThunk('categories/fetchCategory', async (categoryId: string, { rejectWithValue }) => {
+export const fetchCategory = createAsyncThunk('categories/fetchCategory', async (categoryId: any, { rejectWithValue }) => {
     try {
         const response = await api.fetchCategory(categoryId);
         return response.data;

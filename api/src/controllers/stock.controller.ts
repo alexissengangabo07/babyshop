@@ -14,12 +14,13 @@ export const getProductsInStock: RequestHandler = async (req, res, next) => {
 
 export const getProductInStock: RequestHandler = async (req, res, next) => {
     const productId = req.params.id;
+    
     try {
         if (!mongoose.isValidObjectId(productId)) {
             return res.status(400).json({ message: 'Invalid stock product id' });
         }
 
-        const productInStock = await stockModel.findById(productId);
+        const productInStock = await stockModel.findById(productId).populate('productId');
 
         if (!productInStock) {
             return res.status(404).json({ message: 'Product not found' });

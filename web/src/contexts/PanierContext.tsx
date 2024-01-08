@@ -73,7 +73,6 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
             setProductsOnCard([...productsOnCard, { ...product, qte: 1 }]);
             saveToLocalStorage(productsOnCard, "greenCart");
         }
-        toast.success('')
     };
 
     // Supprimer la quantite d'un produit x dans le localStorage

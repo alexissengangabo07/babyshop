@@ -158,6 +158,7 @@ export const userLogin: RequestHandler = async (req, res, next) => {
             email: user.email,
             first_name: user.first_name,
             last_name: user.last_name,
+            role: user.role,
             username: user.username,
             token: generateToken(user)
         });

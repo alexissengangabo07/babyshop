@@ -122,6 +122,7 @@ const userSlice = createSlice({
             console.log("fullfill")
             state.data = action.payload;
 
+            setCookie('role', action.payload?.role, 7);
             setCookie('token', action.payload?.token, 7);
         });
         builder.addCase(loginUser.rejected, (state, action: any) => {

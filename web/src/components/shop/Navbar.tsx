@@ -1,19 +1,22 @@
 "use client"
+import { useEffect, useContext } from 'react';
 import { RootState } from '@/redux/store';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Link from "next/link"
 import { FaBars } from 'react-icons/fa'
-import { useEffect } from 'react';
 import { fetchCategories } from '@/features/categories.slice';
+import { SessionContext } from '@/contexts/SessionContext';
 
 const Navbar = () => {
     const dispatch = useAppDispatch();
     const categories = useAppSelector((store: RootState) => store.categoriesReducer);
+    const { connectedUser, getSession } = useContext(SessionContext);
 
     useEffect(() => {
+        getSession();
         dispatch(fetchCategories());
     }, []);
-    
+
     return (
         <nav className="bg-gray-800">
             <div className="px-6 flex">
@@ -44,7 +47,9 @@ const Navbar = () => {
                         <Link href="/apropos" className="text-gray-200 hover:text-white transition">A Propos</Link>
                         <Link href="/contact" className="text-gray-200 hover:text-white transition">Contact</Link>
                     </div>
-                    <Link href="/login" className="text-gray-200 hover:text-white transition">Login</Link>
+                    {connectedUser.first_name === '' && (
+                        <Link href="/login" className="text-gray-200 hover:text-white transition">Login</Link>
+                    )}
                 </div>
             </div>
         </nav>

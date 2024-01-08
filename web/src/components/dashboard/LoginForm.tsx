@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { Toaster, } from 'react-hot-toast';
+import toast, { Toaster, } from 'react-hot-toast';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { RootState } from '@/redux/store';
 import { loginUser } from '@/features/users.slice';
@@ -31,8 +31,14 @@ const LoginForm = () => {
     }
 
     useEffect(() => {
+        console.log(data)
         if (data?.username !== undefined) {
-            redirect('/dashboard')
+            if (data.role !== 'client') {
+                redirect('/dashboard')
+            }
+            else {
+                toast.error('Vous etes pas authorisé à acceder cette interface')
+            }
         }
     }, [isError, message, data]);
 
@@ -148,8 +154,6 @@ const LoginForm = () => {
                                             {errors.password && touched.password ? (
                                                 <div className="text-red-500">{errors.password}</div>
                                             ) : null}
-
-
                                         </div>
                                         {/* Submit button */}
                                         <div className="mb-12 pb-1 pt-6 text-center">

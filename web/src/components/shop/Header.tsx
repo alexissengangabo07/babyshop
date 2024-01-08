@@ -1,12 +1,18 @@
 'use client'
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { FaSearch, FaShoppingBag, FaUserAlt } from 'react-icons/fa';
 import { PanierContext } from "@/contexts/PanierContext";
+import { SessionContext } from "@/contexts/SessionContext";
 
 const Header = () => {
     const { productsOnCard } = useContext(PanierContext);
+    const { connectedUser, getSession } = useContext(SessionContext);
+
+    useEffect(() => {
+        getSession();
+    }, []);
 
     return (
         <header className="py-4 shadow-sm bg-white text-sm">
@@ -40,12 +46,14 @@ const Header = () => {
                             {productsOnCard.length}
                         </div>
                     </Link>
-                    <Link href="/profil" className="flex flex-col items-center gap-2 text-center text-gray-700 hover:text-primary transition relative">
-                        <div className="text-2xl">
-                            <FaUserAlt />
-                        </div>
-                        <div className="text-xs leading-3">Compte</div>
-                    </Link>
+                    {connectedUser.first_name !== '' && (
+                        <Link href="/profil" className="flex flex-col items-center gap-2 text-center text-gray-700 hover:text-primary transition relative">
+                            <div className="text-2xl">
+                                <FaUserAlt />
+                            </div>
+                            <div className="text-xs leading-3">{connectedUser?.first_name}</div>
+                        </Link>
+                    )}
                 </div>
             </div>
         </header>

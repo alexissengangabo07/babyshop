@@ -1,57 +1,19 @@
 "use client";
 
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { MdMenu } from 'react-icons/md';
 import { BsBellFill, BsFillSunFill, BsArrowsFullscreen } from 'react-icons/bs';
-import { AiFillAppstore } from 'react-icons/ai';
-import { FaMoon } from 'react-icons/fa';
 import { MenuContext } from '@/contexts/MenuContext';
 import { Tooltip } from 'react-tooltip';
-import { getTokenCookie, clearCookie } from '@/utils/cookie';
-import { jwtDecode } from 'jwt-decode';
-import { redirect } from 'next/navigation';
+import { clearCookie } from '@/utils/cookie';
 import Link from 'next/link';
-
-type connectedUserType = {
-    createdAt?: string;
-    first_name?: string;
-    last_name?: string;
-    password?: string;
-    role?: string;
-    telephone?: string;
-    updatedAt?: string;
-    username?: string;
-    __v?: number;
-    _id?: string
-}
-
+import { SessionContext } from '@/contexts/SessionContext';
 
 const Header = () => {
     const { showMenu, toggleShow } = useContext(MenuContext);
+    const { connectedUser } = useContext(SessionContext);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [connectedUser, setConnectedUser] = useState<connectedUserType>({
-        createdAt: '',
-        first_name: '',
-        last_name: '',
-        password: '',
-        role: '',
-        telephone: '',
-        updatedAt: '',
-        username: '',
-        __v: 0,
-        _id: ''
-    });
-
-    useEffect(() => {
-        const token = getTokenCookie();
-        if (token) {
-            const decodedToken: any = jwtDecode(token);
-            setConnectedUser(decodedToken.id);
-        } else {
-            console.log('Token cookie not found');
-        }
-    }, [])
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -59,6 +21,7 @@ const Header = () => {
 
     const disconnect = () => {
         clearCookie('token');
+        clearCookie('role');
         location.reload();
     }
 

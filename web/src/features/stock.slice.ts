@@ -2,19 +2,32 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from '@/features/api/stock';
 
 interface Product {
-    _id: string;
-    productId: {};
-    quantity: number;
+    _id?: string;
+    productId?: {
+        categoryId: string,
+        createdAt: string,
+        description: string,
+        devise: string,
+        image: { public_id: string, url: string }
+        name: string,
+        price: number,
+        updatedAt: string,
+        __v: number,
+        _id: string
+    };
+    quantity?: number;
     size?: string;
 }
 
 interface ProductState {
     data: Product[];
+    singleProd: Product,
     isLoading: boolean;
 }
 
 const initialState: ProductState = {
     data: [],
+    singleProd: {},
     isLoading: false
 };
 
@@ -80,11 +93,22 @@ const productStockSlice = createSlice({
         builder.addCase(fetchProductsStock.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
-            // console.log(state);
         });
         builder.addCase(fetchProductsStock.rejected, (state, action) => {
             state.isLoading = false;
         });
+
+        builder.addCase(fetchProduct.pending, state => {
+            state.isLoading = true;
+        });
+        builder.addCase(fetchProduct.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.singleProd = action.payload;
+        });
+        builder.addCase(fetchProduct.rejected, (state, action) => {
+            state.isLoading = false;
+        });
+
 
         builder.addCase(createProduct.pending, state => {
             state.isLoading = true;
