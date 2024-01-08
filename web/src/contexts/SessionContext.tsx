@@ -12,6 +12,8 @@ interface ConnectedUser {
     telephone?: string;
     updatedAt?: string;
     username?: string;
+    email?: string;
+    adresse?: string;
     __v?: number;
     _id?: string
 }
