@@ -11,7 +11,7 @@ const productsSchema = new Schema({
     },
     devise: {
         type: String,
-        required: true
+        default: 'USD'
     },
     description: String,
     image: {

@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
@@ -8,6 +8,7 @@ import { RootState } from '@/redux/store';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { Toaster, toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { FaFacebook, FaFacebookF, FaGoogle } from 'react-icons/fa';
 
 const loginYupSchema = Yup.object().shape({
     username: Yup.string().min(3, 'Trop court').max(16, 'Trop long').required('Ce champ est obligatoire'),
@@ -130,9 +131,13 @@ const Login = () => {
                 </div>
                 <div className="mt-4 flex gap-4">
                     <a href="#"
-                        className="w-1/2 py-2 text-center text-white bg-blue-800 rounded uppercase font-roboto font-medium text-sm hover:bg-blue-700">facebook</a>
+                        className="flex gap-4 items-center justify-center w-1/2 py-2 text-center text-white bg-blue-800 rounded uppercase font-roboto font-medium text-sm hover:bg-blue-700">
+                        <FaFacebookF /> facebook
+                    </a>
                     <a href="#"
-                        className="w-1/2 py-2 text-center text-white bg-red-600 rounded uppercase font-roboto font-medium text-sm hover:bg-red-500">google</a>
+                        className="flex gap-4 items-center justify-center w-1/2 py-2 text-center text-white bg-red-600 rounded uppercase font-roboto font-medium text-sm hover:bg-red-500">
+                        <FaGoogle /> google
+                    </a>
                 </div>
 
                 <p className="mt-4 text-center text-gray-600">N'avez vous pas de compte? <Link href="/register"

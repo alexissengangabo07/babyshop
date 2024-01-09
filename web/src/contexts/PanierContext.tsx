@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import { getLocalStorageItem, saveToLocalStorage } from '@/utils/localStorage';
+import { saveToLocalStorage } from '@/utils/localStorage';
 import { toast } from 'react-hot-toast';
 
 interface PanierType {
@@ -31,7 +31,9 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
     // Charger les produits du panier
     const getCardItems = () => {
-        const cartLocalItems = getLocalStorageItem("greenCart");
+        const prodCard: any = localStorage.getItem("greenCart");
+        const cartLocalItems = JSON.parse(prodCard);
+
         if (cartLocalItems !== null)
             return cartLocalItems
         else

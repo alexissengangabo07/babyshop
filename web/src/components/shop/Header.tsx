@@ -43,7 +43,7 @@ const Header = () => {
                         <div className="text-xs leading-3">Panier</div>
                         <div
                             className="absolute -right-1 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                            {productsOnCard.length}
+                            {productsOnCard?.length}
                         </div>
                     </Link>
                     {connectedUser.first_name !== '' && (

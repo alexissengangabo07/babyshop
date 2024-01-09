@@ -20,13 +20,13 @@ const ProductsArrival = () => {
 
     return (
         <div className="px-6 pb-16">
-            <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">top new arrival</h2>
+            <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">TOP NOUVEL ARRIVAGE</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {
                     products.data.map((product: any, i: number) => (
                         <div className="bg-white shadow rounded overflow-hidden group" key={i}>
                             <div className="relative">
-                                <img src={product.productId.image?.url} alt="product 1" className="w-full" />
+                                <img src={product.productId.image?.url} alt="product 1" className="w-full h-56" />
                                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
                     justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                                     <Link href={"/produit/" + product._id}
