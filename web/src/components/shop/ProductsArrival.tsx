@@ -19,7 +19,7 @@ const ProductsArrival = () => {
     }, []);
 
     return (
-        <div className="px-6 pb-16">
+        <div className="pb-16">
             <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">TOP NOUVEL ARRIVAGE</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {

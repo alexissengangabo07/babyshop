@@ -15,10 +15,10 @@ const Header = () => {
     }, []);
 
     return (
-        <header className="py-4 shadow-sm bg-white text-sm">
+        <header className="py-4 shadow-sm bg-white text-sm px-28">
             <div className="pr-4 flex items-center justify-between">
                 <Link href="/">
-                    <span className='text-2xl font-bold px-2'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
+                    <span className='text-2xl font-bold'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
                 </Link>
 
                 <div className="w-full max-w-xl relative flex ">

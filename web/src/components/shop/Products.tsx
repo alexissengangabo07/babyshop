@@ -21,7 +21,7 @@ const Products = () => {
 
     return (
         // <div className="col-span-3">
-        <div className='basis-full md:basis-3/4'>
+        <div className='basis-full md:basis-3/4 bg-white p-6'>
             <div className="flex items-center mb-4">
                 <select name="sort" id="sort"
                     className="w-44 text-sm text-gray-600 outline-none py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">

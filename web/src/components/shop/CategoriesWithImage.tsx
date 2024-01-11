@@ -22,7 +22,7 @@ const CategoriesWithImage = () => {
     }, []);
 
     return (
-        <div className="px-6 pt-8 pb-16">
+        <div className="pt-8 pb-16">
             <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">ACHETER PAR CATÉGORIE</h2>
             <div className="grid grid-cols-3 gap-3">
                 {

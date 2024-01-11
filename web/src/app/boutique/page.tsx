@@ -11,7 +11,7 @@ const Boutique = () => {
       <Header />
       <Navbar />
       {/* <div className="container grid md:grid-cols-4 grid-cols-2 gap-6 pt-4 pb-16 items-start"> */}
-      <div className="flex gap-4 py-4 px-6">
+      <div className="flex gap-4 py-4 px-6 bg-gray-100">
         <Categories />
         <Products />
       </div>

@@ -18,9 +18,9 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className="bg-gray-800">
-            <div className="px-6 flex">
-                <div className="px-8 py-4 bg-primary flex items-center cursor-pointer relative group text-sm">
+        <nav className="bg-gray-800 px-28">
+            <div className="flex">
+                <div className="px-6 py-4 bg-primary flex items-center cursor-pointer relative group text-sm">
                     <span className="text-white">
                         <FaBars />
                     </span>

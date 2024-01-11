@@ -16,7 +16,7 @@ const OrderSummary = () => {
 
     return (
         <div className="basis-2/6 border border-gray-200 p-4 rounded">
-            {productsOnCard.length > 0 && <h4 className="text-gray-800 text-lg mb-4 font-medium uppercase">order summary</h4>}       <div className="space-y-2">
+            {productsOnCard.length > 0 && <h4 className="text-gray-800 text-lg mb-4 font-medium uppercase">RÉSUMÉ DE LA COMMANDE</h4>}       <div className="space-y-2">
                 {
                     productsOnCard.map((prodOnCard: any, i) => (
                         <div className="flex justify-between" key={i}>
