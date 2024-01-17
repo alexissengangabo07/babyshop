@@ -61,6 +61,7 @@ const Products = () => {
                                         title="add to wishlist"
                                         data-tooltip-id="my-tooltip-top" data-tooltip-content="Ajouter au panier"
                                         onClick={() => {
+                                            toast.success('+1');
                                             addToCard
                                                 ({
                                                     produit: product.productId.name,
@@ -70,7 +71,7 @@ const Products = () => {
                                                     devise: product.productId.devise,
                                                     description: product.productId.description,
                                                     prix: product.productId.price
-                                                })
+                                                });
                                         }}
                                     >
                                         <FaCartPlus />
@@ -100,7 +101,8 @@ const Products = () => {
                                             devise: product.productId.devise,
                                             description: product.productId.description,
                                             prix: product.productId.price
-                                        })
+                                        });
+                                    toast.success('+1');
                                 }}
                                 className="block w-full py-1 text-center text-sm md:text-base text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition" >
                                 Ajouter au panier

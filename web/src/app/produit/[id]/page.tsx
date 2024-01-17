@@ -13,7 +13,7 @@ const ProduitPage = ({
     <>
       <Header />
       <Navbar />
-      <div className='pt-8 px-5'>
+      <div className='pt-8 px-28'>
         <SingleProduct prodId={params.id} />
       </div>
       <Footer />

@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 const OrderSummary = () => {
-    const { productsOnCard } = useContext(PanierContext);
+    const { productsOnCard, montant } = useContext(PanierContext);
 
     useEffect(() => {
         if (productsOnCard.length <= 0) {
@@ -41,7 +41,7 @@ const OrderSummary = () => {
 
                         <div className="flex justify-between text-gray-800 font-medium py-3 uppercas">
                             <p className="font-semibold">Total</p>
-                            <p>$1280</p>
+                            <p>$ {montant}</p>
                         </div>
 
                         <div className='mt-6'>

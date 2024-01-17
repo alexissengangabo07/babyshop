@@ -9,7 +9,7 @@ const page = () => {
     <>
       <Header />
       <Navbar />
-      <div className='flex px-4 py-6 justify-between gap-4'>
+      <div className='flex px-28 py-6 justify-between gap-4'>
       <Panier />
       <CardSummary />
       </div>

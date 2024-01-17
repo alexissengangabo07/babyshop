@@ -51,7 +51,7 @@ const Header = () => {
                             <div className="text-2xl">
                                 <FaUserAlt />
                             </div>
-                            <div className="text-xs leading-3">{connectedUser?.first_name}</div>
+                            <div className="text-xs leading-3 capitalize">{connectedUser?.first_name}</div>
                         </Link>
                     )}
                 </div>

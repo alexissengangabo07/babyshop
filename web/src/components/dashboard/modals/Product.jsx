@@ -160,7 +160,7 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image du produit</label>
-                            <input type="file" accept='.png, .jpg' onChange={e => { handleFileChange(e); setSelectedFile(e.target.files[0]); }} name="image" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
+                            <input type="file" accept='.png, .jpg, .webp' onChange={e => { handleFileChange(e); setSelectedFile(e.target.files[0]); }} name="image" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
                             <div>
                                 {preview && <Image src={preview} width={100} height={100} alt="er" />}
                             </div>

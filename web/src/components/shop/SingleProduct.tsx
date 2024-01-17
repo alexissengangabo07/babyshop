@@ -6,7 +6,8 @@ import { RootState } from '@/redux/store';
 import { fetchProduct } from "@/features/stock.slice";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { PanierContext } from "@/contexts/PanierContext";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const SingleProduct = ({ prodId }: { prodId: string }) => {
     const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ const SingleProduct = ({ prodId }: { prodId: string }) => {
     const { data } = useAppSelector((store: RootState) => store.categoriesReducer);
     const [singleProductOnCard, setSingleProductOnCard] = useState<any>({});
     const { addToCard, productsOnCard, decreaseItemQte, increaseItemQte, setItemQte, removeItemToCart } = useContext(PanierContext);
+    const router = useRouter();
 
     useEffect(() => {
         dispatch(fetchProduct(prodId));
@@ -95,7 +97,9 @@ const SingleProduct = ({ prodId }: { prodId: string }) => {
                                                 devise: singleProd.productId?.devise,
                                                 description: singleProd.productId?.description,
                                                 prix: singleProd.productId?.price
-                                            })
+                                            });
+                                        toast.success('+1');
+                                        router.push('/panier');
                                     }}
                                     className="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">
                                     <i className="fa-solid fa-bag-shopping"></i> Ajouter au panier
@@ -103,15 +107,15 @@ const SingleProduct = ({ prodId }: { prodId: string }) => {
                             </div>
 
                             <div className="flex gap-3 mt-4">
-                                <a href="#"
+                                <a href="facebook.com"
                                     className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
                                     <FaFacebook />
                                 </a>
-                                <a href="#"
+                                <a href="x.com"
                                     className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
                                     <FaTwitter />
                                 </a>
-                                <a href="#"
+                                <a href="instagram.com"
                                     className="text-gray-400 hover:text-gray-500 h-8 w-8 rounded-full border border-gray-300 flex items-center justify-center">
                                     <FaInstagram />
                                 </a>

@@ -7,7 +7,7 @@ import { PanierContext } from '@/contexts/PanierContext';
 import Link from "next/link";
 import { FaEye, FaCartPlus } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProductsArrival = () => {
     const dispatch = useAppDispatch();
@@ -48,7 +48,8 @@ const ProductsArrival = () => {
                                                     devise: product.productId.devise,
                                                     description: product.productId.description,
                                                     prix: product.productId.price
-                                                })
+                                                });
+                                                toast.success('+ 1')
                                         }}
                                     >
                                         <FaCartPlus />
