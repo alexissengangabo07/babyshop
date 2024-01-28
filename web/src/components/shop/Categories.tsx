@@ -3,14 +3,14 @@
 import { useEffect } from "react";
 import { RootState } from '@/redux/store';
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchCategories } from "@/features/categories.slice";
+// import { fetchCategories } from "@/features/categories.slice";
 
 const Categories = () => {
     const dispatch = useAppDispatch();
-    const categories = useAppSelector((store: RootState) => store.categoriesReducer);
+    // const categories = useAppSelector((store: RootState) => store.categoriesReducer);
 
     useEffect(() => {
-        dispatch(fetchCategories());
+        // dispatch(fetchCategories());
     }, []);
 
     return (
@@ -19,7 +19,7 @@ const Categories = () => {
             <div className="divide-y divide-gray-200 space-y-5">
                 <div>
                     {/* <h3 className="text-xl text-gray-800 mb-3 uppercase font-medium">Catégories</h3> */}
-                    <div className="space-y-2">
+                    {/* <div className="space-y-2">
                         {
                             categories.data.map((category, i) => (
                                 <div className="flex items-center" key={i}>
@@ -30,7 +30,7 @@ const Categories = () => {
                                 </div>
                             ))
                         }
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="pt-4">

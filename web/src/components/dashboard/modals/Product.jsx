@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'antd';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { RootState } from '@/redux/store';
 import { createProduct } from '@/features/products.slice';
-import { fetchCategories } from '@/features/categories.slice';
 import toast, { Toaster } from 'react-hot-toast';
 import Image from 'next/image';
 
@@ -19,15 +17,10 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
         devise: '',
         description: '',
         image: '',
-        categoryId: ''
+        category: ''
     });
     const dispatch = useAppDispatch();
-    const categories = useAppSelector((store) => store.categoriesReducer);
-
-    useEffect(() => {
-        dispatch(fetchCategories());
-    }, []);
-    console.log(editData)
+    const categories = useAppSelector((store) => store.productsReducer);
 
     useEffect(() => {
         if (!selectedFile) return;
@@ -51,6 +44,7 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
 
             if (areAllPropertiesNotEmpty) {
                 setOpen(false);
+                console.log(formInputs)
                 dispatch(createProduct(formInputs));
             }
             else {
@@ -134,15 +128,19 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
                 <form className="p-4 md:p-5">
                     <div className="grid gap-4 mb-4 grid-cols-2">
                         <div className="col-span-2">
-                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom du produit</label>
                             <input type="text" value={editOpen ? editData.name : formInputs.name} onChange={handleInputChange} name="name" autoComplete="off" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
                         </div>
+                        {/* <div className="col-span-2">
+                            <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom</label>
+                            <input type="text" value={editOpen ? editData.marque : formInputs.marque} onChange={handleInputChange} name="name" autoComplete="off" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="De quel marque ?" required={true} />
+                        </div> */}
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prix</label>
                             <input type="number" value={editOpen ? editData.price : formInputs.price} onChange={handleInputChange} name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le prix du produit" required={true} />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
-                            <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Devise</label>
+                            <label htmlFor="devise" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Devise</label>
                             <select id="devise" name="devise" value={editOpen ? editData.devise : formInputs.devise} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
                                 <option value=''>Sélectionner une devise</option>
                                 <option value="USD" className='capitalize py-4'>USD</option>
@@ -151,12 +149,7 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie</label>
-                            <select id="category" name="categoryId" value={editOpen ? editData?.categoryId?._id : formInputs.categoryId} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
-                                <option value=''>Sélectionner une catégorie</option>
-                                {
-                                    categories.data.map(cat => <option key={cat._id} value={cat._id} className='capitalize py-4'>{cat.title}</option>)
-                                }
-                            </select>
+                            <input type="text" value={editOpen ? editData.category : formInputs.category} onChange={handleInputChange} name="category" autoComplete="off" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Categorie de ce produit" required={true} />
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image du produit</label>

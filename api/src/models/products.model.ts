@@ -3,10 +3,15 @@ import { InferSchemaType, model, Schema } from "mongoose";
 const productsSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     price: {
         type: Number,
+        required: true
+    },
+    marque: {
+        type: String,
         required: true
     },
     devise: {
@@ -24,11 +29,19 @@ const productsSchema = new Schema({
             required: true
         }
     },
-    categoryId: {
+    category: {
         type: Schema.Types.ObjectId,
         ref: "categories",
         required: true
     },
+    qteStock: {
+        type: Number,
+        default: 0,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    }
 }, {
     timestamps: true
 });

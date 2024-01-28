@@ -13,6 +13,10 @@ const ordersSchema = new Schema({
     total: {
         type: Number,
         required: true
+    },
+    paymentMethod: {
+        type: String,
+        required: true,
     }
 }, {
     timestamps: true
