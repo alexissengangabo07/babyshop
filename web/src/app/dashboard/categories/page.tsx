@@ -10,25 +10,22 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 function page() {
-  const [editOpen, setEditOpen] = useState(false);
-  const [editData, setEditData] = useState({ _id: '', title: '' });
   const dispatch = useAppDispatch();
-  const categories: any = useAppSelector((store: RootState) => store.productsReducer);
-  const MySwal = withReactContent(Swal);
+  const categories = useAppSelector((store: RootState) => store.productsReducer);
   const columns = [
     { name: '#', selector: (row: any, index: any) => index + 1 },
-    { name: 'Catégories', selector: (row: any) => row.title, sortable: true }
+    { name: 'Catégories', selector: (row: any) => <span className='capitalize'>{row.category}</span>, sortable: true }
   ];
 
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [])
+  }, []);
 
 
   return (
     <>
-      {/* <DataTable tabColumns={columns} data={categories.data} /> */}
+      <DataTable tabColumns={columns} data={categories.data} />
       <Tooltip id="my-tooltip-top" place='top' />
     </>
   );

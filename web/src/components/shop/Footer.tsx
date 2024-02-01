@@ -5,7 +5,7 @@ import { FaFacebookSquare, FaGithubSquare, FaInstagramSquare, FaTwitterSquare } 
 const Footer = () => {
     return (
         <>
-            <footer className="bg-[#535357] pt-16 px-28 pb-12 border-t border-gray-100">
+            <footer className="bg-[#535357] pt-5 lg:pt-16 px-1 lg:px-28 pb-12 border-t border-gray-100">
                 <div className="container grid grid-cols-1 ">
                     <div className="col-span-1 space-y-4">
                         <span className='text-2xl font-bold select-none'><span className='text-primary'>BAM</span><span className='text-white'>BINO SHOP</span></span>
@@ -75,7 +75,7 @@ const Footer = () => {
             {/* <!-- ./footer --> */}
 
             {/* <!-- copyright --> */}
-            <div className="bg-gray-800 py-4 px-28">
+            <div className="bg-gray-800 py-4 px-1 lg:px-28">
                 <div className="container flex items-center justify-between">
                     <p className="text-gray-400">&copy; BAMBINO - Tous droits réservés</p>
                     <div>

@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 const SingleProduct = ({ prodId }: { prodId: string }) => {
     const dispatch = useAppDispatch();
     const { singleProd } = useAppSelector((store: RootState) => store.stockReducer);
-    const { data } = useAppSelector((store: RootState) => store.categoriesReducer);
     const [singleProductOnCard, setSingleProductOnCard] = useState<any>({});
     const { addToCard, productsOnCard, decreaseItemQte, increaseItemQte, setItemQte, removeItemToCart } = useContext(PanierContext);
     const router = useRouter();

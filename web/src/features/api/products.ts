@@ -10,4 +10,4 @@ export const createProduct = (newProduct: Object) => axios.post(url, newProduct)
 
 export const deleteProduct = (productId: string) => axios.delete(url + productId);
 
-export const updateProduct = (productId: string) => axios.patch(url + productId);
+export const updateProduct = (productId: string, product: any) => axios.patch(url + productId, product);

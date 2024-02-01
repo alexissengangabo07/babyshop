@@ -4,7 +4,7 @@ import { IoStorefront } from "react-icons/io5";
 
 const TopCard = () => {
     return (
-        <div className="bg-white shadow-md p-2 h-fit text-xs">
+        <div className="bg-white shadow-md p-2 h-fit text-xs hidden lg:block">
             <div className="flex gap-2 mb-4 items-center">
                 <div className="border h-fit w-fit p-2 rounded-full border-primary text-primary"><FaQuestion /></div>
                 <div>

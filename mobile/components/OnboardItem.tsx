@@ -1,19 +1,12 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import { SliderItemType } from '../types/sliderItem';
 
-type ItemsType = {
-    id: number;
-    title: string;
-    description: string;
-    image: number;
-}
-
-const OnboardItem: React.FC<{ item: ItemsType }> = ({ item }) => {
+const OnboardItem: React.FC<{ item: SliderItemType }> = ({ item }) => {
     const { width, height } = useWindowDimensions();
 
     return (
-        <View style={[styles.container, { width, height: 600, backgroundColor: 'green' }]}>
-            <Text>Onpoarditempv</Text>
+        <View style={[styles.container, { width }]}>
             <Image source={item.image} style={[styles.image, { width, resizeMode: 'contain' }]} />
             <View style={{ flex: 0.3 }}>
                 <Text style={styles.title}>{item.title}</Text>
@@ -37,14 +30,14 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: '800',
         marginBottom: 10,
-        color: 'white',
+        color: 'darkblue',
         textAlign: 'center'
     },
     description: {
         fontWeight: '300',
-        color: 'white',
+        color: 'darkgray',
         textAlign: 'center',
-        paddingHorizontal: 64
+        paddingHorizontal: 64,
     }
 })
 

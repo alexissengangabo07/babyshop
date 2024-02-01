@@ -4,7 +4,7 @@ import * as api from '@/features/api/stock';
 interface Product {
     _id?: string;
     productId?: {
-        categoryId: string,
+        category: string,
         createdAt: string,
         description: string,
         devise: string,

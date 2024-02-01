@@ -1,14 +1,9 @@
-type ItemsType = {
-    id: number;
-    title: string;
-    description: string;
-    image: number;
-}
+import { SliderItemType } from './types/sliderItem';
 
-export const slides: ItemsType[] = [
+export const slides: SliderItemType[] = [
     {
         id: 1,
-        title: "Quick & Easy payments1",
+        title: "Quick & Easy payments1i",
         description: "Payements description Payements description Payements description Payements description Payements description",
         image: require("./assets/images/1.png")
     },

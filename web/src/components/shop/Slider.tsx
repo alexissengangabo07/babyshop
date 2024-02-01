@@ -16,6 +16,7 @@ const Slider = () => {
 
     useEffect(() => {
         let slide = setInterval(() => {
+            console.log(currentItem)
             if (currentItem < products.data.length - 1) {
                 setCurrent(currentItem + 1);
                 setTranslateValue(-(currentItem + 1) * 100);

@@ -18,14 +18,14 @@ function page() {
     _id: '',
     productId: '',
     quantity: '',
-    dateStock: '',
-    size: ''
+    // dateStock: '',
+    // size: ''
   });
   const dispatch = useAppDispatch();
   const stock = useAppSelector((store: RootState) => store.stockReducer);
   const MySwal = withReactContent(Swal);
   const columns = [
-    { name: 'Produit', selector: (row: any) => row?.productId?.name, sortable: true },
+    { name: 'Produit', selector: (row: any) => <span className='capitalize'>{row?.productId?.name}</span>, sortable: true },
     { name: 'Quantité disponile', selector: (row: any) => row?.quantity, sortable: true },
     {
       name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
@@ -35,8 +35,8 @@ function page() {
             _id: row._id,
             productId: row?.productId,
             quantity: row?.quantity,
-            dateStock: row?.dateStock,
-            size: row?.size
+            // dateStock: row?.dateStock,
+            // size: row?.size
           })
         }}
           className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">

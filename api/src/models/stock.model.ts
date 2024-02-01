@@ -10,10 +10,6 @@ const stockSchema = new Schema({
         type: Number,
         required: true
     },
-    dateStock: {
-        type: String,
-        required: true
-    },
     size: {
         type: String
     }

@@ -1,14 +1,8 @@
 import { StyleSheet, View, useWindowDimensions, Animated } from 'react-native'
 import React from 'react'
+import {SliderItemType} from '../types/sliderItem'
 
-type ItemsType = {
-  id: number;
-  title: string;
-  description: string;
-  image: number;
-}
-
-const Paginator: React.FC<{ data: ItemsType[], scrollX: any }> = ({ data, scrollX }) => {
+const Paginator: React.FC<{ data: SliderItemType[], scrollX: any }> = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();
 
   return (

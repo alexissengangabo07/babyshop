@@ -15,18 +15,19 @@ const Header = () => {
     }, []);
 
     return (
-        <header className="py-4 shadow-sm bg-white text-sm px-28">
-            <div className="pr-4 flex items-center justify-between">
+        <header className="py-4 shadow-sm bg-white text-sm px-3 lg:px-28">
+            <div className="flex items-center justify-between">
                 <Link href="/">
-                    <span className='text-2xl font-bold'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
+                    <span className='text-sm lg:text-2xl font-bold'><span className='text-red-400'>BAM</span><span>BINO SHOP</span></span>
                 </Link>
 
-                <div className="w-full max-w-xl relative flex ">
+                <div className="w-full max-w-[210px] lg:max-w-xl relative flex ">
                     <span className="absolute left-4 top-4 text-sm text-gray-400">
                         <FaSearch />
                     </span>
                     <input type="text" name="search" id="search"
-                        className="w-full border border-primary border-r-0 pl-10 py-3 pr-3 rounded-l-md hidden md:flex focus:outline-none"
+                        autoComplete="off"
+                        className="w-full border border-gray-300 lg:border-primary md:border-r-0 pl-10 py-3 pr-3 lg:rounded-l-md md:flex focus:outline-none"
                         placeholder="Rechercher un produit.." />
                     <button type="button"
                         className="bg-primary border border-primary text-white px-8 

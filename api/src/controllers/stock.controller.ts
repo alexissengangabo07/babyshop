@@ -5,7 +5,8 @@ import stockModel from "../models/stock.model";
 export const getProductsInStock: RequestHandler = async (req, res, next) => {
     try {
         const productsInStock = await stockModel.find().sort({ createdAt: 'desc' }).populate('productId');
-        res.status(200).json(productsInStock);
+        const notZero = productsInStock.filter(product => product.quantity > 0);
+        res.status(200).json(notZero);
     } catch (error) {
         next(error);
     }
@@ -14,7 +15,7 @@ export const getProductsInStock: RequestHandler = async (req, res, next) => {
 
 export const getProductInStock: RequestHandler = async (req, res, next) => {
     const productId = req.params.id;
-    
+
     try {
         if (!mongoose.isValidObjectId(productId)) {
             return res.status(400).json({ message: 'Invalid stock product id' });
@@ -34,12 +35,12 @@ export const getProductInStock: RequestHandler = async (req, res, next) => {
 interface CreateProductStockBody {
     productId: string,
     quantity: number,
-    dateStock: string,
-    size?: string
+    // dateStock: string,
+    // size?: string
 }
 
 export const createProductStock: RequestHandler<unknown, unknown, CreateProductStockBody, unknown> = async (req, res, next) => {
-    const { productId, dateStock, quantity, size } = req.body;
+    const { productId, quantity } = req.body;
 
     try {
         if (!productId) {
@@ -50,7 +51,7 @@ export const createProductStock: RequestHandler<unknown, unknown, CreateProductS
         }
 
         const productStock = await stockModel.create({
-            productId, quantity, dateStock, size
+            productId, quantity
         });
         res.status(201).json(productStock);
     } catch (error) {
@@ -61,8 +62,8 @@ export const createProductStock: RequestHandler<unknown, unknown, CreateProductS
 interface UpdateProductBody {
     productId?: string,
     quantity?: number,
-    dateStock?: string,
-    size?: string
+    // dateStock?: string,
+    // size?: string
 }
 
 interface UpdateProductParams {

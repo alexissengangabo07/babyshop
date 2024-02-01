@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import DataTable, { createTheme } from 'react-data-table-component';
 import { FaCirclePlus } from "react-icons/fa6";
 import { Tooltip } from 'react-tooltip';
-import ModalAdd from '@/components/dashboard/modals/Category';
+
 interface TableColumnType {
     name: string;
     selector: (row: {}, index?: number) => any;

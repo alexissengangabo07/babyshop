@@ -1,5 +1,4 @@
-import CategoriesHome from '@/components/shop/CategoriesHome'
-import CategoriesWithImage from '@/components/shop/CategoriesWithImage'
+import CategoriesHome from '@/components/shop/CategoriesHome';
 import Features from '@/components/shop/Features'
 import Footer from '@/components/shop/Footer'
 import Header from '@/components/shop/Header';
@@ -19,8 +18,8 @@ const Home = () => {
       <Navbar />
       <div className='bg-gray-100'>
         {/* <Banner /> */}
-        <div className='px-28'>
-          <div className='flex gap-3 pt-3'>
+        <div className='px-1 lg:px-28'>
+          <div className='flex flex-col lg:flex-row gap-3 pt-3'>
             <CategoriesHome />
             <Slider />
             <div className='basis-1/3 flex flex-col gap-4'>

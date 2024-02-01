@@ -10,10 +10,10 @@ const productsSchema = new Schema({
         type: Number,
         required: true
     },
-    marque: {
-        type: String,
-        required: true
-    },
+    // marque: {
+    //     type: String,
+    //     required: true
+    // },
     devise: {
         type: String,
         default: 'USD'
@@ -30,13 +30,8 @@ const productsSchema = new Schema({
         }
     },
     category: {
-        type: Schema.Types.ObjectId,
-        ref: "categories",
+        type: String,
         required: true
-    },
-    qteStock: {
-        type: Number,
-        default: 0,
     },
     user: {
         type: Schema.Types.ObjectId,

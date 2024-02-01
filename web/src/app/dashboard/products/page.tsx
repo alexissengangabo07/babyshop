@@ -22,7 +22,7 @@ function page() {
     price: '',
     devise: '',
     description: '',
-    categoryId: '',
+    category: '',
     image: ''
   });
   const dispatch = useAppDispatch();
@@ -33,7 +33,7 @@ function page() {
     { name: 'Nom du produit', selector: (row: any) => row.name, sortable: true },
     { name: 'Prix', selector: (row: any) => row.price + ' ' + row?.devise, sortable: true },
     { name: 'Description', selector: (row: any) => row.description, sortable: true },
-    { name: 'Catégorie', selector: (row: any) => row.categoryId?.title, sortable: true },
+    { name: 'Catégorie', selector: (row: any) => row?.category, sortable: true },
     {
       name: 'Actions', selector: (row: any) => <div className='flex gap-2'>
         <button onClick={() => {
@@ -43,7 +43,7 @@ function page() {
             price: row.price,
             devise: row.devise,
             description: row.description,
-            categoryId: row.categoryId,
+            category: row.category,
             image: row.image
           })
         }}

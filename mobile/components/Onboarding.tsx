@@ -4,6 +4,7 @@ import { slides } from "../sliders";
 import OnboardItem from "./OnboardItem";
 import Paginator from "./Paginator";
 import NextButton from "./NextButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Onboarding = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -13,15 +14,22 @@ const Onboarding = () => {
         setCurrentIndex(viewableItems[0].index);
     }).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
-    const slidesRef: any = useRef(null)
+    const slidesRef: any = useRef(null);
 
-    const scrollTo = () => {
+    const scrollTo = async () => {
         if (currentIndex < slides.length - 1) {
-            slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
-            console.log("first")
+            slidesRef.current?.scrollToIndex({
+                animated: true,
+                index: currentIndex + 1
+            });
+            console.log(currentIndex + 1);
         }
         else {
-            console.log('last tem')
+            try {
+                await AsyncStorage.setItem('@viewedStarter', 'true');
+            } catch (error) {
+                console.log('Error setitem : ', error);
+            }
         }
     }
 
@@ -31,11 +39,12 @@ const Onboarding = () => {
                 <FlatList
                     data={slides}
                     renderItem={({ item }) => <OnboardItem item={item} />}
-                    // showsHorizontalScrollIndicator
+                    showsHorizontalScrollIndicator={false}
                     horizontal
                     pinchGestureEnabled
                     pagingEnabled
                     bounces={false}
+                    initialScrollIndex={0}
                     keyExtractor={(item) => item.id.toString()}
                     onScroll={Animated.event(
                         [{ nativeEvent: { contentOffset: { x: scrollX } } }],

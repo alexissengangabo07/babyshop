@@ -5,7 +5,7 @@ import cloudinary from "../utils/cloudinary";
 
 export const getProducts: RequestHandler = async (req, res, next) => {
     try {
-        const products = await productsModel.find().sort({ createdAt: 'desc' }).populate('categoryId');
+        const products = await productsModel.find().sort({ createdAt: 'desc' });
         res.status(200).json(products);
     } catch (error) {
         next(error);
@@ -36,37 +36,41 @@ interface CreateProductBody {
     price: number,
     devise: string,
     description?: string,
-    categoryId: string,
+    category: string,
     image?: string
 }
 
 export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, unknown> = async (req, res, next) => {
-    const { name, price, devise, description, categoryId, image } = req.body;
-    
+    const { name, price, devise, description, category, image } = req.body;
+
     try {
         if (!name) {
             return res.status(400).json({ message: 'Product name is required' });
         }
-        if (!categoryId) {
+        if (!category) {
             return res.status(400).json({ message: 'categoryId is required' });
         }
 
-        if (!image) {
-            return res.status(400).json({ error: 'Aucun fichier fournit' });
-        }
+        // if (!image) {
+        //     return res.status(400).json({ error: 'Aucun fichier fournit' });
+        // }
 
-        const result = await cloudinary.uploader.upload(image, {
-            folder: 'bambino_products' // Optionnel : Définir un dossier spécifique pour les images d'utilisateurs
-        });
+        // const result = await cloudinary.uploader.upload(image, {
+        //     folder: 'bambino_products' // Optionnel : Définir un dossier spécifique pour les images d'utilisateurs
+        // });
 
         const products = await productsModel.create({
             name,
             price,
             description,
-            categoryId,
+            category,
+            // image: {
+            //     public_id: result.public_id,
+            //     url: result.secure_url
+            // }
             image: {
-                public_id: result.public_id,
-                url: result.secure_url
+                public_id: '1i2u',
+                url: 'https://ok.com/2.png',
             }
         });
         res.status(201).json(products);

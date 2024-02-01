@@ -48,9 +48,17 @@ export const createProduct = createAsyncThunk('products/createProduct', async (n
     }
 });
 
-export const updateProduct = createAsyncThunk('products/updateProduct', async (productId: string, { rejectWithValue }) => {
+export const updateProduct = createAsyncThunk('products/updateProduct', async (product: {
+    _id: string,
+    name: string,
+    price: string,
+    devise: string,
+    description: string,
+    category: string,
+    image: string
+}, { rejectWithValue }) => {
     try {
-        const response = await api.updateProduct(productId);
+        const response = await api.updateProduct(product._id, product);
         return response.data;
     } catch (error) {
         return rejectWithValue(error);
@@ -82,7 +90,7 @@ const productSlice = createSlice({
         builder.addCase(fetchProducts.rejected, (state, action) => {
             state.isLoading = false;
         });
-        
+
         builder.addCase(createProduct.pending, state => {
             state.isLoading = true;
         });

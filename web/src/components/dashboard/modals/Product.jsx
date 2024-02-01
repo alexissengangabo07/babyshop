@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'antd';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { createProduct } from '@/features/products.slice';
+import { createProduct, updateProduct } from '@/features/products.slice';
 import toast, { Toaster } from 'react-hot-toast';
 import Image from 'next/image';
 
@@ -14,9 +14,9 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
     const [formInputs, setFormInput] = useState({
         name: '',
         price: '',
-        devise: '',
+        devise: 'USD',
         description: '',
-        image: '',
+        image: 'kl',
         category: ''
     });
     const dispatch = useAppDispatch();
@@ -44,11 +44,26 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
 
             if (areAllPropertiesNotEmpty) {
                 setOpen(false);
-                console.log(formInputs)
                 dispatch(createProduct(formInputs));
             }
             else {
                 toast.error('Tous les champs sont oligatoires.')
+            }
+        }, 2000);
+    };
+
+    const handleOkEdit = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+            const areAllPropertiesNotEmpty = Object.values(editData).every(value => value !== '');
+
+            if (areAllPropertiesNotEmpty) {
+                setEditOpen(false);
+                dispatch(updateProduct(editData));
+            }
+            else {
+                toast.error('Tous les champs sont oligatoires edit.')
             }
         }, 2000);
     };
@@ -58,18 +73,18 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
         setEditOpen(false);
     };
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            setFormInput((prevInputs) => ({
-                ...prevInputs,
-                image: reader.result
-            }));
-        };
+    // const handleFileChange = (event) => {
+    //     const file = event.target.files[0];
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = () => {
+    //         setFormInput((prevInputs) => ({
+    //             ...prevInputs,
+    //             image: reader.result
+    //         }));
+    //     };
 
-    };
+    // };
 
     const handleInputChange = (e) => {
         e.preventDefault();
@@ -119,7 +134,7 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
                         href="#"
                         type="primary"
                         loading={loading}
-                        onClick={handleOk}
+                        onClick={editOpen ? handleOkEdit : handleOk}
                     >
                         Enregistrer
                     </Button>,
@@ -142,9 +157,9 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="devise" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Devise</label>
                             <select id="devise" name="devise" value={editOpen ? editData.devise : formInputs.devise} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
-                                <option value=''>Sélectionner une devise</option>
+                                {/* <option value=''>Sélectionner une devise</option> */}
                                 <option value="USD" className='capitalize py-4'>USD</option>
-                                <option value="CDF" className='capitalize py-4'>CDF</option>
+                                {/* <option value="CDF" className='capitalize py-4'>CDF</option> */}
                             </select>
                         </div>
                         <div className="col-span-2 sm:col-span-1">
@@ -153,7 +168,7 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
                         </div>
                         <div className="col-span-2 sm:col-span-1">
                             <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image du produit</label>
-                            <input type="file" accept='.png, .jpg, .webp' onChange={e => { handleFileChange(e); setSelectedFile(e.target.files[0]); }} name="image" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
+                            <input type="file" accept='.png, .jpg, .webp' /*onChange={e => { handleFileChange(e); setSelectedFile(e.target.files[0]); }} */ name="image" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Entrer le nom du produit" required={true} />
                             <div>
                                 {preview && <Image src={preview} width={100} height={100} alt="er" />}
                             </div>
