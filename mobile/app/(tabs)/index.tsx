@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet, SafeAreaView, Platform, StatusBar, ActivityIndicator } from 'react-native';
-import Onboarding from '../components/Onboarding';
-import HomeScreen from '../components/HomeScreen';
+import Onboarding from '../../components/Onboarding';
+import HomeScreen from '../../components/HomeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Loader = () => (
@@ -12,14 +12,14 @@ const Loader = () => (
 
 const index = () => {
   const [loading, setLoading] = useState(true);
-  const [starterVisibility, setStarterVisibility] = useState(false);
+  const [starterVisibility, setStarterVisibility] = useState(true);
 
   const checkStarter = async () => {
     try {
       const value = await AsyncStorage.getItem('@viewedStarter');
 
       if (value !== null) {
-        setStarterVisibility(true);
+        setStarterVisibility(false);
       }
     } catch (error) {
       console.error('Error starter: ', error);
@@ -36,7 +36,7 @@ const index = () => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <StatusBar barStyle={'dark-content'} />
-        {loading ? <Loader /> : starterVisibility ? <HomeScreen /> : <Onboarding />}
+        {loading ? <Loader /> : starterVisibility ? <Onboarding /> : <HomeScreen />}
       </View>
     </SafeAreaView>
   )

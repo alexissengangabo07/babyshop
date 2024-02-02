@@ -26,7 +26,7 @@ const SingleProduct = ({ prodId }: { prodId: string }) => {
             {/* <!-- product-detail --> */}
             {singleProd._id ? (
                 <>
-                    <div className="container grid grid-cols-2 gap-6">
+                    <div className="flex flex-col lg:flex-row gap-6">
                         <div>
                             <img src={singleProd.productId?.image.url} alt="product" className="w-full" />
                             <div className="grid grid-cols-5 gap-4 mt-4">

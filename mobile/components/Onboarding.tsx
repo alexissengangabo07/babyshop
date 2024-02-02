@@ -5,6 +5,7 @@ import OnboardItem from "./OnboardItem";
 import Paginator from "./Paginator";
 import NextButton from "./NextButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 
 const Onboarding = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,6 +28,7 @@ const Onboarding = () => {
         else {
             try {
                 await AsyncStorage.setItem('@viewedStarter', 'true');
+                router.push('/home/');
             } catch (error) {
                 console.log('Error setitem : ', error);
             }

@@ -9,9 +9,9 @@ const page = () => {
     <>
       <Header />
       <Navbar />
-      <div className='flex px-28 py-6 justify-between gap-4'>
-      <Panier />
-      <CardSummary />
+      <div className='flex flex-col md:flex-row px-1 md:px-28 py-6 justify-between gap-4'>
+        <Panier />
+        <CardSummary />
       </div>
       <Footer />
     </>
