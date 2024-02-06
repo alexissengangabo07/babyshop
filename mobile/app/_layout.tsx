@@ -43,11 +43,12 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
+        <Stack.Screen name='index' options={{ headerShown: false }} />
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-        <Stack.Screen name="login/index" options={{ headerShown: false }} />
-        <Stack.Screen name='register/index' options={{ headerShown: false }} />
-        <Stack.Screen name='panier/index' options={{ headerShown: false }} />
-        <Stack.Screen name='product/[id]' options={{ headerShown: false }} />
+        <Stack.Screen name="login/index" options={{ title: 'Connectez vous' }} />
+        <Stack.Screen name='register/index' options={{ title: 'Créer un compte' }} />
+        <Stack.Screen name='panier/index' options={{ title: 'Panier' }} />
+        <Stack.Screen name='product/[id]' options={{ title: 'Produit' }} />
       </Stack>
     </ThemeProvider>
   );
