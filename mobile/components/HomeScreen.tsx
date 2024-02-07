@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, Feather, FontAwesome } from '@expo/vector-icons';
+import HomeProducts from './HomeProducts';
 
 const HomeScreen = () => {
     const clearStorageStarter = async () => {
@@ -21,22 +22,25 @@ const HomeScreen = () => {
                         <Text style={{ color: 'orange', fontSize: 20 }}>BAMBINO </Text>
                         <Text style={{ color: 'white', fontSize: 20 }}>SHOP</Text>
                     </View>
-                    <View style={{ backgroundColor: 'white', padding: 5, borderRadius: 30 }}>
-                        <FontAwesome name='bell' size={16} />
+                    <View style={{ backgroundColor: 'lightgray', padding: 5, borderRadius: 30 }}>
+                        <Feather name="bell" size={24} color="black" />
                     </View>
                 </View>
                 <View style={styles.two}>
-                    <View style={{ position: 'relative' }}>
-                        <FontAwesome color='green' name="search" style={{ position: 'absolute' }} />
-                        <TextInput style={styles.searchInput} placeholder="Rechercher ..." />
+                    <View style={styles.searchSection}>
+                        <FontAwesome style={styles.searchIcon} name="search" size={20} color="#000" />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Recherchexxr..."
+                            underlineColorAndroid="transparent"
+                        />
                     </View>
-                    <View>
-                        <TouchableOpacity style={{ backgroundColor: 'white' }}>
-                            <FontAwesome name="phone" />
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity style={{ backgroundColor: 'lightgray', borderRadius: 4, paddingVertical: 8, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                        <AntDesign name="shoppingcart" size={24} color="black" />
+                    </TouchableOpacity>
                 </View>
             </View>
+            <HomeProducts />
             <TouchableOpacity onPress={clearStorageStarter}>
                 <Text>Clear async storage</Text>
             </TouchableOpacity>
@@ -60,12 +64,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 10
     },
-    searchInput: {
-        backgroundColor: 'white',
-        borderRadius: 4,
-        paddingHorizontal: 6,
-        paddingVertical: 4,
-    },
     container: {
         flex: 1
     },
@@ -73,7 +71,25 @@ const styles = StyleSheet.create({
         width: 35,
         height: 35,
         borderRadius: 150
-    }
+    },
+    searchSection: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+    },
+    searchIcon: {
+        padding: 10,
+    },
+    input: {
+        flex: 1,
+        paddingVertical: 10,
+        paddingRight: 10,
+        paddingLeft: 0,
+        backgroundColor: '#fff',
+        color: '#424242',
+    },
 });
 
 export default HomeScreen;

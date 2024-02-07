@@ -4,6 +4,9 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
+import PanierContextProvider from '../contexts/PanierContext';
+import SessionContextProvider from '../contexts/SessionContext';
+import { Providers } from './provider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -42,14 +45,20 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name='index' options={{ headerShown: false }} />
-        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-        <Stack.Screen name="login/index" options={{ title: 'Connectez vous' }} />
-        <Stack.Screen name='register/index' options={{ title: 'Créer un compte' }} />
-        <Stack.Screen name='panier/index' options={{ title: 'Panier' }} />
-        <Stack.Screen name='product/[id]' options={{ title: 'Produit' }} />
-      </Stack>
+      <Providers>
+        <SessionContextProvider>
+          <PanierContextProvider>
+            <Stack>
+              <Stack.Screen name='index' options={{ headerShown: false }} />
+              <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+              <Stack.Screen name="login/index" options={{ title: 'Connectez vous' }} />
+              <Stack.Screen name='register/index' options={{ title: 'Créer un compte' }} />
+              <Stack.Screen name='panier/index' options={{ title: 'Panier' }} />
+              <Stack.Screen name='product/[id]' options={{ title: 'Produit' }} />
+            </Stack>
+          </PanierContextProvider>
+        </SessionContextProvider>
+      </Providers>
     </ThemeProvider>
   );
 }
