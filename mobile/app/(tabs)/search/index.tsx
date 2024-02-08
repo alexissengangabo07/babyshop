@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView } from 'react-native'
 import React from 'react'
+import SearchHeader from '../../../components/SearchHeader'
+import HomeProducts from '../../../components/HomeProducts'
 
-const Contact = () => {
+const Search = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View>
-        <Text>Cotact</Text>
-      </View>
+      <SearchHeader />
     </SafeAreaView>
   )
 }
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Contact;
+export default Search;

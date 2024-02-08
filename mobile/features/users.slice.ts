@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from './api/users';
-import { toast } from 'react-hot-toast';
-import { setCookie } from "@/utils/cookie";
+// import { toast } from 'react-hot-toast';
+// import { setCookie } from "@/utils/cookie";
 
 interface User {
     _id?: string;
@@ -106,11 +106,11 @@ const userSlice = createSlice({
         builder.addCase(createUser.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
-            toast.success('Votre  compte a ete creer avec succes')
+            // toast.success('Votre  compte a ete creer avec succes')
         });
         builder.addCase(createUser.rejected, (state, action: any) => {
             state.isLoading = false;
-            toast.error(action.payload?.response.data.message);
+            // toast.error(action.payload?.response.data.message);
         });
 
         builder.addCase(loginUser.pending, state => {
@@ -122,14 +122,14 @@ const userSlice = createSlice({
             console.log("fullfill")
             state.data = action.payload;
 
-            setCookie('role', action.payload?.role, 7);
-            setCookie('token', action.payload?.token, 7);
+            // setCookie('role', action.payload?.role, 7);
+            // setCookie('token', action.payload?.token, 7);
         });
         builder.addCase(loginUser.rejected, (state, action: any) => {
             state.isLoading = false
             state.isError = true;
             state.message = action.payload?.response?.data?.message;
-            toast.error(state.message)
+            // toast.error(state.message)
         });
 
         builder.addCase(deleteUser.pending, state => {

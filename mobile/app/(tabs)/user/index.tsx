@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView } from 'react-native'
 import React from 'react'
 
-const Apropos = () => {
+const User = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View>
-        <Text>Apropos</Text>
+        <Text>User screen</Text>
       </View>
     </SafeAreaView>
   )
 }
 
-export default Apropos
+export default User;
 
 const styles = StyleSheet.create({
   safeArea: {

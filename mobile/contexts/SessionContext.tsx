@@ -1,6 +1,6 @@
-"use client";
+/*
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import { getTokenCookie } from '@/utils/cookie';
+// import { getTokenCookie } from '@/utils/cookie';
 import { jwtDecode } from 'jwt-decode';
 
 interface ConnectedUser {
@@ -76,3 +76,4 @@ const SessionContextProvider: React.FC<{ children: ReactNode }> = ({ children })
 }
 
 export default SessionContextProvider;
+*/

@@ -1,4 +1,4 @@
-"use client";
+/*
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { saveToLocalStorage } from '@/utils/localStorage';
 import { toast } from 'react-hot-toast';
@@ -139,3 +139,4 @@ const PanierContextProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 }
 
 export default PanierContextProvider;
+*/

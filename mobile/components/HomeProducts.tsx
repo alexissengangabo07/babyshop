@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { useContext, useEffect } from "react";
-import { RootState } from '../redux/store';
+import React, { useEffect } from 'react';
+import { View, Text, Linking, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { fetchProductsStock } from "../features/stock.slice";
+import { RootState } from '../redux/store';
+import { fetchProductsStock } from '../features/stock.slice';
+import { FontAwesome } from '@expo/vector-icons';
+// import { toast } from 'react-toastify'; // Make sure to import toast if needed
 
 const HomeProducts = () => {
     const dispatch = useAppDispatch();
@@ -11,84 +12,210 @@ const HomeProducts = () => {
 
     useEffect(() => {
         dispatch(fetchProductsStock());
+        console.log(products.data)
     }, []);
 
-    return (
-        <View>
-            <Text>HomeProducts</Text>
-            <View>
-                {
-                    products.data.map((product: any, i) => (
-                        <div className="bg-white shadow rounded overflow-hidden group" key={i}>
-                            <div className="relative">
-                                <img src={product.productId.image?.url} alt="product 1" className="w-full h-56" />
-                                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-                  justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                                    <Link href={"/produit/" + product._id}
-                                        className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                                        data-tooltip-id="my-tooltip-top" data-tooltip-content="Voir le produit"
-                                    >
-                                        <FaEye />
-                                    </Link>
-                                    <button
-                                        className="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                                        title="add to wishlist"
-                                        data-tooltip-id="my-tooltip-top" data-tooltip-content="Ajouter au panier"
-                                        onClick={() => {
-                                            toast.success('+1');
-                                            addToCard
-                                                ({
-                                                    produit: product.productId.name,
-                                                    id: product._id,
-                                                    image: product.productId.image.url,
-                                                    qteDispo: product.quantity,
-                                                    devise: product.productId.devise,
-                                                    description: product.productId.description,
-                                                    prix: product.productId.price
-                                                });
-                                        }}
-                                    >
-                                        <FaCartPlus />
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="pt-4 pb-3 px-4">
-                                <Link href={"/produit/" + product._id}>
-                                    <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                                        {product.productId.name}
-                                    </h4>
-                                </Link>
-                                <div className="flex items-baseline mb-1 space-x-2">
-                                    <p className="text-xl text-primary font-semibold">{product.productId.devise === 'USD' ? '$' : 'FC '}{product.productId.price}</p>
-                                    <p className="text-sm text-gray-400 line-through">{product.productId.devise === 'USD' ? '$' : 'FC '}{product.productId.price + 10}</p>
-                                </div>
 
-                            </div>
-                            <button type="button"
-                                onClick={() => {
-                                    addToCard
-                                        ({
-                                            produit: product.productId.name,
-                                            id: product._id,
-                                            image: product.productId.image.url,
-                                            qteDispo: product.quantity,
-                                            devise: product.productId.devise,
-                                            description: product.productId.description,
-                                            prix: product.productId.price
-                                        });
-                                    // toast.success('+1');
+    return (
+        <View style={{ marginVertical: 10 }}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginVertical: 10, justifyContent: 'space-between' }}>
+                {/* {products.data.map((product: any, i) => (
+                    <View style={styles.priceContainer} key={i}>
+                        <View style={styles.imageContainer}>
+                            <Image
+                                source={{ uri: product.productId.image?.url }}
+                                style={styles.image}
+                                resizeMode="cover"
+                            />
+                            <View style={styles.overlay}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        Linking.openURL('/produit/' + product._id);
+                                    }}
+                                    style={styles.iconButton}
+                                >
+                                    <FontAwesome name='eye' />
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        // addToCard({
+                                        //     produit: product.productId.name,
+                                        //     id: product._id,
+                                        //     image: product.productId.image.url,
+                                        //     qteDispo: product.quantity,
+                                        //     devise: product.productId.devise,
+                                        //     description: product.productId.description,
+                                        //     prix: product.productId.price,
+                                        // });
+                                    }}
+                                    style={styles.iconButton}
+                                >
+                                    <FontAwesome name='cart-plus' />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={styles.textContainer}>
+                            <TouchableOpacity onPress={() => Linking.openURL('/produit/' + product._id)}>
+                                <Text style={styles.productName}>{product.productId.name}</Text>
+                            </TouchableOpacity>
+                            <View style={styles.priceContainer}>
+                                <Text style={styles.price}>
+                                    {product.productId.devise === 'USD' ? '$' : 'FC '} {product.productId.price}
+                                </Text>
+                                <Text style={styles.oldPrice}>
+                                    {product.productId.devise === 'USD' ? '$' : 'FC '} {product.productId.price + 10}
+                                </Text>
+                            </View>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    // addToCard({
+                                    //     produit: product.productId.name,
+                                    //     id: product._id,
+                                    //     image: product.productId.image.url,
+                                    //     qteDispo: product.quantity,
+                                    //     devise: product.productId.devise,
+                                    //     description: product.productId.description,
+                                    //     prix: product.productId.price,
+                                    // });
                                 }}
-                                className="block w-full py-1 text-center text-sm md:text-base text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition" >
-                                Ajouter au panier
-                            </button>
-                        </div>
-                    ))
-                }
+                                style={styles.addButton}
+                            >
+                                <Text style={styles.addButtonText}>Ajouter au panier</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                ))} */}
+                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((product: any, i) => (
+                    <View style={styles.productContainer} key={i}>
+                        <View style={styles.imageContainer}>
+                            <Image
+                                source={require('../assets/images/prod2.jpg')}
+                                style={styles.image}
+                                resizeMode="cover"
+                            />
+                            <View style={styles.overlay}>
+                                {/* <TouchableOpacity
+                                    onPress={() => {
+                                        Linking.openURL('/produit/' + 1);
+                                    }}
+                                    style={styles.iconButton}
+                                >
+                                    <FontAwesome name='eye' color={'green'} size={20} />
+                                </TouchableOpacity> */}
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        // addToCard({
+                                        //     produit: product.productId.name,
+                                        //     id: product._id,
+                                        //     image: product.productId.image.url,
+                                        //     qteDispo: product.quantity,
+                                        //     devise: product.productId.devise,
+                                        //     description: product.productId.description,
+                                        //     prix: product.productId.price,
+                                        // });
+                                    }}
+                                    style={styles.iconButton}
+                                >
+                                    <FontAwesome name='cart-plus' size={22} color={'orange'} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={styles.textContainer}>
+                            <TouchableOpacity onPress={() => Linking.openURL('/produit/' + 1)}>
+                                <Text style={styles.productName}>Telephone aa</Text>
+                            </TouchableOpacity>
+                            <View style={styles.priceContainer}>
+                                <Text style={styles.price}>
+                                    USD 10
+                                </Text>
+                                <Text style={styles.oldPrice}>
+                                    USD 20
+                                </Text>
+                            </View>
+                        </View>
+                    </View>
+                ))}
             </View>
         </View>
-    )
-}
+    );
+};
 
-export default HomeProducts
+const styles = StyleSheet.create({
+    productContainer: {
+        backgroundColor: 'white',
+        borderRadius: 8,
+        overflow: 'hidden',
+        marginBottom: 10,
+        flexBasis: '49%',
+    },
+    imageContainer: {
+        position: 'relative',
+    },
+    image: {
+        width: '100%',
+        height: 200,
+        objectFit: 'cover'
+    },
+    overlay: {
+        position: 'absolute',
+        top: 2,
+        // left: 0,
+        right: 2,
+        // bottom: 0,
+        backgroundColor: 'transparent',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+        opacity: 1,
+    },
+    iconButton: {
+        width: 40,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#E5F6FB', 
+        borderRadius: 20,
+        marginHorizontal: 5,
+    },
+    textContainer: {
+        padding: 10,
+    },
+    productName: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        color: '#1c4e64'
+    },
+    priceContainer: {
+        flexDirection: 'row',
+        alignItems: 'baseline',
+        marginBottom: 5,
+    },
+    price: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#70758E', 
+        backgroundColor: 'lightblue',
+        borderRadius: 8,
+        paddingVertical: 2,
+        paddingHorizontal: 8
+    },
+    oldPrice: {
+        fontSize: 12,
+        color: 'gray', // Change color as needed
+        textDecorationLine: 'line-through',
+        marginLeft: 5,
+    },
+    // addButton: {
+    //     backgroundColor: 'blue', // Change color as needed
+    //     paddingVertical: 10,
+    //     borderRadius: 5,
+    // },
+    // addButtonText: {
+    //     color: 'white',
+    //     textAlign: 'center',
+    //     fontWeight: 'bold',
+    // },
+});
 
-const styles = StyleSheet.create({})
+export default HomeProducts;
