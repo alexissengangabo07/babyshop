@@ -20,7 +20,7 @@ const index = () => {
 
             if (value !== null) {
                 setStarterVisibility(false);
-                router.push('/(tabs)')
+                router.push('/(drawer)/(tabs)')
             }
         } catch (error) {
             console.error('Error starter: ', error);

@@ -28,7 +28,7 @@ const Onboarding = () => {
         else {
             try {
                 await AsyncStorage.setItem('@viewedStarter', 'true');
-                router.push('/(tabs)');
+                router.push('/(drawer)/(tabs)');
             } catch (error) {
                 console.log('Error setitem : ', error);
             }

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Svg, { G, Circle, } from 'react-native-svg';
+import Svg, { G, Circle } from 'react-native-svg';
 import { AntDesign } from '@expo/vector-icons';
 
 const NextButton = ({ percentage, scrollTo }: { percentage: number, scrollTo: () => void }) => {

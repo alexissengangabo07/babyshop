@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 2,
         // left: 0,
-        right: 2,
+        right: 0,
         // bottom: 0,
         backgroundColor: 'transparent',
         justifyContent: 'space-between',
