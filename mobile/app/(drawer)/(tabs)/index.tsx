@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet, SafeAreaView, Platform, StatusBar, ActivityIndicator } from 'react-native';
-import HomeScreen from '../../components/HomeScreen';
+import HomeScreen from '../../../components/HomeScreen';
 
 const Loader = () => (
-  <View style={{position: 'absolute', top: '55%', left: '44%'}}>
+  <View style={{ position: 'absolute', top: '55%', left: '44%' }}>
     <ActivityIndicator size={'large'} />
   </View>
 )
@@ -13,14 +13,12 @@ const index = () => {
   const [starterVisibility, setStarterVisibility] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 100);
+    setLoading(false);
   }, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle={'dark-content'} />
+      {/* <StatusBar barStyle={'dark-content'} /> */}
       {loading ? <Loader /> : <HomeScreen />}
     </SafeAreaView>
   )

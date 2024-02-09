@@ -1,12 +1,15 @@
-import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
-import SearchHeader from '../../../components/SearchHeader'
-import HomeProducts from '../../../components/HomeProducts'
+import SearchHeader from '../../../../components/SearchHeader'
+import HomeProducts from '../../../../components/HomeProducts'
 
 const Search = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <SearchHeader />
+      <ScrollView>
+        {/* <HomeProducts /> */}
+      </ScrollView>
     </SafeAreaView>
   )
 }

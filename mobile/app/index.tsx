@@ -36,7 +36,7 @@ const index = () => {
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
-                <StatusBar barStyle={'dark-content'} backgroundColor={'#fd3d57'}/>
+                {/* <StatusBar barStyle={'dark-content'} backgroundColor={'#fd3d57'}/> */}
                 {loading ? <Loader /> : starterVisibility && <Onboarding />}
             </View>
         </SafeAreaView>

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { RootState } from '../redux/store';
 import { fetchProductsStock } from '../features/stock.slice';
 import { FontAwesome } from '@expo/vector-icons';
+import { Link, router } from 'expo-router';
 // import { toast } from 'react-toastify'; // Make sure to import toast if needed
 
 const HomeProducts = () => {
@@ -87,9 +88,9 @@ const HomeProducts = () => {
                 ))} */}
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((product: any, i) => (
                     <View style={styles.productContainer} key={i}>
-                        <View style={styles.imageContainer}>
+                        <TouchableOpacity style={styles.imageContainer} onPress={() => router.push('/product/1')}>
                             <Image
-                                source={require('../assets/images/prod2.jpg')}
+                                source={require('../assets/images/1.png')}
                                 style={styles.image}
                                 resizeMode="cover"
                             />
@@ -119,17 +120,17 @@ const HomeProducts = () => {
                                     <FontAwesome name='cart-plus' size={22} color={'orange'} />
                                 </TouchableOpacity>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                         <View style={styles.textContainer}>
                             <TouchableOpacity onPress={() => Linking.openURL('/produit/' + 1)}>
-                                <Text style={styles.productName}>Telephone aa</Text>
+                                <Link href={'/product/1'} style={styles.productName}>Telephone aa</Link>
                             </TouchableOpacity>
                             <View style={styles.priceContainer}>
                                 <Text style={styles.price}>
-                                    USD 10
+                                    $ 10
                                 </Text>
                                 <Text style={styles.oldPrice}>
-                                    USD 20
+                                    $ 20
                                 </Text>
                             </View>
                         </View>
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     price: {
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: 'bold',
         color: '#70758E', 
         backgroundColor: 'lightblue',
@@ -201,7 +202,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8
     },
     oldPrice: {
-        fontSize: 12,
+        fontSize: 13,
         color: 'gray', // Change color as needed
         textDecorationLine: 'line-through',
         marginLeft: 5,

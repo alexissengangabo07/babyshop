@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Platform, StatusBar, SafeAreaView, ActivityIndicator } from 'react-native'
 import React from 'react'
-import HomeProducts from '../../../components/HomeProducts'
-import HomeCategories from '../../../components/HomeCategories'
-import Offer from '../../../components/Offer'
+import HomeProducts from '../../../../components/HomeProducts'
+import HomeCategories from '../../../../components/HomeCategories'
+import Offer from '../../../../components/Offer'
 import { ScrollView } from 'react-native-gesture-handler'
-import HomeHeader from '../../../components/HomeHeader'
+import HomeHeader from '../../../../components/HomeHeader'
 
 const Shop = () => {
   return (

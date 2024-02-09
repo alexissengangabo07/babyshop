@@ -50,11 +50,11 @@ function RootLayoutNav() {
           <PanierContextProvider> */}
             <Stack>
               <Stack.Screen name='index' options={{ headerShown: false }} />
-              <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+              <Stack.Screen name='(drawer)' options={{ headerShown: false }} />
               <Stack.Screen name="login/index" options={{ title: 'Connectez vous' }} />
               <Stack.Screen name='register/index' options={{ title: 'Créer un compte' }} />
-              <Stack.Screen name='panier/index' options={{ title: 'Panier' }} />
-              <Stack.Screen name='product/[id]' options={{ title: 'Produit' }} />
+              <Stack.Screen name='panier/index' options={{ title: 'Mon Panier' }} />
+              <Stack.Screen name='product/[id]' options={{ title: 'Détails Produit' }} />
             </Stack>
           {/* </PanierContextProvider>
         </SessionContextProvider> */}
