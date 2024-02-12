@@ -7,7 +7,7 @@ const HomeHeader = () => {
     return (
         <View style={styles.homeHeader}>
             <View style={styles.one}>
-                <TouchableOpacity onPress={() => { }} style={{ borderWidth: 0, borderRadius: 0, padding: 0, borderColor: '#1c4e64' }}>
+                <TouchableOpacity onPress={() => {}} style={{ borderWidth: 0, borderRadius: 0, padding: 0, borderColor: '#1c4e64' }}>
                     <Feather name='menu' size={29} color={'#1c4e64'} />
                 </TouchableOpacity>
                 {/* <Image style={styles.imageOnTop} source={require('../assets/images/1.png')} /> */}

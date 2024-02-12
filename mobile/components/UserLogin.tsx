@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     loginPtn: {
-        backgroundColor: '#AC61F2',
+        // backgroundColor: '#AC61F2',
+        backgroundColor: 'darkorange',
         padding: 14,
         alignItems: 'center',
         justifyContent: 'center',
