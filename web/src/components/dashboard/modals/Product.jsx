@@ -16,7 +16,7 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
         price: '',
         devise: 'USD',
         description: '',
-        image: 'kl',
+        image: '',
         category: ''
     });
     const dispatch = useAppDispatch();
@@ -45,6 +45,14 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
             if (areAllPropertiesNotEmpty) {
                 setOpen(false);
                 dispatch(createProduct(formInputs));
+                setFormInput({
+                    name: '',
+                    price: '',
+                    devise: 'USD',
+                    description: '',
+                    image: '',
+                    category: ''
+                })
             }
             else {
                 toast.error('Tous les champs sont oligatoires.')
@@ -58,6 +66,14 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
             setLoading(false);
             const areAllPropertiesNotEmpty = Object.values(editData).every(value => value !== '');
 
+            if (formInputs.image !== '') {
+                console.log(formInputs.image)
+                setEditData((prevInputs) => ({
+                    ...prevInputs,
+                    image: formInputs.image
+                }))
+                console.log(editData)
+            }
             if (areAllPropertiesNotEmpty) {
                 setEditOpen(false);
                 dispatch(updateProduct(editData));

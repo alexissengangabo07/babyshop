@@ -1,23 +1,36 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FontAwesome } from '@expo/vector-icons';
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { RootState } from '../../redux/store';
+import { fetchProduct } from "../../features/stock.slice";
+import { useLocalSearchParams } from 'expo-router';
 
 const Product = () => {
+    const dispatch = useAppDispatch();
+    const { singleProd } = useAppSelector((store: RootState) => store.stockReducer);
+    const { id } = useLocalSearchParams();
+
+    useEffect(() => {
+        dispatch(fetchProduct(id.toString()));
+        console.log(singleProd.productId?.image.url)
+    }, []);
+
     return (
         <View style={{ position: 'relative', height: '100%' }}>
             <View style={{ position: 'relative' }}>
-                <Image source={require('../../assets/images/1.png')} style={styles.img} />
+                <Image source={{ uri: singleProd.productId?.image.url }} style={styles.img} />
                 <TouchableOpacity style={{ backgroundColor: '#c5c5c57d', position: 'absolute', top: 5, right: 5, borderRadius: 150, padding: 10 }}>
                     <FontAwesome name="share-alt" color={'#858585'} size={20} />
                 </TouchableOpacity>
             </View>
             <View style={{ marginTop: 8, paddingHorizontal: 9 }}>
-                <Text style={styles.prodTitle} >Telephone aa</Text>
-                <Text style={styles.price}>$99.86</Text>
+                <Text style={styles.prodTitle} >{singleProd.productId?.name}</Text>
+                <Text style={styles.price}>{singleProd.productId?.devise === 'USD' ? '$' : 'FC '}{singleProd.productId?.price}</Text>
                 <View style={{ marginTop: 25 }}>
                     <Text style={{ color: 'lightgray', borderRadius: 5, backgroundColor: '#2b5a6e', width: 90, padding: 6 }}>Description</Text>
                     <Text style={{ color: 'gray', marginTop: 5 }}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum tempore suscipit maxime aperiam possimus sequi ex sapiente. Vitae sint aut unde, officiis eveniet obcaecati mollitia atque, doloribus beatae dolor a?
+                        {singleProd.productId?.description}
                     </Text>
                 </View>
             </View>
@@ -44,6 +57,7 @@ export default Product;
 const styles = StyleSheet.create({
     img: {
         width: '100%',
+        height: 260
     },
     prodTitle: {
         fontWeight: '500',

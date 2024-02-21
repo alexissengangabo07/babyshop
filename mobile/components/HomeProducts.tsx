@@ -13,13 +13,7 @@ const HomeProducts = () => {
     const productsInStock = useAppSelector((store: RootState) => store.stockReducer);
 
     useEffect(() => {
-        // dispatch(fetchProductsStock());
-        (() => {
-            fetch('http://localhost:9001/api/stock')
-                .then(data => data.json())
-                .then(response => console.log(response))
-                .catch(err => console.log(err))
-        })();
+        dispatch(fetchProductsStock());
     }, []);
 
     return (
@@ -91,11 +85,11 @@ const HomeProducts = () => {
                         </View>
                     </View>
                 ))} */}
-                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((product: any, i) => (
+                {productsInStock.data.map((product: any, i) => (
                     <View style={styles.productContainer} key={i}>
-                        <TouchableOpacity style={styles.imageContainer} onPress={() => router.push('/product/1')}>
+                        <TouchableOpacity style={styles.imageContainer} onPress={() => router.push(`/product/${product._id}`)}>
                             <Image
-                                source={require('../assets/images/1.png')}
+                                source={{ uri: product.productId.image?.url }}
                                 style={styles.image}
                                 resizeMode="cover"
                             />
@@ -128,14 +122,16 @@ const HomeProducts = () => {
                         </TouchableOpacity>
                         <View style={styles.textContainer}>
                             <TouchableOpacity onPress={() => Linking.openURL('/produit/' + 1)}>
-                                <Link href={'/product/1'} style={styles.productName}>Telephone aa</Link>
+                                <Link href={`/product/${product._id}`} style={styles.productName}>
+                                    {product.productId.name}
+                                </Link>
                             </TouchableOpacity>
                             <View style={styles.priceContainer}>
                                 <Text style={styles.price}>
-                                    $ 10
+                                    {product.productId.devise === 'USD' ? '$' : 'FC '} {product.productId.price}
                                 </Text>
                                 <Text style={styles.oldPrice}>
-                                    $ 20
+                                    {product.productId.devise === 'USD' ? '$' : 'FC '} {product.productId.price + 10}
                                 </Text>
                             </View>
                         </View>

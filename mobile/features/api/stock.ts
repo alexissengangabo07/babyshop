@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:9001/api/stock/';
+const url = 'http://10.0.2.2:9001/api/stock/';
 
 export const fetchProductsStock = () => axios.get(url);
 

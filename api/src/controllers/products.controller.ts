@@ -79,7 +79,8 @@ interface UpdateProductBody {
     name?: string,
     price?: number,
     description?: string,
-    categoryId?: string
+    categoryId?: string,
+    image?: any
 }
 
 interface UpdateProductParams {
@@ -87,7 +88,7 @@ interface UpdateProductParams {
 }
 
 export const updateProduct: RequestHandler<UpdateProductParams, unknown, UpdateProductBody, unknown> = async (req, res, next) => {
-    const { name, price, description, categoryId } = req.body;
+    const { name, price, description, categoryId, image } = req.body;
     const productId = req.params.id;
 
     try {
@@ -104,6 +105,8 @@ export const updateProduct: RequestHandler<UpdateProductParams, unknown, UpdateP
         if (!name) {
             return res.status(400).json({ message: 'Product name is required' });
         }
+
+        console.log(image.url)
 
         let updatedProduct = await productsModel.findByIdAndUpdate(productId, req.body, { new: true });
         res.status(200).json(updatedProduct);
