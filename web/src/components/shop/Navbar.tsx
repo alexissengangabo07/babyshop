@@ -25,16 +25,16 @@ const Navbar = () => {
                     <span className="text-white text-xl lg:text-sm">
                         <FaBars />
                     </span>
-                    <span className="capitalize ml-2 text-white hidden lg:block">Toutes les Categories</span>
+                    <span className="capitalize ml-2 text-white hidden lg:block">Toutes les Catégories</span>
                     {/* dropdown */}
                     <div
                         className="absolute hidden lg:block w-full left-0 top-full bg-white shadow-md py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
                         {
-                            stock.data.map((category, i) => (
-                                <a href="#" className="flex items-center px-6 py-3 hover:bg-gray-100 transition" key={i}>
+                            stock.data.map((category: any, i: number) => (
+                                <Link href="#" className="flex items-center px-6 py-3 hover:bg-gray-100 transition" key={i}>
                                     <img src="../assets/images/icons/outdoor-cafe.svg" alt="outdoor" className="w-5 h-5 object-contain" />
-                                    <span className="ml-6 text-gray-600 text-sm">{category.productId?.category}</span>
-                                </a>
+                                    <span className="ml-6 text-gray-600 text-sm capitalize">{category.productId?.category}</span>
+                                </Link>
                             ))
                         }
                     </div>

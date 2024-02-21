@@ -1,6 +1,6 @@
 import { ImageBackground, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import FontAwesome5, { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
 
 let year = new Date().getFullYear();
@@ -32,7 +32,7 @@ const CustomDrawer = (props: any) => {
                     </View>
                 </TouchableOpacity>
                 <View style={{ marginTop: 10 }}>
-                    <Text style={styles.textGray}>&copy; SnapTechDrc {year}</Text>
+                    <Text style={styles.textGray}>&copy; Bambino {year}</Text>
                 </View>
             </View>
         </View>

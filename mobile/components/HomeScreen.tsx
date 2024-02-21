@@ -7,6 +7,7 @@ import Offer from './Offer';
 import { ScrollView } from 'react-native-gesture-handler';
 import HomeCategories from './HomeCategories';
 import HomeHeader from './HomeHeader';
+import Slider from './Slider';
 
 const HomeScreen = () => {
     const clearStorageStarter = async () => {
@@ -21,7 +22,8 @@ const HomeScreen = () => {
         <View style={styles.container}>
             <HomeHeader />
             <ScrollView style={{ flex: 1, marginHorizontal: 6 }}>
-                <Offer />
+                <Slider />
+                {/* <Offer /> */}
                 <HomeCategories />
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#55575E' }}>Arrivages</Text>

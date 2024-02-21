@@ -3,8 +3,8 @@ import React from 'react'
 
 const index = () => {
   return (
-    <View>
-      <Text>ORDER HISTORY</Text>
+    <View style={{paddingHorizontal: 8, marginTop: 4}}>
+      <Text style={{marginBottom: 4}}>Historique des commandes</Text>
     </View>
   )
 }

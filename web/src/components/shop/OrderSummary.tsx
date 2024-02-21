@@ -3,15 +3,29 @@ import { useContext, useEffect } from 'react';
 import { PanierContext } from '@/contexts/PanierContext';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { useAppDispatch } from '@/redux/hooks';
+import { createOrder } from '@/features/orders.slice';
+import { SessionContext } from '@/contexts/SessionContext';
 
 const OrderSummary = () => {
     const { productsOnCard, montant } = useContext(PanierContext);
+    const dispatch = useAppDispatch();
+    const { connectedUser } = useContext(SessionContext);
 
     useEffect(() => {
         if (productsOnCard.length <= 0) {
             redirect('/');
         }
     }, [])
+
+    const passerCommande = () => {
+        dispatch(createOrder({
+            userId: connectedUser._id,
+            productsId: productsOnCard,
+            total: montant,
+            paymentMethod: 'airtel money'
+        }));
+    }
 
 
     return (
@@ -46,6 +60,14 @@ const OrderSummary = () => {
 
                         <div className='mt-6'>
                             <img src="/assets/images/methods.png" alt="methods" className="h-8" />
+                        </div>
+                        <div className='mt-8'>
+                            <Link href={'#'}
+                                onClick={passerCommande}
+                                className='bg-primary hover:bg-red-700 text-white p-4 rounded-lg'
+                            >
+                                Effectuer le payements
+                            </Link>
                         </div>
                         {/* 
                         <Link href="/commande"

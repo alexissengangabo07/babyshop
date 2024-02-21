@@ -1,16 +1,16 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
-import { AntDesign, Feather, FontAwesome } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { AntDesign, Feather } from '@expo/vector-icons';
+import { router, useNavigation } from 'expo-router';
 
 const HomeHeader = () => {
+    const nav: any = useNavigation();
+
     return (
         <View style={styles.homeHeader}>
             <View style={styles.one}>
-                <TouchableOpacity onPress={() => {}} style={{ borderWidth: 0, borderRadius: 0, padding: 0, borderColor: '#1c4e64' }}>
+                <TouchableOpacity onPress={() => nav?.toggleDrawer()} style={{ borderWidth: 0, borderRadius: 0, padding: 0, borderColor: '#1c4e64' }}>
                     <Feather name='menu' size={29} color={'#1c4e64'} />
                 </TouchableOpacity>
-                {/* <Image style={styles.imageOnTop} source={require('../assets/images/1.png')} /> */}
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={{ color: 'orange', fontSize: 20, fontWeight: 'bold' }}>BAMBINO</Text>
                     <Text style={{ color: '#1c4e64', fontSize: 20, fontWeight: 'bold' }}>SHOP</Text>
@@ -22,16 +22,6 @@ const HomeHeader = () => {
                     </View>
                 </TouchableOpacity>
             </View>
-            {/* <View style={styles.two}>
-                <View style={styles.searchSection}>
-                    <FontAwesome style={styles.searchIcon} name="search" size={20} color="#000" />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Recherchexxr..."
-                        underlineColorAndroid="transparent"
-                    />
-                </View>
-            </View> */}
         </View>
     )
 }

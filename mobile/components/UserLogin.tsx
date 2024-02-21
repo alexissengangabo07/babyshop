@@ -31,9 +31,9 @@ const UserLogin = () => {
                 <Text style={{ color: 'white', fontSize: 18 }}>Login</Text>
             </TouchableOpacity>
             <Text style={styles.alreadyAccount}>N'avez-vous pas de compte ?
-                <TouchableOpacity>
+                {/* <TouchableOpacity> */}
                     <Text style={styles.alreadyLink}> Créer un compte</Text>
-                </TouchableOpacity>
+                {/* </TouchableOpacity> */}
             </Text>
         </View>
     )
@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     alreadyAccount: {
-        marginTop: 7,
+        marginTop: 7
     },
     alreadyLink: {
         color: '#AC61F2',
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
     },
     searchSection: {
         // flex: 1,

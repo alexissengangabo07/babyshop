@@ -28,6 +28,7 @@ const DrawerLayout = () => {
                 options={{
                     headerShown: true,
                     title: 'Commandes',
+                    headerTitle: 'Historique des commandes',
                     drawerIcon: ({ color }) => <MaterialIcons name="history" size={23} color={color} />
                 }}
             />

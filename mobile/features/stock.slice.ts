@@ -91,10 +91,12 @@ const productStockSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(fetchProductsStock.fulfilled, (state, action) => {
+            console.log(action.payload)
             state.isLoading = false;
             state.data = action.payload;
         });
         builder.addCase(fetchProductsStock.rejected, (state, action) => {
+            console.log('error')
             state.isLoading = false;
         });
 

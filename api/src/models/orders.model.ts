@@ -7,8 +7,7 @@ const ordersSchema = new Schema({
         required: true
     },
     productsId: [{
-        type: Schema.Types.ObjectId,
-        ref: 'products'
+        type: Object
     }],
     total: {
         type: Number,

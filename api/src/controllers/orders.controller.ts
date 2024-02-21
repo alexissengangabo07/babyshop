@@ -33,11 +33,12 @@ export const getOrder: RequestHandler = async (req, res, next) => {
 interface CreateOrderBody {
     userId: string,
     productsId: [string],
-    total: number
+    total: number,
+    paymentMethod: string
 }
 
 export const createOrder: RequestHandler<unknown, unknown, CreateOrderBody, unknown> = async (req, res, next) => {
-    const { userId, productsId, total } = req.body;
+    const { userId, productsId, total, paymentMethod } = req.body;
 
     try {
         if (!productsId) {
@@ -49,9 +50,9 @@ export const createOrder: RequestHandler<unknown, unknown, CreateOrderBody, unkn
 
 
         const orders = await ordersModel.create({
-            userId, productsId, total
+            userId, productsId, total, paymentMethod
         });
-        res.status(201).json(orders);
+        res.status(201).json({ message: 'Order created successfully!' });
     } catch (error) {
         next(error);
     }

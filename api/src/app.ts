@@ -11,11 +11,12 @@ import orderRoute from './routes/orders.route';
 const app = express();
 dotenv.config();
 
-app.use(express.json({limit: '80mb'}));
-app.use(express.urlencoded({limit: '50mb', extended: true}));
-app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:8081'],
-}));
+app.use(express.json({ limit: '80mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(cors());
+// app.use(cors({
+//     origin: ['http://localhost:3000', 'http://localhost:8081', 'exp://localhost:8081', 'exp://192.168.18.7:8081', 'http://192.168.18.7:8081'],
+// }));
 app.use(morgan('dev'));
 //Routes
 app.use('/api/user', userRoute);

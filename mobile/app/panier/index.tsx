@@ -16,7 +16,6 @@ export default Panier
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 5,
         marginTop: 7,
         justifyContent: 'space-between',
         height: '100%'

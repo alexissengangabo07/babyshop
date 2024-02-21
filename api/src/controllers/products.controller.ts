@@ -51,26 +51,22 @@ export const createProduct: RequestHandler<unknown, unknown, CreateProductBody, 
             return res.status(400).json({ message: 'categoryId is required' });
         }
 
-        // if (!image) {
-        //     return res.status(400).json({ error: 'Aucun fichier fournit' });
-        // }
+        if (!image) {
+            return res.status(400).json({ error: 'Aucun fichier fournit' });
+        }
 
-        // const result = await cloudinary.uploader.upload(image, {
-        //     folder: 'bambino_products' // Optionnel : Définir un dossier spécifique pour les images d'utilisateurs
-        // });
+        const result = await cloudinary.uploader.upload(image, {
+            folder: 'bambino_products' // Optionnel : Définir un dossier spécifique pour les images d'utilisateurs
+        });
 
         const products = await productsModel.create({
             name,
             price,
             description,
             category,
-            // image: {
-            //     public_id: result.public_id,
-            //     url: result.secure_url
-            // }
             image: {
-                public_id: '1i2u',
-                url: 'https://ok.com/2.png',
+                public_id: result.public_id,
+                url: result.secure_url
             }
         });
         res.status(201).json(products);

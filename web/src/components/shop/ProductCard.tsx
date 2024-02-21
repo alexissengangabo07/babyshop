@@ -32,7 +32,7 @@ const ProductCard = ({ color }: { color: string }) => {
                     products.data.map((product: any, i: number) => (
                         <div className="bg-white shadow rounded overflow-hidden group" key={i}>
                             <div className="relative">
-                                <img src={product?.productId?.image?.url} alt="product 1" className="w-full h-56" />
+                                <img src={product?.productId?.image?.url} alt="product 1" className="w-full h-52" />
                                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center 
                     justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
                                     <Link href={"/produit/" + product?._id}

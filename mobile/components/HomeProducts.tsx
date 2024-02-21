@@ -5,20 +5,25 @@ import { RootState } from '../redux/store';
 import { fetchProductsStock } from '../features/stock.slice';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
-// import { toast } from 'react-toastify'; // Make sure to import toast if needed
+import axios from 'axios';
+// import { toast } from 'react-toastify';
 
 const HomeProducts = () => {
     const dispatch = useAppDispatch();
-    const products = useAppSelector((store: RootState) => store.stockReducer);
+    const productsInStock = useAppSelector((store: RootState) => store.stockReducer);
 
     useEffect(() => {
-        dispatch(fetchProductsStock());
-        console.log(products.data)
+        // dispatch(fetchProductsStock());
+        (() => {
+            fetch('http://localhost:9001/api/stock')
+                .then(data => data.json())
+                .then(response => console.log(response))
+                .catch(err => console.log(err))
+        })();
     }, []);
 
-
     return (
-        <View style={{ marginVertical: 10 }}>
+        <View style={{ marginTop: 10, marginBottom: 300 }}>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginVertical: 10, justifyContent: 'space-between' }}>
                 {/* {products.data.map((product: any, i) => (
                     <View style={styles.priceContainer} key={i}>
@@ -174,7 +179,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#E5F6FB', 
+        backgroundColor: '#E5F6FB',
         borderRadius: 20,
         marginHorizontal: 5,
     },
@@ -195,7 +200,7 @@ const styles = StyleSheet.create({
     price: {
         fontSize: 15,
         fontWeight: 'bold',
-        color: '#70758E', 
+        color: '#70758E',
         backgroundColor: 'lightblue',
         borderRadius: 8,
         paddingVertical: 2,
