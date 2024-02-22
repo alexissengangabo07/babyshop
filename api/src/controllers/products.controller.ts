@@ -106,10 +106,26 @@ export const updateProduct: RequestHandler<UpdateProductParams, unknown, UpdateP
             return res.status(400).json({ message: 'Product name is required' });
         }
 
-        console.log(image.url)
+        if(typeof(image) === 'object') {
+            let updatedProduct = await productsModel.findByIdAndUpdate(productId, req.body, { new: true });
+            res.status(201).json(updatedProduct);
+        }
+        else {
+            const result = await cloudinary.uploader.upload(image, {
+                folder: 'bambino_products' // Optionnel : Définir un dossier spécifique pour les images d'utilisateurs
+            });
+            
+            let updatedProduct = await productsModel.findByIdAndUpdate(productId, {
+                name, price, description, categoryId,
+                image: {
+                    public_id: result.public_id,
+                    url: result.secure_url
+                }
+            }, { new: true });
+            res.status(201).json(updatedProduct);
 
-        let updatedProduct = await productsModel.findByIdAndUpdate(productId, req.body, { new: true });
-        res.status(200).json(updatedProduct);
+        }
+
     } catch (error) {
         next(error);
     }

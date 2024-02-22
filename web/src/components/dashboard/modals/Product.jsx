@@ -66,19 +66,13 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
             setLoading(false);
             const areAllPropertiesNotEmpty = Object.values(editData).every(value => value !== '');
 
-            if (formInputs.image !== '') {
-                console.log(formInputs.image)
-                setEditData((prevInputs) => ({
-                    ...prevInputs,
-                    image: formInputs.image
-                }))
-                console.log(editData)
-            }
             if (areAllPropertiesNotEmpty) {
+                console.log(editData)
                 setEditOpen(false);
                 dispatch(updateProduct(editData));
             }
             else {
+                console.log(editData)
                 toast.error('Tous les champs sont oligatoires edit.')
             }
         }, 2000);
@@ -98,6 +92,12 @@ const Product = ({ editOpen, setEditOpen, editData, setEditData }) => {
                 ...prevInputs,
                 image: reader.result
             }));
+            if (editOpen) {
+                setEditData((prevInputs) => ({
+                    ...prevInputs,
+                    image: reader.result
+                }))
+            }
         };
 
     };
