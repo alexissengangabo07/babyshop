@@ -49,9 +49,9 @@ function page() {
           className="bg-blue-400 text-gray-300 px-3 py-2 rounded-sm hover:bg-blue-500" data-tooltip-id="my-tooltip-top" data-tooltip-content="Editer">
           <MdEdit size={14} />
         </button>
-        <button onClick={() => removeProd(row._id)} className="bg-red-500 text-gray-300 px-3 py-2 rounded-sm hover:bg-red-600" data-tooltip-id="my-tooltip-top" data-tooltip-content="Supprimer">
+        {/* <button onClick={() => removeProd(row._id)} className="bg-red-500 text-gray-300 px-3 py-2 rounded-sm hover:bg-red-600" data-tooltip-id="my-tooltip-top" data-tooltip-content="Supprimer">
           <VscTrash size={14} />
-        </button>
+        </button> */}
       </div>
     }
   ];

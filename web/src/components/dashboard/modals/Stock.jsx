@@ -72,11 +72,11 @@ const ProductStock = ({ editOpen, setEditOpen, editData, setEditData }) => {
     return (
         <>
             <button type="button" className='bg-[#199cd7] text-sm hover:bg-[#5f8dc2] h-11 text-white rounded-md p-3' onClick={showModal}>
-                Ajouter dans le stock
+                Ajouter nouveau produit dans le stock
             </button>
             <Modal
                 open={open || editOpen}
-                title="Nouveau Stock"
+                title={editOpen ? 'Ajouter quantité' : 'Ajouter nouveau produit en stock'}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 styles={{
@@ -114,17 +114,25 @@ const ProductStock = ({ editOpen, setEditOpen, editData, setEditData }) => {
                     <div className="grid gap-4 mb-4 grid-cols-2">
                         <div className="col-span-2">
                             <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Produit</label>
-                            <select id="product" name="productId" value={editOpen ? editData?.productId._id : formInputs.productId} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
-                                <option value=''>Sélectionner un produit</option>
-                                {
-                                    products.data.map(prod => <option key={prod._id} value={prod._id} className='capitalize py-4'>{prod.name}</option>)
-                                }
-                            </select>
+                            {
+                                editOpen ? <select disabled id="product" name="productId" value={editOpen ? editData?.productId._id : formInputs.productId} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
+                                    <option value=''>Sélectionner un produit</option>
+                                    {
+                                        products.data.map(prod => <option key={prod._id} value={prod._id} className='capitalize py-4'>{prod.name}</option>)
+                                    }
+                                </select> : <select id="product" name="productId" value={editOpen ? editData?.productId._id : formInputs.productId} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none">
+                                    <option value=''>Sélectionner un produit</option>
+                                    {
+                                        products.data.map(prod => <option key={prod._id} value={prod._id} className='capitalize py-4'>{prod.name}</option>)
+                                    }
+                                </select>
+                            }
+
                         </div>
 
                         <div className="col-span-2">
                             <label htmlFor="quantity" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantité</label>
-                            <input type="number" value={editOpen ? editData?.quantity : formInputs.quantity} onChange={handleInputChange} name="quantity" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Comnien produit ?" required={true} />
+                            <input type="number" value={editOpen ? editData?.quantity : formInputs.quantity} onChange={handleInputChange} name="quantity" autoComplete="off" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white focus:border-blue-300 outline-none" placeholder="Combien de pieces ?" required={true} />
                         </div>
 
                         {/* <div className="col-span-2">

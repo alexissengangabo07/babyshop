@@ -43,6 +43,11 @@ export const createProductStock: RequestHandler<unknown, unknown, CreateProductS
     const { productId, quantity } = req.body;
 
     try {
+        const existingProduct = await stockModel.findOne({ productId });
+        if (existingProduct) {
+            return res.status(400).json({ message: 'Veuillez editer la quantite de ce produit, car il existe déjà.' });
+        }
+
         if (!productId) {
             return res.status(400).json({ message: 'Product id is required' });
         }
@@ -71,10 +76,12 @@ interface UpdateProductParams {
 }
 
 export const updateProductStock: RequestHandler<UpdateProductParams, unknown, UpdateProductBody, unknown> = async (req, res, next) => {
-    const { productId } = req.body;
+    const { quantity, productId } = req.body;
     const productIdParam = req.params.id;
 
     try {
+        const existingQte = await stockModel.findOne({ productId });
+
         if (!mongoose.isValidObjectId(productIdParam)) {
             return res.status(400).json({ message: 'Invalid product id' });
         }
@@ -85,11 +92,13 @@ export const updateProductStock: RequestHandler<UpdateProductParams, unknown, Up
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        if (!productId) {
-            return res.status(400).json({ message: 'Product name is required' });
-        }
+        // if (!productId) {
+        //     return res.status(400).json({ message: 'Product name is required' });
+        // }
 
-        let updatedProductStock = await stockModel.findByIdAndUpdate(productIdParam, req.body, { new: true }).populate('productId');
+        let updatedProductStock = await stockModel.findByIdAndUpdate(productIdParam, {
+            quantity: Number(quantity) + Number(existingQte?.quantity)
+        }, { new: true }).populate('productId');
         res.status(201).json(updatedProductStock);
     } catch (error) {
         next(error);

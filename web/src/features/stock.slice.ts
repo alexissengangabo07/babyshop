@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from '@/features/api/stock';
+import toast from "react-hot-toast";
 
 interface Product {
     _id?: string;
@@ -117,9 +118,9 @@ const productStockSlice = createSlice({
             state.isLoading = false;
             state.data.push(action.payload);
         });
-        builder.addCase(createProduct.rejected, (state, action) => {
+        builder.addCase(createProduct.rejected, (state, action: any) => {
             state.isLoading = false;
-            // console.log(action)
+            toast.error(action.payload.response.data.message, {duration: 3000})
         });
 
         builder.addCase(deleteProduct.pending, state => {
