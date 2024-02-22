@@ -92,10 +92,6 @@ export const updateProductStock: RequestHandler<UpdateProductParams, unknown, Up
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        // if (!productId) {
-        //     return res.status(400).json({ message: 'Product name is required' });
-        // }
-
         let updatedProductStock = await stockModel.findByIdAndUpdate(productIdParam, {
             quantity: Number(quantity) + Number(existingQte?.quantity)
         }, { new: true }).populate('productId');

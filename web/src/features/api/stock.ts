@@ -6,7 +6,7 @@ export const fetchProductsStock = () => axios.get(url);
 
 export const fetchProductStock = (productId: string) => axios.get(url + productId);
 
-export const createProductStock = (newProduct: Object) => axios.post(url, newProduct);
+export const createProductStock = (newProduct: object) => axios.post(url, newProduct);
 
 export const deleteProductStock = (productId: string) => axios.delete(url + productId);
 

@@ -6,7 +6,7 @@ export const fetchOrders = () => axios.get(url);
 
 export const fetchOrder = (orderId: string) => axios.get(url + orderId);
 
-export const createOrder = (newOrder: Object) => axios.post(url, newOrder);
+export const createOrder = (newOrder: object) => axios.post(url, newOrder);
 
 export const deleteOrder = (orderId: string) => axios.delete(url + orderId);
 

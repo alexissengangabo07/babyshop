@@ -65,6 +65,15 @@ export const loginUser = createAsyncThunk('users/loginUser', async (user: object
     }
 });
 
+export const changePass = createAsyncThunk('users/changePass', async (user: object, { rejectWithValue }) => {
+    try {
+        const response = await api.changePass(user);
+        return response.data;
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+});
+
 export const updateUser = createAsyncThunk('users/updateUser', async (userId: string, { rejectWithValue }) => {
     try {
         const response = await api.updateUser(userId);
@@ -111,6 +120,19 @@ const userSlice = createSlice({
         builder.addCase(createUser.rejected, (state, action: any) => {
             state.isLoading = false;
             toast.error(action.payload?.response.data.message);
+        });
+
+        builder.addCase(changePass.pending, state => {
+            state.isLoading = true;
+        });
+        builder.addCase(changePass.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.data = action.payload;
+            toast.success('Mot de passe mis a jour avec succes')
+        });
+        builder.addCase(changePass.rejected, (state, action: any) => {
+            state.isLoading = false;
+            toast.error('Ancien mot de passe incorrecte !');
         });
 
         builder.addCase(loginUser.pending, state => {

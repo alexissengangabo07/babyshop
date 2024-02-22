@@ -15,7 +15,7 @@ interface ConnectedUser {
     email?: string;
     adresse?: string;
     __v?: number;
-    _id?: string
+    _id: string
 }
 
 interface SessionType {

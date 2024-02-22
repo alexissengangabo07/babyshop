@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import mongoose from "mongoose";
 import ordersModel from "../models/orders.model";
+import stockModel from "../models/stock.model";
 
 export const getOrders: RequestHandler = async (req, res, next) => {
     try {
@@ -30,17 +31,28 @@ export const getOrder: RequestHandler = async (req, res, next) => {
     }
 }
 
-interface CreateOrderBody {
-    userId: string,
-    productsId: [string],
-    total: number,
-    paymentMethod: string
+interface OrderRequestBody {
+    userId: string;
+    productsId: any; // Définir productsId comme type any
+    total: number;
+    paymentMethod: string;
 }
 
-export const createOrder: RequestHandler<unknown, unknown, CreateOrderBody, unknown> = async (req, res, next) => {
+export const createOrder: RequestHandler<unknown, unknown, OrderRequestBody, unknown> = async (req, res, next) => {
     const { userId, productsId, total, paymentMethod } = req.body;
 
     try {
+        const productsInStock: any[] = [];
+        for (let i = 0; i < productsId.length; i++) {
+            const tour = await stockModel.find({ _id: { $in: productsId[i].id }, quantity: { $gt: 0 } });
+            productsInStock.push(...tour);
+        }
+
+        console.log(productsInStock.length + ' ok ' + productsId.length)
+        if (productsInStock.length !== productsId.length) {
+            console.log("ruprture")
+            return res.status(400).json({ error: 'Certains produits sont en rupture de stock.' });
+        }
         if (!productsId) {
             return res.status(400).json({ message: 'Product id is required' });
         }
@@ -48,11 +60,20 @@ export const createOrder: RequestHandler<unknown, unknown, CreateOrderBody, unkn
             return res.status(400).json({ message: 'User id is required' });
         }
 
+        // Mettre à jour les quantités de produits en stock
+        await Promise.all(productsInStock.map(async (product, i) => {
+            const orderedQuantity = productsId[i].qte;
+            console.log(orderedQuantity)
+            product.quantity -= orderedQuantity;
+            await product.save();
+        }));
 
+        // Enregistrer la commande
         const orders = await ordersModel.create({
             userId, productsId, total, paymentMethod
         });
-        res.status(201).json({ message: 'Order created successfully!' });
+
+        res.status(201).json(orders);
     } catch (error) {
         next(error);
     }

@@ -7,6 +7,7 @@ route.get('/', UsersController.getUsers)
     .get('/:id', UsersController.getUser)
     .post('/', UsersController.createUser)
     .post('/login', UsersController.userLogin)
+    .patch('/changepass', UsersController.changePass)
     .patch('/:id', UsersController.updateUser)
     .delete('/:id', UsersController.deleteUser);
 

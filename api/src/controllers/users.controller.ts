@@ -167,3 +167,31 @@ export const userLogin: RequestHandler = async (req, res, next) => {
         res.status(400).json({ message: 'Invalid username or password !' });
     }
 }
+
+
+interface UpdateUserPassword {
+    userId: string;
+    password: string
+}
+
+export const changePass: RequestHandler<unknown, unknown, UpdateUserPassword, unknown> = async (req, res, next) => {
+    const { userId, password } = req.body;
+
+    try {
+        const user = await usersModel.findById({ _id: userId });
+
+        if (user && (await bcrypt.compare(password, user.password))) {
+            let updatedUser = await usersModel.findByIdAndUpdate(userId, {
+                password
+            }, { new: true });
+
+            res.status(201).json(updatedUser);
+        }
+        else {
+            res.status(400).json({ message: 'Ancien mot de passe incorrecte !' });
+        }
+
+    } catch (error) {
+        next(error);
+    }
+}
